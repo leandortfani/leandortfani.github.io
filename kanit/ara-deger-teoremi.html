@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ara Değer Teoremi — Ahmet</title>
+<meta name="description" content="Sürekli bir fonksiyon işaret değiştiriyorsa arada sıfırlanır. Kanıtın bütün ağırlığı reel sayıların tamlığında.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#kanitin-fikri">Kanıtın fikri</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#genel-bicim">Genel biçim</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Ara Değer Teoremi</h1>
+    <p class="ozet">Sürekli bir fonksiyon işaret değiştiriyorsa arada sıfırlanır. Kanıtın bütün ağırlığı reel sayıların tamlığında.</p>
+  </header>
+  <p>Bu da benim eklediklerimden. Yukarıdaki bütün süreklilik alıştırmaları
+"süreklilik korunur" tipindeydi; bu ise sürekliliğin <strong>ne işe yaradığını</strong>
+söyleyen ilk teorem.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Teorem</span> <span class="ortam-baslik">Bolzano — İşaret Değişimi</span></p><p><span class="mat">\(f : [a,b] \to \mathbb{R}\)</span> sürekli olsun ve <span class="mat">\(f(a) &lt; 0 &lt; f(b)\)</span> olsun. O hâlde
+öyle bir <span class="mat">\(c \in (a,b)\)</span> vardır ki <span class="mat">\(f(c) = 0\)</span>.</p></section>
+<h2 id="kanitin-fikri">Kanıtın fikri<a class="capa" href="#kanitin-fikri">#</a></h2>
+<p>Fonksiyonun hâlâ negatif olduğu noktaların en sağ ucuna gidiyoruz. Bu "en sağ
+uç" bir supremum olarak tanımlanıyor ve varlığı reel sayıların <strong>tamlık
+aksiyomu</strong>ndan geliyor. Sonra süreklilik, bu noktada fonksiyonun ne pozitif ne
+negatif olabileceğini söylüyor — geriye sıfır kalıyor.</p>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Tamlık şart</span></p><p>Teorem <span class="mat">\(\mathbb{Q}\)</span> üzerinde <strong>yanlıştır</strong>: <span class="mat">\(f(x) = x^2 - 2\)</span> fonksiyonu
+<span class="mat">\([0,2] \cap \mathbb{Q}\)</span> üzerinde süreklidir, <span class="mat">\(f(0) = -2 &lt; 0 &lt; 2 = f(2)\)</span>, ama
+<span class="mat">\(f(c) = 0\)</span> olan bir rasyonel <span class="mat">\(c\)</span> yoktur. Aşağıdaki kanıtta tamlığın tam olarak
+nerede kullanıldığına dikkat edin.</p></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Şu kümeyi tanımlayalım:</p>
+<div class="mat-blok">\[A = \{\,x \in [a,b] \;:\; f(x) &lt; 0 \,\}.\]</div>
+<p><strong><span class="mat">\(A\)</span> boş değil ve üstten sınırlı.</strong> <span class="mat">\(f(a) &lt; 0\)</span> olduğundan <span class="mat">\(a \in A\)</span>, yani
+<span class="mat">\(A \ne \emptyset\)</span>. Ayrıca <span class="mat">\(A \subseteq [a,b]\)</span> olduğundan <span class="mat">\(b\)</span> bir üst sınırdır.
+Reel sayıların tamlık aksiyomu gereği</p>
+<div class="mat-blok">\[c = \sup A\]</div>
+<p>vardır ve <span class="mat">\(a \le c \le b\)</span>'dir. İddiamız <span class="mat">\(f(c) = 0\)</span>.</p>
+<p><span class="mat">\(f(c) \ne 0\)</span> olduğunu varsayıp çelişki arayacağız. İki hâl var.</p>
+<p><strong>Hâl 1: <span class="mat">\(f(c) &gt; 0\)</span>.</strong> <span class="mat">\(f\)</span>'nin <span class="mat">\(c\)</span>'deki sürekliliğinde
+<span class="mat">\(\varepsilon = f(c) &gt; 0\)</span> alalım: bir <span class="mat">\(\delta &gt; 0\)</span> vardır ki
+<span class="mat">\(x \in [a,b]\)</span> ve <span class="mat">\(|x - c| &lt; \delta\)</span> olduğunda</p>
+<div class="mat-blok">\[|f(x) - f(c)| &lt; f(c) \;\Longrightarrow\; f(x) &gt; f(c) - f(c) = 0 .\]</div>
+<p>Yani <span class="mat">\((c-\delta,\, c] \cap [a,b]\)</span> üzerinde <span class="mat">\(f\)</span> kesin pozitiftir; bu aralıkta
+hiç <span class="mat">\(A\)</span> elemanı yoktur.</p>
+<p>Öte yandan <span class="mat">\(c = \sup A\)</span> olduğundan, <span class="mat">\(c - \delta\)</span> sayısı <span class="mat">\(A\)</span>'nın bir üst sınırı
+olamaz (aksi hâlde <span class="mat">\(c\)</span> <em>en küçük</em> üst sınır olmazdı). Öyleyse bir <span class="mat">\(x_0 \in A\)</span>
+için <span class="mat">\(c - \delta &lt; x_0 \le c\)</span>'dir. Ama böyle bir <span class="mat">\(x_0\)</span> için <span class="mat">\(f(x_0) &gt; 0\)</span>
+bulmuştuk, oysa <span class="mat">\(x_0 \in A\)</span> demek <span class="mat">\(f(x_0) &lt; 0\)</span> demek. Çelişki.</p>
+<p>(Bu arada bu hâl <span class="mat">\(c \ne a\)</span> olduğunu da gösterir: <span class="mat">\(f(a) &lt; 0\)</span>.)</p>
+<p><strong>Hâl 2: <span class="mat">\(f(c) &lt; 0\)</span>.</strong> Önce <span class="mat">\(c \ne b\)</span> olduğuna dikkat edelim, çünkü
+<span class="mat">\(f(b) &gt; 0\)</span>. Demek ki <span class="mat">\(c &lt; b\)</span>.</p>
+<p><span class="mat">\(f\)</span>'nin <span class="mat">\(c\)</span>'deki sürekliliğinde <span class="mat">\(\varepsilon = -f(c) &gt; 0\)</span> alalım: bir
+<span class="mat">\(\delta &gt; 0\)</span> vardır ki <span class="mat">\(x \in [a,b]\)</span>, <span class="mat">\(|x-c| &lt; \delta\)</span> olduğunda</p>
+<div class="mat-blok">\[|f(x) - f(c)| &lt; -f(c) \;\Longrightarrow\; f(x) &lt; f(c) + (-f(c)) = 0 .\]</div>
+<p><span class="mat">\(c &lt; b\)</span> olduğundan <span class="mat">\(c\)</span>'nin hemen sağında <span class="mat">\([a,b]\)</span> içinde nokta vardır; mesela</p>
+<div class="mat-blok">\[x_1 = \min\!\left(c + \tfrac{\delta}{2},\ \tfrac{c+b}{2}\right)\]</div>
+<p>alalım. Bu nokta <span class="mat">\([a,b]\)</span> içindedir, <span class="mat">\(c &lt; x_1\)</span> ve <span class="mat">\(|x_1 - c| &lt; \delta\)</span>
+sağlanır. Dolayısıyla <span class="mat">\(f(x_1) &lt; 0\)</span>, yani <span class="mat">\(x_1 \in A\)</span>. Ama <span class="mat">\(x_1 &gt; c = \sup A\)</span>
+olması, <span class="mat">\(c\)</span>'nin üst sınır olmasıyla çelişir.</p>
+<p>Her iki hâl de imkânsız olduğuna göre <span class="mat">\(f(c) = 0\)</span>. Son olarak <span class="mat">\(f(a) &lt; 0\)</span> ve
+<span class="mat">\(f(b) &gt; 0\)</span> olduğundan <span class="mat">\(c \ne a\)</span> ve <span class="mat">\(c \ne b\)</span>; yani <span class="mat">\(c \in (a,b)\)</span>.</p><span class="mezar">□</span></section>
+<h2 id="genel-bicim">Genel biçim<a class="capa" href="#genel-bicim">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Ara Değer Teoremi</span></p><p><span class="mat">\(f : [a,b] \to \mathbb{R}\)</span> sürekli olsun ve <span class="mat">\(y\)</span>, <span class="mat">\(f(a)\)</span> ile <span class="mat">\(f(b)\)</span> arasında
+bir sayı olsun. O hâlde bir <span class="mat">\(c \in [a,b]\)</span> için <span class="mat">\(f(c) = y\)</span>'dir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(f(a) &lt; y &lt; f(b)\)</span> hâlini ele alalım (diğer hâl için <span class="mat">\(f\)</span> yerine <span class="mat">\(-f\)</span> ve <span class="mat">\(y\)</span>
+yerine <span class="mat">\(-y\)</span> alınır). <span class="mat">\(g(x) = f(x) - y\)</span> tanımlayalım. Sabit fonksiyon sürekli
+ve sürekli fonksiyonların farkı sürekli olduğundan <span class="mat">\(g\)</span> süreklidir; ayrıca</p>
+<div class="mat-blok">\[g(a) = f(a) - y &lt; 0, \qquad g(b) = f(b) - y &gt; 0 .\]</div>
+<p>Bolzano teoremi bir <span class="mat">\(c \in (a,b)\)</span> için <span class="mat">\(g(c) = 0\)</span>, yani <span class="mat">\(f(c) = y\)</span> verir.</p>
+<p><span class="mat">\(y = f(a)\)</span> ya da <span class="mat">\(y = f(b)\)</span> ise <span class="mat">\(c = a\)</span> ya da <span class="mat">\(c = b\)</span> almak yeterli.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Tek dereceden polinomların kökü vardır</span></p><p>Derecesi tek olan her reel katsayılı polinomun en az bir reel kökü vardır.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(P(x) = a_n x^n + \cdots + a_0\)</span>, <span class="mat">\(n\)</span> tek ve <span class="mat">\(a_n \ne 0\)</span> olsun. Genelliği
+bozmadan <span class="mat">\(a_n &gt; 0\)</span> alalım (değilse <span class="mat">\(-P\)</span> ile çalışırız; kökler aynı).</p>
+<p>Büyük <span class="mat">\(|x|\)</span> değerleri için <span class="mat">\(P\)</span>'nin işaretini baş terim belirler: <span class="mat">\(x \ne 0\)</span> için</p>
+<div class="mat-blok">\[P(x) = x^n\left(a_n + \frac{a_{n-1}}{x} + \cdots + \frac{a_0}{x^n}\right)\]</div>
+<p>ve parantez içi, <span class="mat">\(|x| \to \infty\)</span> iken <span class="mat">\(a_n\)</span>'e yakınsar. Öyleyse yeterince
+büyük bir <span class="mat">\(M &gt; 0\)</span> için parantez içi pozitiftir; <span class="mat">\(n\)</span> tek olduğundan</p>
+<div class="mat-blok">\[P(M) &gt; 0 \qquad \text{ve} \qquad P(-M) &lt; 0 .\]</div>
+<p><span class="mat">\(P\)</span>, <a href="polinomlarin-surekliligi.html">polinomların sürekliliği</a> gereği
+<span class="mat">\([-M, M]\)</span> üzerinde süreklidir; Bolzano teoremi bir <span class="mat">\(c \in (-M,M)\)</span> için
+<span class="mat">\(P(c) = 0\)</span> verir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden çift derece için çalışmaz</span></p><p><span class="mat">\(n\)</span> çift olsaydı <span class="mat">\((-M)^n = M^n &gt; 0\)</span> olurdu ve iki uçta da aynı işareti
+görürdük. Nitekim <span class="mat">\(P(x) = x^2 + 1\)</span> polinomunun hiç reel kökü yok. Bu, cebirin
+temel teoreminin neden <span class="mat">\(\mathbb{C}\)</span> üzerinde ifade edildiğinin en basit
+göstergesi.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="sin-bir-bolu-x.html"><span>← Önceki</span>sin(1/x) ve x·sin(1/x) Limitleri</a><span></span></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limit Aritmetiği — Toplam ve Çarpım — Ahmet</title>
+<meta name="description" content="lim (f+g) = lim f + lim g ve lim (fg) = (lim f)(lim g); çarpımdaki püf nokta g&#x27;yi limitin yakınında sınırlamak.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#toplam">Toplam</a></li><li class="toc-s2"><a href="#carpim">Çarpım</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Limit Aritmetiği — Toplam ve Çarpım</h1>
+    <p class="ozet"><span class="mat">\(\lim (f+g) = \lim f + \lim g\)</span> ve <span class="mat">\(\lim (fg) = (\lim f)(\lim g)\)</span>; çarpımdaki püf nokta <span class="mat">\(g\)</span>'yi limitin yakınında sınırlamak.</p>
+  </header>
+  <section class="ortam ortam-tanim"><p class="ortam-bas"><span class="ortam-etiket">Tanım</span> <span class="ortam-baslik">Limit</span></p><p><span class="mat">\(f : D \to \mathbb{R}\)</span> ve <span class="mat">\(c \in \overline{D}\)</span> olsun.</p>
+<div class="mat-blok">\[\lim_{x \to c} f(x) = L\]</div>
+<p>demek, her <span class="mat">\(\varepsilon &gt; 0\)</span> için öyle bir <span class="mat">\(\delta &gt; 0\)</span> vardır ki
+<span class="mat">\(x \in D\)</span> ve <span class="mat">\(0 &lt; |x - c| &lt; \delta\)</span> olduğunda <span class="mat">\(|f(x) - L| &lt; \varepsilon\)</span> olur,
+demektir.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden <span class="mat">\(c \in \overline{D}\)</span>?</span></p><p><span class="mat">\(c\)</span>'nin <span class="mat">\(D\)</span>'nin <strong>kapanışında</strong> olmasını istiyoruz ki <span class="mat">\(c\)</span>'ye keyfî yakın
+noktalarda <span class="mat">\(f\)</span> tanımlı olsun. Aksi hâlde tanımdaki koşul boş yere sağlanır ve
+her sayı "limit" olur; limitin tekliği bozulur.</p></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 4</span></p><p><span class="mat">\(f, g : D \to \mathbb{R}\)</span> ve <span class="mat">\(c \in \overline{D}\)</span> olsun.
+<span class="mat">\(\lim_{x\to c} f(x)\)</span> ve <span class="mat">\(\lim_{x\to c} g(x)\)</span> limitleri varsa</p>
+<div class="mat-blok">\[\lim_{x\to c}\bigl(f(x) + g(x)\bigr) = \lim_{x\to c} f(x) + \lim_{x\to c} g(x),\]</div>
+<div class="mat-blok">\[\lim_{x\to c} f(x)g(x) = \Bigl(\lim_{x\to c} f(x)\Bigr)\Bigl(\lim_{x\to c} g(x)\Bigr).\]</div>
+<p>Özel olarak bu limitler vardır.</p></section>
+<p>Kanıt boyunca <span class="mat">\(L = \lim_{x\to c} f(x)\)</span> ve <span class="mat">\(M = \lim_{x\to c} g(x)\)</span> yazacağız.</p>
+<h2 id="toplam">Toplam<a class="capa" href="#toplam">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. Limitlerin varlığından:</p>
+<ul>
+<li><span class="mat">\(\varepsilon/2\)</span> sayısına karşılık öyle bir <span class="mat">\(\delta_1 &gt; 0\)</span> vardır ki <span class="mat">\(0 &lt; |x - c| &lt; \delta_1\)</span> iken <span class="mat">\(|f(x) - L| &lt; \varepsilon/2\)</span>;</li>
+<li><span class="mat">\(\varepsilon/2\)</span> sayısına karşılık öyle bir <span class="mat">\(\delta_2 &gt; 0\)</span> vardır ki <span class="mat">\(0 &lt; |x - c| &lt; \delta_2\)</span> iken <span class="mat">\(|g(x) - M| &lt; \varepsilon/2\)</span>.</li>
+</ul>
+<p><span class="mat">\(\delta = \min(\delta_1, \delta_2) &gt; 0\)</span> alalım. <span class="mat">\(0 &lt; |x-c| &lt; \delta\)</span> olan her
+<span class="mat">\(x \in D\)</span> için iki koşul da geçerlidir ve üçgen eşitsizliğiyle</p>
+<div class="mat-blok">\[\bigl|(f(x)+g(x)) - (L+M)\bigr| \le |f(x)-L| + |g(x)-M|
+&lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon .\]</div>
+<p><span class="mat">\(\varepsilon\)</span> keyfî olduğundan <span class="mat">\(\lim_{x\to c}(f+g)(x) = L + M\)</span>.</p><span class="mezar">□</span></section>
+<h2 id="carpim">Çarpım<a class="capa" href="#carpim">#</a></h2>
+<p>Çarpımda doğrudan bir üçgen eşitsizliği yetmez, çünkü <span class="mat">\(|f(x)g(x) - LM|\)</span>
+ifadesinde iki hata terimi birbirine karışır. Standart hile, sıfır eklemek:</p>
+<div class="mat-blok">\[f(x)g(x) - LM = \underbrace{g(x)\bigl(f(x) - L\bigr)}_{\text{(I)}}
+\;+\; \underbrace{L\bigl(g(x) - M\bigr)}_{\text{(II)}} .\]</div>
+<p>(II) terimi rahat: <span class="mat">\(|L|\)</span> sabit bir sayı. (I) terimindeki <span class="mat">\(g(x)\)</span> ise değişken —
+onu önce <strong>sınırlamamız</strong> gerekiyor.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Limiti olan fonksiyon yerel olarak sınırlıdır</span></p><p><span class="mat">\(\lim_{x\to c} g(x) = M\)</span> ise öyle bir <span class="mat">\(\delta_0 &gt; 0\)</span> vardır ki
+<span class="mat">\(0 &lt; |x-c| &lt; \delta_0\)</span> olduğunda <span class="mat">\(|g(x)| &lt; |M| + 1\)</span>.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Limit tanımında <span class="mat">\(\varepsilon = 1\)</span> alalım: bir <span class="mat">\(\delta_0 &gt; 0\)</span> için
+<span class="mat">\(0 &lt; |x-c| &lt; \delta_0\)</span> iken <span class="mat">\(|g(x) - M| &lt; 1\)</span>. Üçgen eşitsizliğiyle</p>
+<div class="mat-blok">\[|g(x)| = |g(x) - M + M| \le |g(x) - M| + |M| &lt; 1 + |M| .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Şimdi çarpımı kanıtlayabiliriz. <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin ve</p>
+<div class="mat-blok">\[K = |M| + 1, \qquad K&#x27; = |L| + 1\]</div>
+<p>yazalım; her ikisi de <strong>pozitif</strong> sayılardır (bu yüzden <span class="mat">\(|L|\)</span> yerine <span class="mat">\(|L|+1\)</span>
+kullanıyoruz: <span class="mat">\(L = 0\)</span> olduğunda bölme bozulmasın).</p>
+<p>Üç yarıçap seçiyoruz:</p>
+<ol>
+<li>Lemma gereği <span class="mat">\(\delta_0 &gt; 0\)</span> öyle ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_0
+   \Rightarrow |g(x)| &lt; K\)</span>.</li>
+<li><span class="mat">\(\delta_1 &gt; 0\)</span> öyle ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_1
+   \Rightarrow |f(x) - L| &lt; \dfrac{\varepsilon}{2K}\)</span>.</li>
+<li><span class="mat">\(\delta_2 &gt; 0\)</span> öyle ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_2
+   \Rightarrow |g(x) - M| &lt; \dfrac{\varepsilon}{2K&#x27;}\)</span>.</li>
+</ol>
+<p><span class="mat">\(\delta = \min(\delta_0, \delta_1, \delta_2)\)</span> alalım. <span class="mat">\(0 &lt; |x - c| &lt; \delta\)</span>
+olan her <span class="mat">\(x \in D\)</span> için</p>
+<div class="mat-blok">\[\bigl|f(x)g(x) - LM\bigr| \le |g(x)|\,|f(x)-L| + |L|\,|g(x)-M|\]</div>
+<div class="mat-blok">\[&lt; K \cdot \frac{\varepsilon}{2K} \;+\; K&#x27; \cdot \frac{\varepsilon}{2K&#x27;}
+\;=\; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \;=\; \varepsilon .\]</div>
+<p>İkinci terimde <span class="mat">\(|L| \le K&#x27;\)</span> kullanıldı. <span class="mat">\(\varepsilon\)</span> keyfî olduğundan
+<span class="mat">\(\lim_{x\to c} f(x)g(x) = LM\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Kanıt aynı zamanda limitlerin <strong>var olduğunu</strong> da veriyor: <span class="mat">\(L+M\)</span> ve <span class="mat">\(LM\)</span>
+sayılarının tanımı sağladığını gösterdik, yani bunlar birer limittir. Limitin
+tekliğiyle birlikte bu, ifadelerin iyi tanımlı olduğunu söyler.</p></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<p>Mathlib'de "<span class="mat">\(x \to c\)</span> ama <span class="mat">\(x \ne c\)</span>" süzgeci <span class="mat">\(\mathcal{N}[\ne] c\)</span> ile
+gösterilir. Limit aritmetiği süzgeç düzeyinde kanıtlanmış olduğu için ispat
+tek satıra iner.</p>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+open Filter Topology
+
+variable {f g : ℝ → ℝ} {c L M : ℝ}
+
+theorem limit_toplam
+    (hf : Tendsto f (𝓝[≠] c) (𝓝 L))
+    (hg : Tendsto g (𝓝[≠] c) (𝓝 M)) :
+    Tendsto (fun x =&gt; f x + g x) (𝓝[≠] c) (𝓝 (L + M)) :=
+  hf.add hg
+
+theorem limit_carpim
+    (hf : Tendsto f (𝓝[≠] c) (𝓝 L))
+    (hg : Tendsto g (𝓝[≠] c) (𝓝 M)) :
+    Tendsto (fun x =&gt; f x * g x) (𝓝[≠] c) (𝓝 (L * M)) :=
+  hf.mul hg
+
+/-- Yerel sınırlılık lemması da hazır: limiti olan fonksiyon
+    süzgeç boyunca sınırlıdır. -/
+example (hg : Tendsto g (𝓝[≠] c) (𝓝 M)) :
+    ∀ᶠ x in 𝓝[≠] c, |g x| &lt; |M| + 1 := by
+  have h : ∀ᶠ x in 𝓝[≠] c, |g x - M| &lt; 1 := by
+    simpa [Real.dist_eq] using hg (Metric.ball_mem_nhds M one_pos)
+  filter_upwards [h] with x hx
+  calc |g x| = |g x - M + M| := by ring_nf
+    _ ≤ |g x - M| + |M| := abs_add _ _
+    _ &lt; 1 + |M| := by linarith
+    _ = |M| + 1 := by ring</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p><code>hf.add hg</code> yazabilmemizin sebebi Mathlib'in bu önermeyi tek tek limitler için
+değil, <strong>her</strong> süzgeç için bir kez kanıtlamış olması. Kâğıt üstünde üç ayrı
+<span class="mat">\(\delta\)</span> seçmek zorunda kaldığımız yer, orada topolojik yapının içine
+gömülmüş durumda.</p></section>
+  <nav class="alt-gezinme"><span></span><a class="gez sonraki" href="tersin-limiti.html"><span>Sonraki →</span>Sıfırdan Farklı Limitin Tersi</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sin ve cos Süreklidir — Ahmet</title>
+<meta name="description" content="Toplam formüllerini farka çevirip |sin t| le |t| eşitsizliğiyle birleştirince delta = varepsilon çıkıyor.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Trigonometrik Kanıtlar</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#iki-hazirlik">İki hazırlık</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Trigonometrik Kanıtlar · 2026-08-14</p>
+    <h1>sin ve cos Süreklidir</h1>
+    <p class="ozet">Toplam formüllerini farka çevirip <span class="mat">\(|\sin t| \le |t|\)</span> eşitsizliğiyle birleştirince <span class="mat">\(\delta = \varepsilon\)</span> çıkıyor.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.6</span></p><p><span class="mat">\(\sin x\)</span> ve <span class="mat">\(\cos x\)</span> fonksiyonları <span class="mat">\(\mathbb{R}\)</span> üzerinde süreklidir.</p></section>
+<p>Elimizdeki tek araç <span class="mat">\(\sin(x+y)\)</span> ve <span class="mat">\(\cos(x+y)\)</span> toplam formülleri. Onlardan
+<strong>fark</strong> formüllerine geçip, ortaya çıkan ifadeyi <span class="mat">\(|h|\)</span> ile sınırlayacağız.</p>
+<h2 id="iki-hazirlik">İki hazırlık<a class="capa" href="#iki-hazirlik">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Fark formülleri</span></p><p>Her <span class="mat">\(x, h \in \mathbb{R}\)</span> için</p>
+<div class="mat-blok">\[\sin(x+h) - \sin x = 2\,\cos\!\left(x + \frac{h}{2}\right)
+\sin\!\left(\frac{h}{2}\right),\]</div>
+<div class="mat-blok">\[\cos(x+h) - \cos x = -2\,\sin\!\left(x + \frac{h}{2}\right)
+\sin\!\left(\frac{h}{2}\right).\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(u = x + \dfrac{h}{2}\)</span> ve <span class="mat">\(v = \dfrac{h}{2}\)</span> yazalım; böylece
+<span class="mat">\(x + h = u + v\)</span> ve <span class="mat">\(x = u - v\)</span> olur. Toplam formüllerinden</p>
+<div class="mat-blok">\[\begin{aligned}
+\sin(u+v) &amp;= \sin u\cos v + \cos u \sin v, \\
+\sin(u-v) &amp;= \sin u \cos v - \cos u \sin v
+\end{aligned}\]</div>
+<p>(ikincisi, birincisinde <span class="mat">\(v \mapsto -v\)</span> konup <span class="mat">\(\sin(-v) = -\sin v\)</span>,
+<span class="mat">\(\cos(-v) = \cos v\)</span> kullanılarak elde edilir). Çıkarırsak</p>
+<div class="mat-blok">\[\sin(x+h) - \sin x = \sin(u+v) - \sin(u-v) = 2\cos u \sin v ,\]</div>
+<p>ki bu tam olarak ilk formül. Kosinüs için aynı şekilde</p>
+<div class="mat-blok">\[\begin{aligned}
+\cos(u+v) &amp;= \cos u \cos v - \sin u \sin v, \\
+\cos(u-v) &amp;= \cos u\cos v + \sin u \sin v
+\end{aligned}\]</div>
+<p>ve çıkarma <span class="mat">\(\cos(x+h) - \cos x = -2\sin u \sin v\)</span> verir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Temel eşitsizlik</span></p><p>Her <span class="mat">\(t \in \mathbb{R}\)</span> için</p>
+<div class="mat-blok">\[|\sin t| \ \le\ |t| .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(|t| \ge 1\)</span> ise <span class="mat">\(|\sin t| \le 1 \le |t|\)</span> olduğundan iş biter. <span class="mat">\(0 &lt; t &lt; 1\)</span>
+hâlini ele alalım (<span class="mat">\(t &lt; 0\)</span> hâli <span class="mat">\(\sin\)</span>'in tek fonksiyon olmasından gelir,
+<span class="mat">\(t = 0\)</span>'da iki taraf da sıfır).</p>
+<p><span class="mat">\(t\)</span> radyanlık merkez açıya birim çemberde karşılık gelen yayı düşünelim.
+<span class="mat">\(\sin t\)</span>, bu açının karşısındaki dik kenarın uzunluğudur; <span class="mat">\(t\)</span> ise yayın
+uzunluğu. Bir kirişin uzunluğu, gerdiği yayın uzunluğunu aşamayacağından — ve
+<span class="mat">\(\sin t\)</span> o kirişten de kısa olduğundan — <span class="mat">\(\sin t \le t\)</span> elde edilir.</p>
+<p>Analitik tanımı temel alanlar için: <span class="mat">\(\sin t = \sum_{k\ge 0}
+\frac{(-1)^k t^{2k+1}}{(2k+1)!}\)</span> serisinde <span class="mat">\(0 &lt; t &lt; 1\)</span> için terimlerin mutlak
+değerleri kesin azalır ve seri alterne olur; alterne seri kestirimi doğrudan
+<span class="mat">\(0 \le t - \sin t\)</span> verir.</p><span class="mezar">□</span></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik"><span class="mat">\(\sin\)</span></span></p><p><span class="mat">\(a \in \mathbb{R}\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(\delta = \varepsilon\)</span>
+alalım. <span class="mat">\(|x - a| &lt; \delta\)</span> olsun ve <span class="mat">\(h = x - a\)</span> yazalım. Fark formülüyle</p>
+<div class="mat-blok">\[|\sin x - \sin a| = \left|2\cos\!\left(a + \frac{h}{2}\right)
+\sin\!\left(\frac{h}{2}\right)\right|
+= 2\left|\cos\!\left(a+\frac{h}{2}\right)\right| \cdot
+\left|\sin\!\left(\frac{h}{2}\right)\right| .\]</div>
+<p>Şimdi iki sınır kullanıyoruz: <span class="mat">\(|\cos(\cdot)| \le 1\)</span> ve temel eşitsizlikten
+<span class="mat">\(\left|\sin\left(\frac{h}{2}\right)\right| \le \left|\frac{h}{2}\right|\)</span>.
+Öyleyse</p>
+<div class="mat-blok">\[|\sin x - \sin a| \ \le\ 2 \cdot 1 \cdot \frac{|h|}{2} = |h| = |x - a|
+\ &lt; \ \delta = \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik"><span class="mat">\(\cos\)</span></span></p><p>Aynı hesap. <span class="mat">\(|x - a| &lt; \delta = \varepsilon\)</span> ve <span class="mat">\(h = x-a\)</span> için</p>
+<div class="mat-blok">\[|\cos x - \cos a| = 2\left|\sin\!\left(a+\frac{h}{2}\right)\right|
+\left|\sin\!\left(\frac{h}{2}\right)\right|
+\ \le\ 2 \cdot 1 \cdot \frac{|h|}{2} = |x-a| &lt; \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik"><span class="mat">\(\delta = \varepsilon\)</span> ne anlatıyor</span></p><p>İki kanıt da aslında daha güçlü bir şey gösterdi:</p>
+<div class="mat-blok">\[|\sin x - \sin a| \le |x - a|, \qquad |\cos x - \cos a| \le |x-a| .\]</div>
+<p>Yani her iki fonksiyon da <span class="mat">\(1\)</span>-Lipschitz'tir, dolayısıyla <span class="mat">\(\mathbb{R}\)</span> üzerinde
+<strong>düzgün</strong> süreklidir — <span class="mat">\(\delta\)</span> seçimi <span class="mat">\(a\)</span>'ya hiç bağlı olmadı. Bu,
+<span class="mat">\(|\sin&#x27;| = |\cos| \le 1\)</span> olmasının ortalama değer teoremine başvurmadan
+görülen hâli.</p></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Diğer trigonometrik fonksiyonlar</span></p><p><span class="mat">\(\tan = \dfrac{\sin}{\cos}\)</span> fonksiyonu, <span class="mat">\(\cos\)</span>'un sıfırlanmadığı her noktada
+süreklidir; yani <span class="mat">\(\mathbb{R} \setminus \left\{\frac{\pi}{2} + k\pi :
+k \in \mathbb{Z}\right\}\)</span> üzerinde. Aynı şey <span class="mat">\(\cot\)</span>, <span class="mat">\(\sec\)</span> ve <span class="mat">\(\csc\)</span> için de
+geçerli. Hepsi <a href="sureklilik-cebiri.html">süreklilik cebirinin</a> bölüm kuralından
+çıkıyor.</p></section>
+  <nav class="alt-gezinme"><span></span><a class="gez sonraki" href="sinx-bolu-x.html"><span>Sonraki →</span>sin(x)/x Limitinin 1 Olduğu</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

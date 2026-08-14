@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kök–Çarpan Teoremi ve Köklerin Sayısı — Ahmet</title>
+<meta name="description" content="c bir köktür iff (x-c) mid P; buradan n. dereceden bir polinomun en çok n kökü olduğu ve tam n kökü varsa çarpanlara ayrılışı.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Cebir Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#a-kok-carpan-teoremi">(a) Kök–Çarpan Teoremi</a></li><li class="toc-s2"><a href="#b-en-cok-kok">(b) En çok <span class="mat">\(n\)</span> kök</a></li><li class="toc-s2"><a href="#c-tam-kok-varsa-carpanlara-ayrilis">(c) Tam <span class="mat">\(n\)</span> kök varsa çarpanlara ayrılış</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Cebir Kanıtları · 2026-08-14</p>
+    <h1>Kök–Çarpan Teoremi ve Köklerin Sayısı</h1>
+    <p class="ozet"><span class="mat">\(c\)</span> bir köktür <span class="mat">\(\iff\)</span> <span class="mat">\((x-c) \mid P\)</span>; buradan <span class="mat">\(n\)</span>. dereceden bir polinomun en çok <span class="mat">\(n\)</span> kökü olduğu ve tam <span class="mat">\(n\)</span> kökü varsa çarpanlara ayrılışı.</p>
+  </header>
+  <p>Önceki yazıdaki <a href="polinom-bolme.html">bölme önermesinin</a> ilk ve en güzel meyvesi.
+Üç iddiayı sırayla kanıtlıyoruz; her biri bir öncekini kullanıyor.</p>
+<section class="ortam ortam-tanim"><p class="ortam-bas"><span class="ortam-etiket">Tanım</span> <span class="ortam-baslik">Kök</span></p><p><span class="mat">\(P(x)\)</span> bir polinom olmak üzere, <span class="mat">\(P(c) = 0\)</span> koşulunu sağlayan <span class="mat">\(c\)</span> sayısına
+<span class="mat">\(P\)</span>'nin bir <strong>kökü</strong> denir.</p></section>
+<h2 id="a-kok-carpan-teoremi">(a) Kök–Çarpan Teoremi<a class="capa" href="#a-kok-carpan-teoremi">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 8.2 (a)</span></p><p><span class="mat">\(c\)</span> sayısı <span class="mat">\(P(x)\)</span>'in bir köküdür <span class="mat">\(\iff\)</span> bir <span class="mat">\(Q(x)\)</span> polinomu için
+<span class="mat">\(P(x) = (x-c)Q(x)\)</span> olur.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><strong>(<span class="mat">\(\Leftarrow\)</span>) Kolay yön.</strong> <span class="mat">\(P(x) = (x-c)Q(x)\)</span> ise <span class="mat">\(x = c\)</span> koyarak
+<span class="mat">\(P(c) = (c-c)Q(c) = 0 \cdot Q(c) = 0\)</span> elde ederiz; yani <span class="mat">\(c\)</span> bir köktür.</p>
+<p><strong>(<span class="mat">\(\Rightarrow\)</span>) Asıl yön.</strong> <span class="mat">\(P(c) = 0\)</span> olsun. <span class="mat">\(D(x) = x - c\)</span> alalım; bu
+birinci dereceden bir polinomdur. Bölme önermesini uygulayarak</p>
+<div class="mat-blok">\[P(x) = (x-c)Q(x) + R(x), \qquad \deg R &lt; \deg D = 1\]</div>
+<p>yazabiliriz. Derecesi <span class="mat">\(1\)</span>'den küçük bir polinom sabittir; diyelim <span class="mat">\(R(x) = r\)</span>.
+Şimdi bu özdeşlikte <span class="mat">\(x = c\)</span> koyalım:</p>
+<div class="mat-blok">\[0 = P(c) = (c-c)Q(c) + r = r .\]</div>
+<p>Demek ki <span class="mat">\(r = 0\)</span> ve <span class="mat">\(P(x) = (x-c)Q(x)\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Sağdaki <span class="mat">\(Q\)</span>'nun derecesi, derecelerin toplamsallığı gereği
+<span class="mat">\(\deg Q = \deg P - 1\)</span>'dir. Aşağıdaki tümevarımı besleyen şey tam olarak bu
+"bir derece düşme" olgusu.</p></section>
+<h2 id="b-en-cok-kok">(b) En çok <span class="mat">\(n\)</span> kök<a class="capa" href="#b-en-cok-kok">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 8.2 (b)</span></p><p>Derecesi <span class="mat">\(n\)</span> olan bir polinomun en çok <span class="mat">\(n\)</span> tane farklı kökü vardır.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(n\)</span> üzerinden tümevarım.</p>
+<p><strong>Temel durum <span class="mat">\(n = 0\)</span>.</strong> <span class="mat">\(P(x) = a_0\)</span> sabit ve <span class="mat">\(\deg P = 0\)</span> olduğundan
+<span class="mat">\(a_0 \ne 0\)</span>. Böyle bir polinomun hiç kökü yoktur; <span class="mat">\(0 \le 0\)</span>.</p>
+<p><strong>Tümevarım adımı.</strong> İddia <span class="mat">\(n-1\)</span> için doğru olsun ve <span class="mat">\(\deg P = n \ge 1\)</span> olsun.
+<span class="mat">\(P\)</span>'nin hiç kökü yoksa iş bitmiştir (<span class="mat">\(0 \le n\)</span>). Aksi hâlde bir <span class="mat">\(c_1\)</span> kökü
+vardır ve (a) şıkkı gereği</p>
+<div class="mat-blok">\[P(x) = (x - c_1)Q(x), \qquad \deg Q = n - 1 .\]</div>
+<p>Şimdi <span class="mat">\(c \ne c_1\)</span> olan herhangi bir <span class="mat">\(P\)</span> kökü alalım. O zaman</p>
+<div class="mat-blok">\[0 = P(c) = (c - c_1)Q(c)\]</div>
+<p>olur. Katsayılar bir cisimden geldiği ve <span class="mat">\(c - c_1 \ne 0\)</span> olduğu için
+<span class="mat">\(Q(c) = 0\)</span> olmak zorundadır. Yani <span class="mat">\(c_1\)</span>'den farklı her <span class="mat">\(P\)</span> kökü aynı zamanda
+bir <span class="mat">\(Q\)</span> köküdür.</p>
+<p>Tümevarım hipotezine göre <span class="mat">\(Q\)</span>'nun en çok <span class="mat">\(n-1\)</span> farklı kökü vardır. Öyleyse
+<span class="mat">\(P\)</span>'nin farklı köklerinin sayısı en çok <span class="mat">\((n-1) + 1 = n\)</span>'dir; buradaki <span class="mat">\(+1\)</span>
+sadece <span class="mat">\(c_1\)</span>'i saymak içindir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Cisim şartı yine kritik</span></p><p>"<span class="mat">\((c-c_1)Q(c) = 0\)</span> ve <span class="mat">\(c - c_1 \ne 0\)</span> <span class="mat">\(\Rightarrow\)</span> <span class="mat">\(Q(c) = 0\)</span>" adımı sıfır
+bölen bulunmamasını kullanıyor. <span class="mat">\(\mathbb{Z}/8\mathbb{Z}\)</span> üzerinde
+<span class="mat">\(P(x) = x^2\)</span> ikinci derecedendir ama <span class="mat">\(0, 2, 4, 6\)</span> olmak üzere <strong>dört</strong> kökü
+vardır.</p></section>
+<h2 id="c-tam-kok-varsa-carpanlara-ayrilis">(c) Tam <span class="mat">\(n\)</span> kök varsa çarpanlara ayrılış<a class="capa" href="#c-tam-kok-varsa-carpanlara-ayrilis">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 8.2 (c)</span></p><p>Derecesi <span class="mat">\(n\)</span> olan <span class="mat">\(P(x)\)</span> polinomunun <span class="mat">\(c_1, \dots, c_n\)</span> gibi <span class="mat">\(n\)</span> tane farklı
+kökü varsa, <span class="mat">\(a_n\)</span> baş katsayısı olmak üzere</p>
+<div class="mat-blok">\[P(x) = a_n \prod_{i=1}^{n} (x - c_i).\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Yine (a) şıkkını tekrar tekrar uygulayarak, <span class="mat">\(k = 0, 1, \dots, n\)</span> için</p>
+<div class="mat-blok">\[P(x) = (x-c_1)\cdots(x-c_k)\,Q_k(x), \qquad \deg Q_k = n - k\]</div>
+<p>olacak biçimde <span class="mat">\(Q_k\)</span> polinomları kuruyoruz. <span class="mat">\(k\)</span> üzerinden tümevarım:</p>
+<ul>
+<li><span class="mat">\(k = 0\)</span> için <span class="mat">\(Q_0 = P\)</span> alalım.</li>
+<li><span class="mat">\(Q_k\)</span> kurulmuş olsun ve <span class="mat">\(k &lt; n\)</span> olsun. <span class="mat">\(c_{k+1}\)</span> kökünü <span class="mat">\(P\)</span>'de yerine koyarsak <div class="mat-blok">\[0 = P(c_{k+1}) = (c_{k+1}-c_1)\cdots(c_{k+1}-c_k)\,Q_k(c_{k+1})\]</div> olur. Kökler birbirinden farklı olduğundan soldaki çarpanların hepsi sıfırdan farklıdır; dolayısıyla <span class="mat">\(Q_k(c_{k+1}) = 0\)</span>. (a) şıkkına göre <span class="mat">\(Q_k(x) = (x - c_{k+1})Q_{k+1}(x)\)</span> ve derece toplamsallığından <span class="mat">\(\deg Q_{k+1} = (n-k) - 1 = n - (k+1)\)</span>.</li>
+</ul>
+<p><span class="mat">\(k = n\)</span> adımında <span class="mat">\(\deg Q_n = 0\)</span> olur, yani <span class="mat">\(Q_n\)</span> sıfırdan farklı bir <span class="mat">\(a\)</span>
+sabitidir ve</p>
+<div class="mat-blok">\[P(x) = a \prod_{i=1}^{n}(x - c_i).\]</div>
+<p>Son olarak <span class="mat">\(a\)</span>'yı belirleyelim: sağ taraftaki çarpımı açtığımızda <span class="mat">\(x^n\)</span>'in
+katsayısı <span class="mat">\(a\)</span>'dır. Sol tarafta ise <span class="mat">\(x^n\)</span>'in katsayısı tanım gereği baş katsayı
+<span class="mat">\(a_n\)</span>'dir. Bir polinomun katsayıları biricik olduğundan <span class="mat">\(a = a_n\)</span>.</p><span class="mezar">□</span></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+open Polynomial
+
+variable {K : Type*} [CommRing K] [IsDomain K]
+
+/-- (a) Kök–çarpan teoremi. -/
+theorem kok_carpan (P : K[X]) (c : K) :
+    P.IsRoot c ↔ ∃ Q : K[X], P = (X - C c) * Q := by
+  constructor
+  · intro h
+    obtain ⟨Q, hQ⟩ := dvd_iff_isRoot.mpr h
+    exact ⟨Q, hQ⟩
+  · rintro ⟨Q, rfl⟩
+    simp [IsRoot]
+
+/-- (b) Farklı köklerin sayısı dereceyi aşamaz. -/
+theorem en_fazla_n_kok (P : K[X]) (hP : P ≠ 0) :
+    P.roots.toFinset.card ≤ P.natDegree :=
+  le_trans (Multiset.toFinset_card_le _) (card_roots&#x27; P)
+
+/-- (c) `n` farklı kök varsa polinom tamamen çarpanlarına ayrılır. -/
+example (P : K[X]) (hP : P ≠ 0)
+    (h : P.roots.toFinset.card = P.natDegree) :
+    P = C P.leadingCoeff * ∏ c ∈ P.roots.toFinset, (X - C c) := by
+  sorry  -- ayrıntı: `Polynomial.eq_prod_roots_of_splits` üzerinden</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Son iddia için Mathlib'in hazır aracı <code>Polynomial.eq_prod_roots_of_splits</code>;
+yukarıdaki <code>sorry</code> yerine onu kullanmak gerekiyor. Elle yazılan tümevarım da
+işe yarar ama Mathlib'in çokluk (multiplicity) muhasebesiyle uğraşmak
+gerekir — bu, kâğıt üstündeki kanıttan belirgin biçimde daha uzun.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="derecenin-toplamsalligi.html"><span>← Önceki</span>Çarpımın Derecesi Derecelerin Toplamıdır</a><a class="gez sonraki" href="cauchy-schwarz.html"><span>Sonraki →</span>Cauchy–Schwarz Eşitsizliği</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

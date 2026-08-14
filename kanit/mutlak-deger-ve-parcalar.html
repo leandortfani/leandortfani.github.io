@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mutlak Değer, Pozitif ve Negatif Parçalar — Ahmet</title>
+<meta name="description" content="|f| süreklidir; f+ = tfrac12(f+|f|) ve f- = tfrac12(|f|-f) de öyle; ve f = f+ - f-.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#a-sureklidir">(a) <span class="mat">\(|f|\)</span> süreklidir</a></li><li class="toc-s2"><a href="#b-ve-sureklidir">(b) <span class="mat">\(f_+\)</span> ve <span class="mat">\(f_-\)</span> süreklidir</a></li><li class="toc-s2"><a href="#c-ayrisim">(c) Ayrışım</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Mutlak Değer, Pozitif ve Negatif Parçalar</h1>
+    <p class="ozet"><span class="mat">\(|f|\)</span> süreklidir; <span class="mat">\(f_+ = \tfrac12(f+|f|)\)</span> ve <span class="mat">\(f_- = \tfrac12(|f|-f)\)</span> de öyle; ve <span class="mat">\(f = f_+ - f_-\)</span>.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 10</span></p><p><span class="mat">\(f : D \to S\)</span> bir <span class="mat">\(D\)</span> aralığında sürekli olsun.</p>
+<p>(a) <span class="mat">\(|f| : D \to \mathbb{R}\)</span>, <span class="mat">\(|f|(x) = |f(x)|\)</span> süreklidir.</p>
+<p>(b) <span class="mat">\(f_+, f_- : D \to \mathbb{R}\)</span>,</p>
+<div class="mat-blok">\[f_+(x) = \begin{cases} f(x), &amp; f(x) \ge 0 \\ 0, &amp; f(x) &lt; 0 \end{cases}
+\qquad
+f_-(x) = \begin{cases} -f(x), &amp; f(x) \le 0 \\ 0, &amp; f(x) &gt; 0 \end{cases}\]</div>
+<p>süreklidir.</p>
+<p>(c) <span class="mat">\(f = f_+ - f_-\)</span>.</p></section>
+<h2 id="a-sureklidir">(a) <span class="mat">\(|f|\)</span> süreklidir<a class="capa" href="#a-sureklidir">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Anahtar, <strong>ters üçgen eşitsizliği</strong>dir:</p>
+<div class="mat-blok">\[\bigl|\,|s| - |t|\,\bigr| \ \le\ |s - t| \qquad (s,t \in \mathbb{R}).\]</div>
+<p>Gerçekten <span class="mat">\(|s| = |(s-t)+t| \le |s-t| + |t|\)</span> olduğundan
+<span class="mat">\(|s| - |t| \le |s-t|\)</span>; <span class="mat">\(s\)</span> ile <span class="mat">\(t\)</span>'nin rollerini değiştirince
+<span class="mat">\(|t| - |s| \le |s-t|\)</span> ve ikisi birlikte iddiayı verir.</p>
+<p>Şimdi <span class="mat">\(a \in D\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(f\)</span>'nin <span class="mat">\(a\)</span>'daki
+sürekliliğinden bir <span class="mat">\(\delta &gt; 0\)</span> vardır ki <span class="mat">\(x \in D\)</span>, <span class="mat">\(|x-a| &lt; \delta\)</span>
+olduğunda <span class="mat">\(|f(x) - f(a)| &lt; \varepsilon\)</span>. Aynı <span class="mat">\(\delta\)</span> ile</p>
+<div class="mat-blok">\[\bigl|\,|f|(x) - |f|(a)\,\bigr| = \bigl|\,|f(x)| - |f(a)|\,\bigr|
+\ \le\ |f(x) - f(a)| \ &lt; \ \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Kanıt aslında daha fazlasını gösteriyor: <span class="mat">\(t \mapsto |t|\)</span> fonksiyonu
+<span class="mat">\(1\)</span>-Lipschitz olduğundan, bir fonksiyonla bileşkesi sürekliliği <strong>hiç
+bozmadan</strong> aktarır. Aynı <span class="mat">\(\delta\)</span>'yı kullanabilmemizin sebebi bu.</p></section>
+<h2 id="b-ve-sureklidir">(b) <span class="mat">\(f_+\)</span> ve <span class="mat">\(f_-\)</span> süreklidir<a class="capa" href="#b-ve-sureklidir">#</a></h2>
+<p>İpucu, parçalı tanımdan kurtulmayı söylüyor. Gerçekten şu kapalı formüller
+geçerli:</p>
+<div class="mat-blok">\[f_+ = \tfrac{1}{2}\bigl(f + |f|\bigr), \qquad
+f_- = \tfrac{1}{2}\bigl(|f| - f\bigr).\]</div>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik">Formüllerin doğrulanması</span></p><p>Bir <span class="mat">\(x \in D\)</span> alalım ve <span class="mat">\(t = f(x)\)</span> yazalım. İki hâl:</p>
+<ul>
+<li><span class="mat">\(t \ge 0\)</span> ise <span class="mat">\(|t| = t\)</span> ve <span class="mat">\(\tfrac12(t + |t|) = \tfrac12(2t) = t = f_+(x)\)</span>; ayrıca <span class="mat">\(\tfrac12(|t| - t) = 0 = f_-(x)\)</span>.</li>
+<li><span class="mat">\(t &lt; 0\)</span> ise <span class="mat">\(|t| = -t\)</span> ve <span class="mat">\(\tfrac12(t + |t|) = \tfrac12(t - t) = 0 = f_+(x)\)</span>; ayrıca <span class="mat">\(\tfrac12(|t| - t) = \tfrac12(-2t) = -t = f_-(x)\)</span>.</li>
+</ul>
+<p>Her iki hâlde de formüller doğrudur.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik">Süreklilik</span></p><p><span class="mat">\(f\)</span> süreklidir (hipotez) ve <span class="mat">\(|f|\)</span> süreklidir ((a) şıkkı). Sabit fonksiyon
+<span class="mat">\(\tfrac12\)</span> süreklidir. <a href="sureklilik-cebiri.html">Süreklilik cebiri</a> gereği
+toplam, fark ve çarpım sürekliliği korur; dolayısıyla</p>
+<div class="mat-blok">\[f_+ = \tfrac12\bigl(f + |f|\bigr), \qquad f_- = \tfrac12\bigl(|f| - f\bigr)\]</div>
+<p>süreklidir.</p><span class="mezar">□</span></section>
+<h2 id="c-ayrisim">(c) Ayrışım<a class="capa" href="#c-ayrisim">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Formülleri doğrudan çıkaralım:</p>
+<div class="mat-blok">\[f_+ - f_- = \tfrac12\bigl(f + |f|\bigr) - \tfrac12\bigl(|f| - f\bigr)
+= \tfrac12\bigl(f + |f| - |f| + f\bigr) = \tfrac12 (2f) = f .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p>Aynı hesabın toplama hâli de kullanışlıdır:</p>
+<div class="mat-blok">\[f_+ + f_- = \tfrac12\bigl(f + |f|\bigr) + \tfrac12\bigl(|f| - f\bigr) = |f| .\]</div>
+<p>Yani <span class="mat">\(f_+\)</span> ve <span class="mat">\(f_-\)</span> negatif olmayan iki fonksiyondur; farkları <span class="mat">\(f\)</span>'yi,
+toplamları <span class="mat">\(|f|\)</span>'yi verir. Ayrıca <span class="mat">\(f_+ \cdot f_- = 0\)</span>'dır: her noktada
+en az biri sıfırlanır.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden değerli bir ayrışım</span></p><p>"Her sürekli fonksiyon, iki negatif olmayan sürekli fonksiyonun farkıdır"
+ifadesi, integral ve ölçü teorisinin belkemiğidir: <span class="mat">\(\int f\)</span> tanımlanırken
+<span class="mat">\(\int f_+\)</span> ve <span class="mat">\(\int f_-\)</span> ayrı ayrı tanımlanıp farkları alınır. Aynı ayrışım
+işaretli ölçülerde Jordan ayrışımı olarak karşımıza çıkar.</p>
+<p><span class="mat">\(\max\)</span> ve <span class="mat">\(\min\)</span> ile de aynı şey yazılabilir:</p>
+<div class="mat-blok">\[f_+ = \max(f, 0), \qquad f_- = \max(-f, 0),\]</div>
+<p>ve genel olarak</p>
+<div class="mat-blok">\[\max(f,g) = \tfrac12\bigl(f + g + |f-g|\bigr), \qquad
+\min(f,g) = \tfrac12\bigl(f + g - |f-g|\bigr),\]</div>
+<p>ki bu da iki sürekli fonksiyonun maksimumunun ve minimumunun sürekli olduğunu
+gösterir.</p></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+variable {f : ℝ → ℝ}
+
+/-- (a) `|f|` süreklidir. -/
+theorem surekli_abs (hf : Continuous f) : Continuous fun x =&gt; |f x| :=
+  hf.abs
+
+/-- (b) Pozitif ve negatif parçalar süreklidir. -/
+theorem surekli_pozitif_parca (hf : Continuous f) :
+    Continuous fun x =&gt; (f x + |f x|) / 2 := by
+  fun_prop
+
+theorem surekli_negatif_parca (hf : Continuous f) :
+    Continuous fun x =&gt; (|f x| - f x) / 2 := by
+  fun_prop
+
+/-- Parçalı tanımla kapalı formülün aynı şey olduğu. -/
+theorem parca_formulu (t : ℝ) : max t 0 = (t + |t|) / 2 := by
+  rcases le_total 0 t with h | h
+  · rw [max_eq_left h, abs_of_nonneg h]; ring
+  · rw [max_eq_right h, abs_of_nonpos h]; ring
+
+/-- (c) `f = f₊ - f₋`. -/
+theorem ayrisim (t : ℝ) : (t + |t|) / 2 - (|t| - t) / 2 = t := by ring
+
+/-- Bonus: `f₊ + f₋ = |f|`. -/
+theorem toplam_abs (t : ℝ) : (t + |t|) / 2 + (|t| - t) / 2 = |t| := by ring</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>(c) şıkkının Lean'de tek <code>ring</code> çağrısına inmesi tesadüf değil: kâğıt üstündeki
+kanıt da saf cebirdi. <code>|t|</code>'nin ne olduğunu hiç açmadık, sadece bir reel sayı
+olarak muamele ettik. Asıl iş <code>parca_formulu</code>'nde — parçalı tanımı kapalı
+formüle çevirdiğimiz yerde — ve orada <code>le_total</code> ile iki hâle ayırmak zorunda
+kalıyoruz; tam da kâğıt üstünde yaptığımız gibi.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="surekli-genisleme.html"><span>← Önceki</span>Sürekli Genişleme</a><a class="gez sonraki" href="sin-bir-bolu-x.html"><span>Sonraki →</span>sin(1/x) ve x·sin(1/x) Limitleri</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

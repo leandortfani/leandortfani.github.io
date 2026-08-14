@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sin(x)/x Limitinin 1 Olduğu — Ahmet</title>
+<meta name="description" content="sin x &lt; x &lt; tan x geometrik eşitsizliğini ters çevirip sıkıştırma teoremine vermek; sonuç 0/0 belirsizliğinin en meşhur çözümü.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Trigonometrik Kanıtlar</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#geometrik-esitsizlik">Geometrik eşitsizlik</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#tureve-giden-yol">Türeve giden yol</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Trigonometrik Kanıtlar · 2026-08-14</p>
+    <h1>sin(x)/x Limitinin 1 Olduğu</h1>
+    <p class="ozet"><span class="mat">\(\sin x &lt; x &lt; \tan x\)</span> geometrik eşitsizliğini ters çevirip sıkıştırma teoremine vermek; sonuç <span class="mat">\(0/0\)</span> belirsizliğinin en meşhur çözümü.</p>
+  </header>
+  <p>Kendi eklediğim kanıtlardan. Analizdeki ilk gerçek "belirsizlik" hesabı ve
+türev tanımının trigonometrik ayağının tamamı bunun üzerinde duruyor:
+<span class="mat">\(\sin&#x27; = \cos\)</span> eşitliği doğrudan bu limitten çıkar.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Teorem</span></p><div class="mat-blok">\[\lim_{x\to 0} \frac{\sin x}{x} = 1 .\]</div></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Döngüsel kanıt tuzağı</span></p><p>Bu limiti L'Hôpital kuralıyla "kanıtlamak" cazip görünür:
+<span class="mat">\(\lim \frac{\sin x}{x} = \lim \frac{\cos x}{1} = 1\)</span>. Ama L'Hôpital'i
+uygulamak için <span class="mat">\(\sin&#x27; = \cos\)</span> olduğunu bilmek gerekir ve <span class="mat">\(\sin\)</span>'in türevini
+hesaplamak tam olarak bu limiti gerektirir. Döngüsel. Aşağıdaki kanıt
+geometriden (ya da <span class="mat">\(\sin\)</span>'in seri tanımından) başlar.</p></section>
+<h2 id="geometrik-esitsizlik">Geometrik eşitsizlik<a class="capa" href="#geometrik-esitsizlik">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span></p><p><span class="mat">\(0 &lt; x &lt; \dfrac{\pi}{2}\)</span> için</p>
+<div class="mat-blok">\[\sin x \ &lt; \ x \ &lt; \ \tan x .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Birim çemberde merkezi <span class="mat">\(O\)</span>, yarıçapı <span class="mat">\(1\)</span> olan bir daire alalım. <span class="mat">\(x\)</span> radyanlık
+merkez açının kenarlarının çemberi kestiği noktalardan birine <span class="mat">\(A\)</span>, diğerinin
+üzerindeki noktaya <span class="mat">\(B\)</span> diyelim; <span class="mat">\(A\)</span>'yı <span class="mat">\((1,0)\)</span> olarak sabitleyelim ve
+<span class="mat">\(B = (\cos x, \sin x)\)</span> olsun. Ayrıca <span class="mat">\(A\)</span>'daki teğetin <span class="mat">\(OB\)</span> doğrusunu kestiği
+noktaya <span class="mat">\(C = (1, \tan x)\)</span> diyelim.</p>
+<p>Üç bölgenin alanlarını karşılaştıralım — her biri bir öncekini kapsar:</p>
+<div class="mat-blok">\[\text{üçgen } OAB \;\subset\; \text{daire dilimi } OAB
+\;\subset\; \text{üçgen } OAC .\]</div>
+<p>Alanlar:</p>
+<div class="mat-blok">\[\begin{aligned}
+[OAB] &amp;= \tfrac{1}{2}\cdot 1 \cdot \sin x, \\
+[\text{dilim}] &amp;= \frac{x}{2\pi}\cdot \pi \cdot 1^2 = \frac{x}{2}, \\
+[OAC] &amp;= \tfrac{1}{2}\cdot 1\cdot \tan x .
+\end{aligned}\]</div>
+<p>Kapsama ilişkisi kesin olduğundan (bölgeler birbirine eşit değil)</p>
+<div class="mat-blok">\[\frac{\sin x}{2} \ &lt; \ \frac{x}{2} \ &lt; \ \frac{\tan x}{2},\]</div>
+<p>ve ikiyle çarpınca istenen eşitsizlik çıkar.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Radyanın rolü</span></p><p>Dilimin alanının <span class="mat">\(x/2\)</span> olması, açının <strong>radyan</strong> cinsinden ölçülmesine
+bağlıdır. Teorem derece cinsinden yanlıştır: o durumda limit
+<span class="mat">\(\pi/180\)</span> olur. "<span class="mat">\(\sin x \approx x\)</span>" yaklaşımının ve <span class="mat">\(\sin&#x27; = \cos\)</span>
+eşitliğinin radyanı zorunlu kılması bundan.</p></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(0 &lt; x &lt; \dfrac{\pi}{2}\)</span> olsun. Lemmadaki eşitsizliği <span class="mat">\(\sin x &gt; 0\)</span> ile
+bölelim:</p>
+<div class="mat-blok">\[1 \ &lt; \ \frac{x}{\sin x} \ &lt; \ \frac{\tan x}{\sin x} = \frac{1}{\cos x} .\]</div>
+<p>Bütün terimler pozitif olduğundan tersini alıp yönü çevirebiliriz:</p>
+<div class="mat-blok">\[\cos x \ &lt; \ \frac{\sin x}{x} \ &lt; \ 1 . \tag{\ast}\]</div>
+<p><span class="mat">\((\ast)\)</span> eşitsizliği <span class="mat">\(-\dfrac{\pi}{2} &lt; x &lt; 0\)</span> için de geçerlidir, çünkü
+<span class="mat">\(\dfrac{\sin(-x)}{-x} = \dfrac{-\sin x}{-x} = \dfrac{\sin x}{x}\)</span> ve
+<span class="mat">\(\cos(-x) = \cos x\)</span>; yani her iki taraf da çift fonksiyondur.</p>
+<p>Şimdi <span class="mat">\(x \to 0\)</span> limitine geçelim. <a href="sin-cos-surekliligi.html">Kosinüs süreklidir</a>,
+dolayısıyla</p>
+<div class="mat-blok">\[\lim_{x\to 0}\cos x = \cos 0 = 1,\]</div>
+<p>ve sağdaki sabit fonksiyonun limiti de <span class="mat">\(1\)</span>'dir.
+<a href="sikistirma-teoremi.html">Sıkıştırma teoremi</a> <span class="mat">\((\ast)\)</span>'a uygulanınca</p>
+<div class="mat-blok">\[\lim_{x\to 0}\frac{\sin x}{x} = 1 .\]</div><span class="mezar">□</span></section>
+<h2 id="tureve-giden-yol">Türeve giden yol<a class="capa" href="#tureve-giden-yol">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><div class="mat-blok">\[\lim_{x\to 0}\frac{1 - \cos x}{x} = 0
+\qquad \text{ve} \qquad
+\lim_{x\to 0}\frac{1-\cos x}{x^2} = \frac{1}{2}.\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Eşleniğiyle genişletelim:</p>
+<div class="mat-blok">\[\begin{aligned}
+\frac{1-\cos x}{x}
+&amp;= \frac{(1-\cos x)(1+\cos x)}{x\,(1+\cos x)}
+= \frac{1 - \cos^2 x}{x\,(1+\cos x)} \\[4pt]
+&amp;= \frac{\sin^2 x}{x\,(1+\cos x)}
+= \frac{\sin x}{x}\cdot\frac{\sin x}{1+\cos x}.
+\end{aligned}\]</div>
+<p>İlk çarpanın limiti <span class="mat">\(1\)</span>, ikinci çarpanın limiti ise süreklilikten
+<span class="mat">\(\dfrac{\sin 0}{1 + \cos 0} = \dfrac{0}{2} = 0\)</span>. Çarpımın limiti <span class="mat">\(1 \cdot 0 = 0\)</span>.</p>
+<p>İkinci eşitlik için aynı ifadeyi <span class="mat">\(x^2\)</span> ile yazalım:</p>
+<div class="mat-blok">\[\frac{1-\cos x}{x^2} = \left(\frac{\sin x}{x}\right)^2
+\cdot \frac{1}{1+\cos x} \ \longrightarrow \ 1^2 \cdot \frac{1}{2}
+= \frac{1}{2}.\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik"><span class="mat">\(\sin&#x27; = \cos\)</span></span></p><div class="mat-blok">\[\frac{\dd}{\dd x}\sin x = \cos x .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Türev tanımından ve fark formülünden (<a href="sin-cos-surekliligi.html"><span class="mat">\(\sin\)</span>–<span class="mat">\(\cos\)</span> sürekliliği
+yazısındaki</a> lemma):</p>
+<div class="mat-blok">\[\frac{\sin(x+h) - \sin x}{h}
+= \frac{2\cos\!\left(x+\frac{h}{2}\right)\sin\!\left(\frac{h}{2}\right)}{h}
+= \cos\!\left(x + \frac{h}{2}\right)\cdot
+\frac{\sin\!\left(\frac{h}{2}\right)}{\frac{h}{2}} .\]</div>
+<p><span class="mat">\(h \to 0\)</span> iken ikinci çarpan (teoremimiz gereği, <span class="mat">\(t = h/2 \to 0\)</span> ile) <span class="mat">\(1\)</span>'e,
+birinci çarpan ise kosinüsün sürekliliği gereği <span class="mat">\(\cos x\)</span>'e gider. Çarpımın
+limiti <span class="mat">\(\cos x\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Aynı kanıt kalıbı <span class="mat">\(\cos&#x27; = -\sin\)</span> için de aynen işler; sadece kosinüsün fark
+formülü kullanılır. İki sonuç birlikte, bütün trigonometrik türev tablosunu
+bölüm ve zincir kuralıyla üretir.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="sin-cos-surekliligi.html"><span>← Önceki</span>sin ve cos Süreklidir</a><a class="gez sonraki" href="chebyshev.html"><span>Sonraki →</span>cos(nθ) Bir Polinomdur — Chebyshev</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

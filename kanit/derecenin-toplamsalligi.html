@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Çarpımın Derecesi Derecelerin Toplamıdır — Ahmet</title>
+<meta name="description" content="deg(P1P2) = deg P1 + deg P2 — ve bunun neden tamlık bölgesi olmayan halkalarda bozulduğu.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Cebir Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#neden-tamlik-bolgesi-sarti-sart">Neden "tamlık bölgesi" şartı şart</a></li><li class="toc-s2"><a href="#dogrudan-bir-sonuc">Doğrudan bir sonuç</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Cebir Kanıtları · 2026-08-14</p>
+    <h1>Çarpımın Derecesi Derecelerin Toplamıdır</h1>
+    <p class="ozet"><span class="mat">\(\deg(P_1P_2) = \deg P_1 + \deg P_2\)</span> — ve bunun neden tamlık bölgesi olmayan halkalarda bozulduğu.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 8.1</span></p><p><span class="mat">\(P(x)\)</span>, <span class="mat">\(P_1(x)\)</span> ve <span class="mat">\(P_2(x)\)</span> polinomlarının çarpımı olsun. O hâlde</p>
+<div class="mat-blok">\[\deg P = \deg P_1 + \deg P_2 .\]</div></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\deg P_1 = n\)</span> ve <span class="mat">\(\deg P_2 = m\)</span> olsun. Bu polinomları</p>
+<div class="mat-blok">\[P_1(x) = \sum_{i=0}^{n} a_i x^i, \qquad P_2(x) = \sum_{j=0}^{m} b_j x^j\]</div>
+<p>biçiminde yazalım; derece tanımı gereği baş katsayılar sıfırdan farklıdır:
+<span class="mat">\(a_n \ne 0\)</span> ve <span class="mat">\(b_m \ne 0\)</span>.</p>
+<p>Çarpımı dağılma özelliğiyle açalım:</p>
+<div class="mat-blok">\[P(x) = P_1(x)P_2(x) = \sum_{i=0}^{n}\sum_{j=0}^{m} a_i b_j\, x^{\,i+j}.\]</div>
+<p>Burada <span class="mat">\(x\)</span>'in görünen en yüksek kuvveti <span class="mat">\(i+j \le n+m\)</span>'dir; yani <span class="mat">\(\deg P \le n+m\)</span>.
+Geriye <span class="mat">\(x^{n+m}\)</span>'in katsayısının <strong>gerçekten</strong> sıfırdan farklı olduğunu
+göstermek kalıyor.</p>
+<p><span class="mat">\(i + j = n + m\)</span> eşitliğini sağlayan tek <span class="mat">\((i,j)\)</span> çifti <span class="mat">\((n,m)\)</span>'dir: gerçekten
+<span class="mat">\(i \le n\)</span> ve <span class="mat">\(j \le m\)</span> olduğundan, <span class="mat">\(i &lt; n\)</span> olsaydı <span class="mat">\(i + j &lt; n + m\)</span> olurdu; aynısı
+<span class="mat">\(j &lt; m\)</span> için de geçerli. Dolayısıyla iki toplamda <span class="mat">\(x^{n+m}\)</span> terimine katkı veren
+tek çarpım <span class="mat">\(a_n b_m x^{n+m}\)</span>'dir ve <span class="mat">\(x^{n+m}\)</span>'in katsayısı tam olarak</p>
+<div class="mat-blok">\[a_n b_m .\]</div>
+<p>Katsayılar bir cisimden (daha genel olarak: bir tamlık bölgesinden) geldiği
+için <span class="mat">\(a_n \ne 0\)</span> ve <span class="mat">\(b_m \ne 0\)</span> olması <span class="mat">\(a_n b_m \ne 0\)</span> olmasını gerektirir.
+Öyleyse <span class="mat">\(x^{n+m}\)</span>'in katsayısı sıfır değildir ve</p>
+<div class="mat-blok">\[\deg P = n + m = \deg P_1 + \deg P_2 .\]</div><span class="mezar">□</span></section>
+<h2 id="neden-tamlik-bolgesi-sarti-sart">Neden "tamlık bölgesi" şartı şart<a class="capa" href="#neden-tamlik-bolgesi-sarti-sart">#</a></h2>
+<p>Kanıtın tamamı, tek bir adım dışında, herhangi bir katsayı halkasında yürür:
+<span class="mat">\(a_n b_m \ne 0\)</span> adımı. Bu adım, sıfır bölenlerin bulunmamasını gerektirir.</p>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Karşı örnek</span></p><p>Katsayıları <span class="mat">\(\mathbb{Z}/6\mathbb{Z}\)</span> halkasından alalım ve</p>
+<div class="mat-blok">\[P_1(x) = 2x + 1, \qquad P_2(x) = 3x + 1\]</div>
+<p>polinomlarını çarpalım:</p>
+<div class="mat-blok">\[P_1(x)P_2(x) = 6x^2 + 5x + 1 = 5x + 1 \pmod 6 .\]</div>
+<p>Burada <span class="mat">\(\deg P_1 + \deg P_2 = 2\)</span> ama <span class="mat">\(\deg(P_1P_2) = 1\)</span>. Sebep açık:
+<span class="mat">\(2 \cdot 3 \equiv 0 \pmod 6\)</span>, yani baş katsayıların çarpımı yok oldu.</p></section>
+<p>Genel bir değişmeli halkada elde edilebilen tek şey eşitsizliktir:</p>
+<div class="mat-blok">\[\deg(P_1P_2) \le \deg P_1 + \deg P_2 .\]</div>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Sıfır polinomu</span></p><p><span class="mat">\(\deg 0 = -\infty\)</span> kabulüyle önerme, çarpanlardan biri sıfır olduğunda da
+geçerli kalır: <span class="mat">\(-\infty + m = -\infty\)</span>. Bu kabul olmasaydı ifadeyi
+"<span class="mat">\(P_1, P_2 \ne 0\)</span> olsun" diye kısıtlamak gerekirdi.</p></section>
+<h2 id="dogrudan-bir-sonuc">Doğrudan bir sonuç<a class="capa" href="#dogrudan-bir-sonuc">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p>Bir cisim üzerindeki polinomlar halkası <span class="mat">\(\mathbb{K}[x]\)</span> bir tamlık bölgesidir
+ve tersinir elemanları tam olarak sıfırdan farklı sabitlerdir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(P_1, P_2 \ne 0\)</span> ise <span class="mat">\(\deg P_1, \deg P_2 \ge 0\)</span> olur, dolayısıyla
+<span class="mat">\(\deg(P_1P_2) = \deg P_1 + \deg P_2 \ge 0 &gt; -\infty\)</span>; yani <span class="mat">\(P_1 P_2 \ne 0\)</span>.
+Bu, tamlık bölgesi olma özelliğidir.</p>
+<p>Tersinirlik için: <span class="mat">\(P_1P_2 = 1\)</span> ise dereceleri toplayarak
+<span class="mat">\(\deg P_1 + \deg P_2 = 0\)</span> buluruz. Her iki derece de negatif olamayacağından
+<span class="mat">\(\deg P_1 = \deg P_2 = 0\)</span>, yani her ikisi de sıfırdan farklı sabittir. Tersine,
+sıfırdan farklı her <span class="mat">\(c\)</span> sabiti <span class="mat">\(c^{-1}\)</span> ile çarpıldığında <span class="mat">\(1\)</span> verir.</p><span class="mezar">□</span></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="polinom-bolme.html"><span>← Önceki</span>Polinomlar için Bölme Önermesi</a><a class="gez sonraki" href="kok-carpan-teoremi.html"><span>Sonraki →</span>Kök–Çarpan Teoremi ve Köklerin Sayısı</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

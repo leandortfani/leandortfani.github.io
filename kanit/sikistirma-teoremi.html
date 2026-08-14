@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sıkıştırma Teoremi — Ahmet</title>
+<meta name="description" content="İki fonksiyon arasına sıkışan bir fonksiyon onların ortak limitine mecburdur — analizin en çok kullanılan tek aracı.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#sifira-sikistirma">Sıfıra sıkıştırma</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Sıkıştırma Teoremi</h1>
+    <p class="ozet">İki fonksiyon arasına sıkışan bir fonksiyon onların ortak limitine mecburdur — analizin en çok kullanılan tek aracı.</p>
+  </header>
+  <p>Bu kanıt kaynak listede yok; kendi eklediklerimden. Ama listedeki
+<span class="mat">\(\lim_{x\to 0} x\sin(1/x)\)</span> ve <span class="mat">\(\lim_{x\to 0}\frac{\sin x}{x}\)</span> sorularının
+ikisi de bu teoremle çözüldüğü için burada durması doğru.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Teorem</span> <span class="ortam-baslik">Sıkıştırma (Squeeze) Teoremi</span></p><p><span class="mat">\(g, f, h : D \to \mathbb{R}\)</span> ve <span class="mat">\(c \in \overline{D}\)</span> olsun. Bir <span class="mat">\(\alpha &gt; 0\)</span>
+için, <span class="mat">\(0 &lt; |x - c| &lt; \alpha\)</span> olan her <span class="mat">\(x \in D\)</span>'de</p>
+<div class="mat-blok">\[g(x) \ \le\ f(x) \ \le\ h(x)\]</div>
+<p>sağlansın. Ayrıca</p>
+<div class="mat-blok">\[\lim_{x\to c} g(x) = \lim_{x\to c} h(x) = L\]</div>
+<p>olsun. O hâlde <span class="mat">\(\lim_{x\to c} f(x)\)</span> vardır ve <span class="mat">\(L\)</span>'ye eşittir.</p></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. Üç yarıçap seçelim:</p>
+<ol>
+<li><span class="mat">\(\lim g = L\)</span> olduğundan bir <span class="mat">\(\delta_1 &gt; 0\)</span> vardır ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_1\)</span> iken <span class="mat">\(|g(x) - L| &lt; \varepsilon\)</span>; özel olarak <div class="mat-blok">\[L - \varepsilon &lt; g(x).\]</div></li>
+<li><span class="mat">\(\lim h = L\)</span> olduğundan bir <span class="mat">\(\delta_2 &gt; 0\)</span> vardır ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_2\)</span> iken <span class="mat">\(|h(x) - L| &lt; \varepsilon\)</span>; özel olarak <div class="mat-blok">\[h(x) &lt; L + \varepsilon.\]</div></li>
+<li>Sıkıştırma eşitsizliğinin geçerli olduğu <span class="mat">\(\alpha\)</span>.</li>
+</ol>
+<p><span class="mat">\(\delta = \min(\alpha, \delta_1, \delta_2) &gt; 0\)</span> alalım. <span class="mat">\(0 &lt; |x - c| &lt; \delta\)</span>
+olan her <span class="mat">\(x \in D\)</span> için üç bilgiyi zincirleyelim:</p>
+<div class="mat-blok">\[L - \varepsilon \;&lt;\; g(x) \;\le\; f(x) \;\le\; h(x) \;&lt;\; L + \varepsilon .\]</div>
+<p>Uçları okursak <span class="mat">\(L - \varepsilon &lt; f(x) &lt; L + \varepsilon\)</span>, yani</p>
+<div class="mat-blok">\[|f(x) - L| &lt; \varepsilon .\]</div>
+<p><span class="mat">\(\varepsilon\)</span> keyfî olduğundan <span class="mat">\(\lim_{x\to c} f(x) = L\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Dikkat edilecek nokta</span></p><p>Teorem <span class="mat">\(f\)</span>'nin limitinin var <strong>olduğunu</strong> da söylüyor; bu bir bonus değil,
+ifadenin en değerli kısmı. Genelde <span class="mat">\(f\)</span> o kadar düzensizdir ki limitinin
+varlığını doğrudan göstermek imkânsıza yakındır —
+<span class="mat">\(x\sin(1/x)\)</span> tam olarak böyle bir örnek.</p></section>
+<h2 id="sifira-sikistirma">Sıfıra sıkıştırma<a class="capa" href="#sifira-sikistirma">#</a></h2>
+<p>Uygulamada en sık kullanılan hâli, mutlak değerli biçimidir.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p><span class="mat">\(|f(x)| \le g(x)\)</span> ve <span class="mat">\(\lim_{x\to c} g(x) = 0\)</span> ise <span class="mat">\(\lim_{x\to c} f(x) = 0\)</span>.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(|f(x)| \le g(x)\)</span> eşitsizliği <span class="mat">\(-g(x) \le f(x) \le g(x)\)</span> demektir. Ayrıca
+<span class="mat">\(\lim (-g) = -\lim g = 0\)</span> olduğundan alt ve üst fonksiyonların ortak limiti
+<span class="mat">\(0\)</span>'dır. Sıkıştırma teoremi doğrudan sonucu verir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Örnek</span></p><p><span class="mat">\(f(x) = x\sin(1/x)\)</span> için <span class="mat">\(|f(x)| \le |x|\)</span> ve <span class="mat">\(\lim_{x\to 0}|x| = 0\)</span> olduğundan
+<span class="mat">\(\lim_{x\to 0} x\sin(1/x) = 0\)</span>. Ayrıntısı
+<a href="sin-bir-bolu-x.html">şurada</a>.</p></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<p>Mathlib'de sıkıştırma teoremi süzgeç düzeyinde, "sonunda" (<code>∀ᶠ</code>) niceleyicisiyle
+ifade edilmiştir; bu, "bir <span class="mat">\(\alpha\)</span> komşuluğunda" demenin topolojik karşılığı.</p>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+open Filter Topology
+
+variable {f g h : ℝ → ℝ} {c L : ℝ}
+
+/-- Sıkıştırma teoremi. -/
+theorem sikistirma
+    (hg : Tendsto g (𝓝[≠] c) (𝓝 L))
+    (hh : Tendsto h (𝓝[≠] c) (𝓝 L))
+    (h₁ : ∀ᶠ x in 𝓝[≠] c, g x ≤ f x)
+    (h₂ : ∀ᶠ x in 𝓝[≠] c, f x ≤ h x) :
+    Tendsto f (𝓝[≠] c) (𝓝 L) :=
+  tendsto_of_tendsto_of_tendsto_of_le_of_le&#x27; hg hh h₁ h₂
+
+/-- Sıfıra sıkıştırma: `|f| ≤ g` ve `g → 0` ise `f → 0`. -/
+theorem sifira_sikistirma
+    (hg : Tendsto g (𝓝[≠] c) (𝓝 0))
+    (hle : ∀ᶠ x in 𝓝[≠] c, |f x| ≤ g x) :
+    Tendsto f (𝓝[≠] c) (𝓝 0) := by
+  have halt : ∀ᶠ x in 𝓝[≠] c, -g x ≤ f x := by
+    filter_upwards [hle] with x hx
+    have := abs_le.mp hx
+    linarith [this.1]
+  have hust : ∀ᶠ x in 𝓝[≠] c, f x ≤ g x := by
+    filter_upwards [hle] with x hx
+    exact (abs_le.mp hx).2
+  have hneg : Tendsto (fun x =&gt; -g x) (𝓝[≠] c) (𝓝 0) := by
+    simpa using hg.neg
+  exact tendsto_of_tendsto_of_tendsto_of_le_of_le&#x27; hneg hg halt hust
+
+/-- Örnek: `x * sin (1/x) → 0`. -/
+example : Tendsto (fun x : ℝ =&gt; x * Real.sin (1 / x)) (𝓝[≠] 0) (𝓝 0) := by
+  apply sifira_sikistirma (g := fun x =&gt; |x|)
+  · simpa using (continuous_abs.tendsto (0 : ℝ)).comp tendsto_nhdsWithin_of_tendsto_nhds
+  · filter_upwards with x
+    rw [abs_mul]
+    exact mul_le_of_le_one_right (abs_nonneg _) (Real.abs_sin_le_one _)</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Mathlib'de teoremin adı <code>tendsto_of_tendsto_of_tendsto_of_le_of_le&#x27;</code> — sondaki
+kesme işareti, eşitsizliklerin her yerde değil "sonunda" istendiği sürümü
+gösteriyor. Kesme işaretsiz sürüm ise <code>g ≤ f</code> ve <code>f ≤ h</code>'yi her noktada ister.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="epsilon-kisitlama.html"><span>← Önceki</span>Küçük ε&#x27;lara Bakmak Yeterlidir</a><a class="gez sonraki" href="sureklilik-cebiri.html"><span>Sonraki →</span>Sürekliliğin Cebiri</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cos(nθ) Bir Polinomdur — Chebyshev — Ahmet</title>
+<meta name="description" content="Her n için cos ntheta = Tn(costheta) olacak biçimde tam sayı katsayılı bir Tn polinomu vardır; iki adımlı tümevarımla.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Trigonometrik Kanıtlar</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#anahtar-ozdeslik">Anahtar özdeşlik</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#bir-sonuc-kokler">Bir sonuç: kökler</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Trigonometrik Kanıtlar · 2026-08-14</p>
+    <h1>cos(nθ) Bir Polinomdur — Chebyshev</h1>
+    <p class="ozet">Her <span class="mat">\(n\)</span> için <span class="mat">\(\cos n\theta = T_n(\cos\theta)\)</span> olacak biçimde tam sayı katsayılı bir <span class="mat">\(T_n\)</span> polinomu vardır; iki adımlı tümevarımla.</p>
+  </header>
+  <p>Kendi eklediğim kanıtlardan; bu sitedeki iki bölümü — trigonometri ile
+polinomları — birbirine bağladığı için burada duruyor.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Teorem</span> <span class="ortam-baslik">Chebyshev</span></p><p>Her <span class="mat">\(n \in \mathbb{N}\)</span> için, tam sayı katsayılı ve derecesi <span class="mat">\(n\)</span> olan öyle bir
+<span class="mat">\(T_n\)</span> polinomu vardır ki her <span class="mat">\(\theta \in \mathbb{R}\)</span> için</p>
+<div class="mat-blok">\[\cos(n\theta) = T_n(\cos\theta).\]</div>
+<p>Ayrıca <span class="mat">\(T_n\)</span>'in baş katsayısı <span class="mat">\(n \ge 1\)</span> için <span class="mat">\(2^{\,n-1}\)</span>'dir.</p></section>
+<p>İlk birkaçı:</p>
+<div class="mat-blok">\[T_0 = 1, \quad T_1 = x, \quad T_2 = 2x^2 - 1, \quad
+T_3 = 4x^3 - 3x, \quad T_4 = 8x^4 - 8x^2 + 1 .\]</div>
+<h2 id="anahtar-ozdeslik">Anahtar özdeşlik<a class="capa" href="#anahtar-ozdeslik">#</a></h2>
+<p>Her şey tek bir trigonometrik özdeşlikten çıkıyor.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Üç terimli bağıntı</span></p><p>Her <span class="mat">\(\theta \in \mathbb{R}\)</span> ve <span class="mat">\(n \ge 0\)</span> için</p>
+<div class="mat-blok">\[\cos\bigl((n+2)\theta\bigr) = 2\cos\theta\,\cos\bigl((n+1)\theta\bigr)
+- \cos(n\theta).\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(A = (n+1)\theta\)</span> ve <span class="mat">\(B = \theta\)</span> yazalım. Toplam ve fark formülleri:</p>
+<div class="mat-blok">\[\cos(A+B) = \cos A\cos B - \sin A \sin B,\]</div>
+<div class="mat-blok">\[\cos(A-B) = \cos A\cos B + \sin A \sin B .\]</div>
+<p>Bunları <strong>toplarsak</strong> sinüslü terimler birbirini götürür:</p>
+<div class="mat-blok">\[\cos(A+B) + \cos(A-B) = 2\cos A\cos B .\]</div>
+<p>Şimdi <span class="mat">\(A + B = (n+2)\theta\)</span> ve <span class="mat">\(A - B = n\theta\)</span> olduğunu yerine koyalım:</p>
+<div class="mat-blok">\[\cos\bigl((n+2)\theta\bigr) + \cos(n\theta) = 2\cos\bigl((n+1)\theta\bigr)\cos\theta,\]</div>
+<p>ve <span class="mat">\(\cos(n\theta)\)</span>'yı karşıya atarsak istenen bağıntı çıkar.</p><span class="mezar">□</span></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(T_n\)</span> polinomlarını yinelemeli olarak tanımlıyoruz:</p>
+<div class="mat-blok">\[T_0(x) = 1, \qquad T_1(x) = x, \qquad
+T_{n+2}(x) = 2x\,T_{n+1}(x) - T_n(x).\]</div>
+<p>Bu tanım her <span class="mat">\(n\)</span> için tek bir polinom belirler ve katsayılar tam sayı
+işlemleriyle üretildiğinden hepsi tam sayıdır.</p>
+<p>Şimdi <span class="mat">\(\cos(n\theta) = T_n(\cos\theta)\)</span> iddiasını <strong>iki adımlı tümevarımla</strong>
+kanıtlıyoruz: iddia <span class="mat">\(n\)</span> ve <span class="mat">\(n+1\)</span> için doğruysa <span class="mat">\(n+2\)</span> için de doğrudur.</p>
+<p><strong>Temel durumlar.</strong></p>
+<div class="mat-blok">\[T_0(\cos\theta) = 1 = \cos(0\cdot\theta), \qquad
+T_1(\cos\theta) = \cos\theta = \cos(1\cdot\theta). \ \checkmark\]</div>
+<p><strong>Adım.</strong> İddia <span class="mat">\(n\)</span> ve <span class="mat">\(n+1\)</span> için doğru olsun. Tanım gereği</p>
+<div class="mat-blok">\[T_{n+2}(\cos\theta) = 2\cos\theta \cdot T_{n+1}(\cos\theta) - T_n(\cos\theta).\]</div>
+<p>Tümevarım hipotezini iki terime de uygulayalım:</p>
+<div class="mat-blok">\[T_{n+2}(\cos\theta) = 2\cos\theta\,\cos\bigl((n+1)\theta\bigr) - \cos(n\theta).\]</div>
+<p>Sağ taraf, lemma gereği tam olarak <span class="mat">\(\cos\bigl((n+2)\theta\bigr)\)</span>'dır. <span class="mat">\(\checkmark\)</span></p>
+<p><strong>Derece ve baş katsayı.</strong> Yine iki adımlı tümevarım. <span class="mat">\(T_1 = x\)</span>'in derecesi
+<span class="mat">\(1\)</span>, baş katsayısı <span class="mat">\(1 = 2^0\)</span>. <span class="mat">\(T_2 = 2x^2 - 1\)</span>'in derecesi <span class="mat">\(2\)</span>, baş katsayısı
+<span class="mat">\(2 = 2^1\)</span>. <span class="mat">\(T_n\)</span> ve <span class="mat">\(T_{n+1}\)</span> için iddia doğru olsun; o hâlde
+<span class="mat">\(2x\,T_{n+1}\)</span> teriminin derecesi <span class="mat">\(1 + (n+1) = n+2\)</span> ve baş katsayısı
+<span class="mat">\(2 \cdot 2^{n} = 2^{n+1}\)</span>'dir. Çıkarılan <span class="mat">\(T_n\)</span>'in derecesi <span class="mat">\(n\)</span> olup
+<span class="mat">\(n + 2\)</span>'den küçük olduğundan baş terimi etkilemez. Yani <span class="mat">\(T_{n+2}\)</span>'nin
+derecesi <span class="mat">\(n+2\)</span>, baş katsayısı <span class="mat">\(2^{(n+2)-1}\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">İki adımlı tümevarım neden meşru</span></p><p>Yineleme bağıntısı <span class="mat">\(T_{n+2}\)</span>'yi <em>iki</em> öncekine dayandırdığı için tek adımlı
+tümevarım yetmez. Kuvvetli tümevarımın (yani "<span class="mat">\(k \le n\)</span> için doğruysa <span class="mat">\(n+1\)</span>
+için doğrudur") özel bir hâli olarak düşünülebilir; ya da
+<span class="mat">\(P(n) \wedge P(n+1)\)</span> önermesi üzerinden sıradan tümevarım olarak.</p></section>
+<h2 id="bir-sonuc-kokler">Bir sonuç: kökler<a class="capa" href="#bir-sonuc-kokler">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p><span class="mat">\(n \ge 1\)</span> için <span class="mat">\(T_n\)</span> polinomunun <span class="mat">\([-1,1]\)</span> aralığında tam <span class="mat">\(n\)</span> tane farklı
+kökü vardır:</p>
+<div class="mat-blok">\[x_k = \cos\!\left(\frac{(2k+1)\pi}{2n}\right), \qquad k = 0,1,\dots,n-1 .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\theta_k = \dfrac{(2k+1)\pi}{2n}\)</span> yazalım. Teorem gereği</p>
+<div class="mat-blok">\[T_n(x_k) = T_n(\cos\theta_k) = \cos(n\theta_k)
+= \cos\!\left(\frac{(2k+1)\pi}{2}\right) = 0,\]</div>
+<p>çünkü <span class="mat">\(\pi/2\)</span>'nin tek katlarında kosinüs sıfırlanır. Ayrıca
+<span class="mat">\(k = 0,\dots,n-1\)</span> için <span class="mat">\(\theta_k \in (0,\pi)\)</span> ve <span class="mat">\(\theta_k\)</span>'lar birbirinden
+farklıdır; <span class="mat">\(\cos\)</span> fonksiyonu <span class="mat">\([0,\pi]\)</span> üzerinde kesin azalan olduğundan
+<span class="mat">\(x_k\)</span>'lar da birbirinden farklıdır.</p>
+<p>Böylece <span class="mat">\(n\)</span>. dereceden <span class="mat">\(T_n\)</span> polinomunun <span class="mat">\(n\)</span> farklı kökünü bulmuş olduk;
+<a href="kok-carpan-teoremi.html">kök–çarpan teoremi</a> gereği bunlar <strong>bütün</strong>
+köklerdir ve</p>
+<div class="mat-blok">\[T_n(x) = 2^{\,n-1}\prod_{k=0}^{n-1}\left(x -
+\cos\frac{(2k+1)\pi}{2n}\right).\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden önemli</span></p><p>Bu kökler ("Chebyshev düğümleri") sayısal analizde polinom interpolasyonunun
+hata terimini en aza indirir; eşit aralıklı düğümlerdeki Runge olgusunu
+ortadan kaldıran şey tam olarak budur. <span class="mat">\(T_n\)</span>'in <span class="mat">\([-1,1]\)</span> üzerinde
+<span class="mat">\([-1,1]\)</span>'e sıkışması — <span class="mat">\(|T_n(x)| = |\cos n\theta| \le 1\)</span> — bunun sebebi.</p></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<p>Kanıtın bel kemiği olan üç terimli bağıntı, Lean'de doğrudan yazılabilir.</p>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+open Real Polynomial
+
+/-- Chebyshev polinomlarının yinelemeli tanımı. -/
+noncomputable def T : ℕ → Polynomial ℝ
+  | 0     =&gt; 1
+  | 1     =&gt; X
+  | (n+2) =&gt; 2 * X * T (n+1) - T n
+
+/-- Anahtar özdeşlik: `cos((n+2)θ) = 2 cos θ cos((n+1)θ) - cos(nθ)`. -/
+theorem cos_yineleme (θ : ℝ) (n : ℕ) :
+    cos ((n + 2) * θ) = 2 * cos θ * cos ((n + 1) * θ) - cos (n * θ) := by
+  have h₁ : ((n : ℝ) + 2) * θ = ((n + 1) * θ) + θ := by ring
+  have h₂ : ((n : ℝ)) * θ = ((n + 1) * θ) - θ := by ring
+  rw [h₁, h₂, Real.cos_add, Real.cos_sub]
+  ring
+
+/-- Ana teorem: `T n` polinomu `cos θ`&#x27;da `cos (n θ)` değerini verir. -/
+theorem T_eval_cos (θ : ℝ) : ∀ n : ℕ, (T n).eval (cos θ) = cos (n * θ)
+  | 0     =&gt; by simp [T]
+  | 1     =&gt; by simp [T]
+  | (n+2) =&gt; by
+      have ih₁ := T_eval_cos θ (n + 1)
+      have ih₂ := T_eval_cos θ n
+      simp only [T, eval_sub, eval_mul, eval_X, eval_ofNat]
+      rw [ih₁, ih₂, ← cos_yineleme θ n]
+      push_cast
+      ring_nf</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Mathlib'de Chebyshev polinomları <code>Polynomial.Chebyshev.T</code> adıyla zaten var ve
+<code>Polynomial.Chebyshev.T_real_cos</code> bu teoremin hazır hâlini veriyor. Yukarıdaki
+tanım, kanıtın yapısını görmek için sıfırdan yazılmış hâli; <code>T_eval_cos</code>'un
+gövdesindeki eşleşme (<code>| 0</code>, <code>| 1</code>, <code>| n+2</code>) kâğıt üstündeki iki adımlı
+tümevarımın birebir karşılığı.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="sinx-bolu-x.html"><span>← Önceki</span>sin(x)/x Limitinin 1 Olduğu</a><span></span></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

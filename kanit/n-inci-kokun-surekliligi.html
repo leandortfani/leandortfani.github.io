@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>n. Kök Fonksiyonu Süreklidir — Ahmet</title>
+<meta name="description" content="u^n - v^n çarpanlamasını tersten okuyarak (0,infty) üzerinde açık bir delta elde ediyoruz.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#zorluk-nerede">Zorluk nerede?</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#noktasi-ayrica"><span class="mat">\(0\)</span> noktası ayrıca</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>n. Kök Fonksiyonu Süreklidir</h1>
+    <p class="ozet"><span class="mat">\(u^n - v^n\)</span> çarpanlamasını tersten okuyarak <span class="mat">\((0,\infty)\)</span> üzerinde açık bir <span class="mat">\(\delta\)</span> elde ediyoruz.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.5 ve Alıştırma 8(a)</span></p><p><span class="mat">\(n \in \mathbb{N}\)</span> olsun. <span class="mat">\(x \mapsto x^{1/n}\)</span> fonksiyonu <span class="mat">\((0,\infty)\)</span> üzerinde
+süreklidir. Buna denk olarak, <span class="mat">\(y &gt; 0\)</span> için</p>
+<div class="mat-blok">\[\lim_{x \to y} x^{1/n} = y^{1/n} .\]</div></section>
+<h2 id="zorluk-nerede">Zorluk nerede?<a class="capa" href="#zorluk-nerede">#</a></h2>
+<p><span class="mat">\(x^{1/n}\)</span>'in kendisi hakkında elimizde doğrudan bir eşitsizlik yok; elimizde
+olan, <span class="mat">\(n\)</span>. kuvvetin cebiri. O hâlde işi tersine çevirelim:</p>
+<div class="mat-blok">\[u = x^{1/n}, \qquad v = y^{1/n}\]</div>
+<p>yazarsak <span class="mat">\(u^n = x\)</span>, <span class="mat">\(v^n = y\)</span> ve kontrol etmek istediğimiz büyüklük <span class="mat">\(|u - v|\)</span>.
+Bilinen çarpanlama</p>
+<div class="mat-blok">\[u^n - v^n = (u - v)\bigl(u^{n-1} + u^{n-2}v + \cdots + uv^{n-2} + v^{n-1}\bigr)\]</div>
+<p>bize tam da bunu veriyor — yeter ki sağdaki parantezin <strong>büyük</strong> olduğunu
+gösterebilelim. Parantez ne kadar büyükse <span class="mat">\(|u-v|\)</span> o kadar küçük olur.</p>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(y &gt; 0\)</span> sabit olsun ve <span class="mat">\(v = y^{1/n} &gt; 0\)</span> yazalım. <span class="mat">\(x &gt; 0\)</span> keyfî ve
+<span class="mat">\(u = x^{1/n} &gt; 0\)</span> olsun.</p>
+<p>Çarpanlamayı düzenleyelim:</p>
+<div class="mat-blok">\[x - y = u^n - v^n = (u - v)\sum_{k=0}^{n-1} u^{k} v^{\,n-1-k} .\]</div>
+<p>Sağdaki toplamın bütün terimleri pozitiftir (<span class="mat">\(u, v &gt; 0\)</span>), dolayısıyla toplam
+kendi terimlerinden herhangi birinden büyüktür. <span class="mat">\(k = 0\)</span> terimini seçelim:</p>
+<div class="mat-blok">\[\sum_{k=0}^{n-1} u^{k}v^{\,n-1-k} \ \ge\ v^{\,n-1} \ &gt; \ 0 .\]</div>
+<p>Buradan</p>
+<div class="mat-blok">\[|x - y| = |u - v| \cdot \sum_{k=0}^{n-1} u^k v^{\,n-1-k}
+\ \ge\ |u - v| \cdot v^{\,n-1},\]</div>
+<p>yani</p>
+<div class="mat-blok">\[\bigl|x^{1/n} - y^{1/n}\bigr| = |u - v| \ \le\ \frac{|x-y|}{v^{\,n-1}}
+= \frac{|x - y|}{y^{\,(n-1)/n}} .\]</div>
+<p>Şimdi <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin ve</p>
+<div class="mat-blok">\[\delta = \varepsilon\, y^{\,(n-1)/n} \; &gt; 0\]</div>
+<p>alalım. <span class="mat">\(x &gt; 0\)</span> ve <span class="mat">\(|x - y| &lt; \delta\)</span> olduğunda</p>
+<div class="mat-blok">\[\bigl|x^{1/n} - y^{1/n}\bigr| \le \frac{|x-y|}{y^{(n-1)/n}}
+&lt; \frac{\delta}{y^{(n-1)/n}} = \varepsilon .\]</div>
+<p>Demek ki <span class="mat">\(x \mapsto x^{1/n}\)</span> her <span class="mat">\(y &gt; 0\)</span> noktasında, dolayısıyla
+<span class="mat">\((0,\infty)\)</span> üzerinde süreklidir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik"><span class="mat">\(\delta\)</span>'nın davranışı</span></p><p>Bulduğumuz <span class="mat">\(\delta = \varepsilon y^{(n-1)/n}\)</span> ifadesi <span class="mat">\(y \to 0^+\)</span> iken sıfıra
+gidiyor. Bu bir kusur değil, doğru resim: <span class="mat">\(x^{1/n}\)</span> fonksiyonunun grafiği
+orijinde dikleşir, dolayısıyla süreklilik <span class="mat">\((0,\infty)\)</span> üzerinde <strong>düzgün</strong>
+değildir. Yine de <span class="mat">\([\eta, \infty)\)</span> gibi sıfırdan uzak her aralıkta düzgün
+süreklidir, hatta Lipschitz'tir.</p></section>
+<h2 id="noktasi-ayrica"><span class="mat">\(0\)</span> noktası ayrıca<a class="capa" href="#noktasi-ayrica">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span></p><p><span class="mat">\(x \mapsto x^{1/n}\)</span> fonksiyonu <span class="mat">\([0,\infty)\)</span> üzerinde de süreklidir; <span class="mat">\(0\)</span>'da
+sağdan sürekliliğin kanıtı ayrıdır.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(y = 0\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> olsun. <span class="mat">\(\delta = \varepsilon^n &gt; 0\)</span> alalım.
+<span class="mat">\(0 \le x &lt; \delta\)</span> olduğunda, <span class="mat">\(t \mapsto t^{1/n}\)</span> artan olduğundan</p>
+<div class="mat-blok">\[\bigl|x^{1/n} - 0\bigr| = x^{1/n} &lt; \delta^{1/n} = (\varepsilon^n)^{1/n}
+= \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Genel üsler</span></p><p>Aynı yöntem <span class="mat">\(x \mapsto x^{p/q}\)</span> için de çalışır: bu fonksiyon
+<span class="mat">\(x \mapsto (x^{1/q})^p\)</span> bileşkesidir ve
+<a href="bileske-ve-kisitlama.html">bileşkenin sürekliliği</a> ile
+<a href="polinomlarin-surekliligi.html">polinomların sürekliliği</a> sonucu doğrudan verir.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="polinomlarin-surekliligi.html"><span>← Önceki</span>Polinomlar Süreklidir</a><a class="gez sonraki" href="bileske-ve-kisitlama.html"><span>Sonraki →</span>Bileşkenin ve Kısıtlamanın Sürekliliği</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

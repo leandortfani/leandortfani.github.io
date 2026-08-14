@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sin(1/x) ve x·sin(1/x) Limitleri — Ahmet</title>
+<meta name="description" content="Birincisi yoktur, ikincisi 0&#x27;dır. Aradaki tek fark, salınımı bastıran bir x çarpanı.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#birinci-limit-yoktur">Birinci limit yoktur</a></li><li class="toc-s2"><a href="#ikinci-limit-dir">İkinci limit <span class="mat">\(0\)</span>'dır</a></li><li class="toc-s2"><a href="#karsilastirma">Karşılaştırma</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>sin(1/x) ve x·sin(1/x) Limitleri</h1>
+    <p class="ozet">Birincisi yoktur, ikincisi <span class="mat">\(0\)</span>'dır. Aradaki tek fark, salınımı bastıran bir <span class="mat">\(x\)</span> çarpanı.</p>
+  </header>
+  <section class="ortam ortam-tanim"><p class="ortam-bas"><span class="ortam-etiket">Alıştırma</span> <span class="ortam-baslik">Alıştırma 9</span></p><p>Aşağıdaki limitler var mıdır?</p>
+<div class="mat-blok">\[\lim_{x\to 0}\sin\!\left(\frac{1}{x}\right)
+\qquad \text{ve} \qquad
+\lim_{x\to 0} x\,\sin\!\left(\frac{1}{x}\right).\]</div>
+<p>Şu olguyu kullanabilirsiniz: her <span class="mat">\(y \in \mathbb{R}\)</span> için
+<span class="mat">\(-1 \le \sin(y) \le 1\)</span>.</p></section>
+<p>Cevap: <strong>birincisi yoktur, ikincisi vardır ve <span class="mat">\(0\)</span>'dır.</strong> İkisi de aynı vahşi
+salınımı içeriyor; fark, ikincisinde salınımın genliğinin <span class="mat">\(|x|\)</span> ile
+çarpılarak sıfıra ezilmesi.</p>
+<h2 id="birinci-limit-yoktur">Birinci limit yoktur<a class="capa" href="#birinci-limit-yoktur">#</a></h2>
+<p>Fikir basit: <span class="mat">\(0\)</span>'a keyfî yakın noktalarda fonksiyon hem <span class="mat">\(1\)</span> hem <span class="mat">\(-1\)</span> değerini
+alıyor. Bir limit varsa fonksiyon <span class="mat">\(0\)</span> civarında tek bir sayının etrafında
+toplanmak zorundadır; bu iki değer birden mümkün olamaz.</p>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(n \in \mathbb{N}\)</span> için şu iki diziyi tanımlayalım:</p>
+<div class="mat-blok">\[x_n = \frac{1}{\tfrac{\pi}{2} + 2\pi n}, \qquad
+y_n = \frac{1}{-\tfrac{\pi}{2} + 2\pi n}.\]</div>
+<p>Her ikisi de pozitiftir (yeterince büyük <span class="mat">\(n\)</span> için) ve <span class="mat">\(n \to \infty\)</span> iken
+<span class="mat">\(0\)</span>'a yakınsar. Değerlere bakalım:</p>
+<div class="mat-blok">\[\sin\!\left(\frac{1}{x_n}\right) = \sin\!\left(\frac{\pi}{2} + 2\pi n\right) = 1,
+\qquad
+\sin\!\left(\frac{1}{y_n}\right) = \sin\!\left(-\frac{\pi}{2} + 2\pi n\right) = -1 .\]</div>
+<p>Şimdi <span class="mat">\(\lim_{x\to 0}\sin(1/x) = L\)</span> olduğunu varsayalım ve limit tanımında
+<span class="mat">\(\varepsilon = 1\)</span> alalım. Bir <span class="mat">\(\delta &gt; 0\)</span> için, <span class="mat">\(0 &lt; |x| &lt; \delta\)</span> olan her
+<span class="mat">\(x\)</span>'te</p>
+<div class="mat-blok">\[\bigl|\sin(1/x) - L\bigr| &lt; 1 .\]</div>
+<p><span class="mat">\(x_n \to 0\)</span> ve <span class="mat">\(y_n \to 0\)</span> olduğundan, yeterince büyük bir <span class="mat">\(n\)</span> için hem
+<span class="mat">\(0 &lt; x_n &lt; \delta\)</span> hem <span class="mat">\(0 &lt; y_n &lt; \delta\)</span> olur. Bu <span class="mat">\(n\)</span> için</p>
+<div class="mat-blok">\[|1 - L| &lt; 1 \qquad \text{ve} \qquad |-1 - L| &lt; 1 .\]</div>
+<p>Üçgen eşitsizliğiyle</p>
+<div class="mat-blok">\[2 = |1 - (-1)| = |(1 - L) + (L - (-1))| \le |1-L| + |L+1| &lt; 1 + 1 = 2,\]</div>
+<p>yani <span class="mat">\(2 &lt; 2\)</span>. Çelişki. Demek ki böyle bir <span class="mat">\(L\)</span> yoktur.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Genel kalıp</span></p><p>Bu argüman "iki dizi testi" olarak bilinir: <span class="mat">\(c\)</span>'ye yakınsayan iki dizi
+<span class="mat">\(x_n \to c\)</span>, <span class="mat">\(y_n \to c\)</span> bulup <span class="mat">\(f(x_n)\)</span> ile <span class="mat">\(f(y_n)\)</span>'nin farklı limitlere
+gittiğini göstermek, <span class="mat">\(\lim_{x\to c} f(x)\)</span>'in olmadığını kanıtlar. Süreksizlik
+göstermenin en pratik yolu genellikle budur.</p></section>
+<h2 id="ikinci-limit-dir">İkinci limit <span class="mat">\(0\)</span>'dır<a class="capa" href="#ikinci-limit-dir">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(D = \mathbb{R}\setminus\{0\}\)</span> üzerinde çalışıyoruz; her <span class="mat">\(x \in D\)</span> için
+<span class="mat">\(1/x\)</span> tanımlı ve verilen olgu gereği</p>
+<div class="mat-blok">\[-1 \ \le\ \sin\!\left(\frac{1}{x}\right) \ \le\ 1 .\]</div>
+<p>Her iki tarafı <span class="mat">\(|x| \ge 0\)</span> ile çarparsak</p>
+<div class="mat-blok">\[-|x| \ \le\ |x|\sin\!\left(\frac{1}{x}\right) \ \le\ |x| ,\]</div>
+<p>ve mutlak değer alarak daha kullanışlı hâli elde ederiz:</p>
+<div class="mat-blok">\[\left|\,x\sin\!\left(\frac{1}{x}\right)\right|
+= |x| \cdot \left|\sin\!\left(\frac{1}{x}\right)\right| \ \le\ |x| \cdot 1 = |x| .\]</div>
+<p>Şimdi doğrudan <span class="mat">\(\varepsilon\)</span>–<span class="mat">\(\delta\)</span>: <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin,
+<span class="mat">\(\delta = \varepsilon\)</span> alalım. <span class="mat">\(0 &lt; |x| &lt; \delta\)</span> olduğunda</p>
+<div class="mat-blok">\[\left|\,x\sin\!\left(\frac{1}{x}\right) - 0\right| \le |x| &lt; \delta
+= \varepsilon .\]</div>
+<p>Demek ki</p>
+<div class="mat-blok">\[\lim_{x\to 0} x\,\sin\!\left(\frac{1}{x}\right) = 0 .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Sıkıştırma ile</span></p><p>Aynı sonuç <a href="sikistirma-teoremi.html">sıkıştırma teoreminin</a> sıfıra sıkıştırma
+biçiminden bir satırda çıkar: <span class="mat">\(g(x) = |x|\)</span> alalım; <span class="mat">\(|f(x)| \le g(x)\)</span> ve
+<span class="mat">\(\lim_{x\to 0}|x| = 0\)</span> olduğundan <span class="mat">\(\lim_{x\to 0} f(x) = 0\)</span>. Yukarıdaki doğrudan
+kanıt, o teoremin bu özel hâldeki açılımından ibaret.</p></section>
+<h2 id="karsilastirma">Karşılaştırma<a class="capa" href="#karsilastirma">#</a></h2>
+<p>Her iki fonksiyon da <span class="mat">\(0\)</span> civarında sonsuz kez salınır — <span class="mat">\(x\)</span> sıfıra
+yaklaştıkça <span class="mat">\(1/x\)</span> sınırsız büyür ve <span class="mat">\(\sin\)</span> her <span class="mat">\(2\pi\)</span> aralığında bütün
+turunu tamamlar. Salınımın <strong>sıklığı</strong> ikisinde de aynı; fark
+<strong>genliğinde</strong>:</p>
+<div class='tablo-sar'><table><thead><tr><th></th><th>genlik</th><th><span class="mat">\(x \to 0\)</span> davranışı</th></tr></thead><tbody><tr><td><span class="mat">\(\sin(1/x)\)</span></td><td>sabit <span class="mat">\(1\)</span></td><td><span class="mat">\([-1,1]\)</span> aralığını sonsuz kez tarar, limit yok</td></tr><tr><td><span class="mat">\(x\sin(1/x)\)</span></td><td><span class="mat">\(|x|\)</span></td><td><span class="mat">\(\pm|x|\)</span> zarfı arasında sıkışır, limit <span class="mat">\(0\)</span></td></tr></tbody></table></div>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Sıradaki soru</span></p><p><span class="mat">\(x\sin(1/x)\)</span> fonksiyonu <span class="mat">\(0\)</span>'da <span class="mat">\(0\)</span> değeri verilerek sürekli hâle getirilir
+(<a href="surekli-genisleme.html">sürekli genişleme</a>). Ama <strong>türevlenebilir</strong> olmaz:</p>
+<div class="mat-blok">\[\frac{x\sin(1/x) - 0}{x - 0} = \sin\!\left(\frac{1}{x}\right)\]</div>
+<p>ve bu ifadenin <span class="mat">\(0\)</span>'daki limiti — yukarıda gösterdiğimiz gibi — yoktur.
+Türevlenebilirlik için genliği bir mertebe daha bastırmak gerekir:
+<span class="mat">\(x^2\sin(1/x)\)</span> fonksiyonu <span class="mat">\(0\)</span>'da türevlenebilirdir, ama bu kez türevi <span class="mat">\(0\)</span>'da
+sürekli değildir. Bu üçlü, analizde "sürekli / türevlenebilir / sürekli
+türevlenebilir" ayrımının standart örnek ailesidir.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="mutlak-deger-ve-parcalar.html"><span>← Önceki</span>Mutlak Değer, Pozitif ve Negatif Parçalar</a><a class="gez sonraki" href="ara-deger-teoremi.html"><span>Sonraki →</span>Ara Değer Teoremi</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sıfırdan Farklı Limitin Tersi — Ahmet</title>
+<meta name="description" content="lim f ne 0 ise lim (1/f) vardır ve 1/lim f&#x27;e eşittir; anahtar adım |f| için sıfırdan uzak bir alt sınır bulmak.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#fikir">Fikir</a></li><li class="toc-s2"><a href="#anahtar-lemma">Anahtar lemma</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Sıfırdan Farklı Limitin Tersi</h1>
+    <p class="ozet"><span class="mat">\(\lim f \ne 0\)</span> ise <span class="mat">\(\lim (1/f)\)</span> vardır ve <span class="mat">\(1/\lim f\)</span>'e eşittir; anahtar adım <span class="mat">\(|f|\)</span> için sıfırdan uzak bir alt sınır bulmak.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 5</span></p><p><span class="mat">\(f : D \to S\)</span> reel değerli bir fonksiyon olsun. Bir <span class="mat">\(c \in D\)</span> ve bir
+<span class="mat">\(\alpha &gt; 0\)</span> için</p>
+<div class="mat-blok">\[f(x) \ne 0 \quad \text{oldukça} \quad 0 \le |x - c| &lt; \alpha\]</div>
+<p>varsayılsın. Eğer <span class="mat">\(\lim_{x\to c} f(x)\)</span> varsa ve <span class="mat">\(\lim_{x\to c} f(x) \ne 0\)</span> ise</p>
+<div class="mat-blok">\[\lim_{x\to c} \frac{1}{f(x)}\]</div>
+<p>vardır.</p></section>
+<h2 id="fikir">Fikir<a class="capa" href="#fikir">#</a></h2>
+<p><span class="mat">\(L = \lim_{x\to c} f(x) \ne 0\)</span> olsun. Hedef ifadeyi ortak paydada toplayalım:</p>
+<div class="mat-blok">\[\left|\frac{1}{f(x)} - \frac{1}{L}\right|
+= \left|\frac{L - f(x)}{f(x)\,L}\right|
+= \frac{|f(x) - L|}{|f(x)|\,|L|} .\]</div>
+<p>Pay istediğimiz kadar küçültülebilir — bu, <span class="mat">\(f\)</span>'nin limitinin <span class="mat">\(L\)</span> olmasından
+gelir. Sorun paydada: <span class="mat">\(|f(x)|\)</span> sıfıra yaklaşırsa kesir patlar. Varsayım bize
+<span class="mat">\(f(x) \ne 0\)</span> olduğunu söylüyor ama bu tek başına yetmez; <span class="mat">\(f(x)\)</span>'in sıfıra
+<em>yaklaşmadığını</em>, yani <strong>düzgün</strong> bir alt sınırı olduğunu bilmemiz gerekir.
+İşte <span class="mat">\(L \ne 0\)</span> koşulu tam olarak bunu sağlıyor.</p>
+<h2 id="anahtar-lemma">Anahtar lemma<a class="capa" href="#anahtar-lemma">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Sıfırdan uzak durma</span></p><p><span class="mat">\(\lim_{x\to c} f(x) = L\)</span> ve <span class="mat">\(L \ne 0\)</span> olsun. O hâlde öyle bir <span class="mat">\(\delta_0 &gt; 0\)</span>
+vardır ki</p>
+<div class="mat-blok">\[0 &lt; |x - c| &lt; \delta_0 \;\Longrightarrow\; |f(x)| &gt; \frac{|L|}{2} .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(L \ne 0\)</span> olduğundan <span class="mat">\(|L|/2 &gt; 0\)</span> bir pozitif sayıdır; limit tanımında
+<span class="mat">\(\varepsilon = |L|/2\)</span> alabiliriz. Buna karşılık gelen <span class="mat">\(\delta_0 &gt; 0\)</span> için,
+<span class="mat">\(0 &lt; |x-c| &lt; \delta_0\)</span> olduğunda</p>
+<div class="mat-blok">\[|f(x) - L| &lt; \frac{|L|}{2} .\]</div>
+<p>Ters üçgen eşitsizliği <span class="mat">\(\bigl||a| - |b|\bigr| \le |a - b|\)</span> ile</p>
+<div class="mat-blok">\[|L| - |f(x)| \le \bigl||L| - |f(x)|\bigr| \le |f(x) - L| &lt; \frac{|L|}{2},\]</div>
+<p>yani <span class="mat">\(|f(x)| &gt; |L| - \dfrac{|L|}{2} = \dfrac{|L|}{2}\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Lemma, hipotezdeki "<span class="mat">\(f(x) \ne 0\)</span>" koşulunun aslında <span class="mat">\(L \ne 0\)</span>'dan <strong>türetilebilir</strong>
+olduğunu gösteriyor: <span class="mat">\(c\)</span>'nin delinmiş bir komşuluğunda <span class="mat">\(f\)</span> zaten sıfır olamaz.
+Alıştırmadaki <span class="mat">\(\alpha\)</span> koşulu, <span class="mat">\(1/f\)</span> ifadesinin en baştan anlamlı olmasını
+garantilemek için var; kanıtın kendisi için gerekli değil.</p></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. İki yarıçap seçiyoruz:</p>
+<ol>
+<li>Lemma gereği <span class="mat">\(\delta_0 &gt; 0\)</span> öyle ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_0\)</span> iken <span class="mat">\(|f(x)| &gt; |L|/2\)</span>.</li>
+<li><span class="mat">\(\dfrac{\varepsilon |L|^2}{2}\)</span> pozitif bir sayı olduğundan, limit tanımı gereği bir <span class="mat">\(\delta_1 &gt; 0\)</span> vardır ki <span class="mat">\(0 &lt; |x-c| &lt; \delta_1\)</span> iken <div class="mat-blok">\[|f(x) - L| &lt; \frac{\varepsilon\,|L|^2}{2} .\]</div></li>
+</ol>
+<p><span class="mat">\(\delta = \min(\alpha, \delta_0, \delta_1) &gt; 0\)</span> alalım. <span class="mat">\(0 &lt; |x - c| &lt; \delta\)</span>
+olan her <span class="mat">\(x \in D\)</span> için <span class="mat">\(f(x) \ne 0\)</span> olduğundan <span class="mat">\(1/f(x)\)</span> tanımlıdır ve</p>
+<div class="mat-blok">\[\left|\frac{1}{f(x)} - \frac{1}{L}\right|
+= \frac{|f(x) - L|}{|f(x)|\,|L|}
+\;&lt;\; \frac{\varepsilon |L|^2/2}{\bigl(|L|/2\bigr)\,|L|}
+\;=\; \frac{\varepsilon |L|^2/2}{|L|^2/2}
+\;=\; \varepsilon .\]</div>
+<p><span class="mat">\(\varepsilon\)</span> keyfî olduğundan istenen limit vardır ve</p>
+<div class="mat-blok">\[\lim_{x\to c}\frac{1}{f(x)} = \frac{1}{L} = \frac{1}{\lim_{x\to c} f(x)} .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Bölümün limiti</span></p><p><span class="mat">\(\lim_{x\to c} f(x) = L\)</span>, <span class="mat">\(\lim_{x\to c} g(x) = M\)</span> ve <span class="mat">\(M \ne 0\)</span> ise</p>
+<div class="mat-blok">\[\lim_{x\to c}\frac{f(x)}{g(x)} = \frac{L}{M} .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\dfrac{f}{g} = f \cdot \dfrac{1}{g}\)</span> yazıp önce yukarıdaki önermeyi <span class="mat">\(g\)</span>'ye,
+sonra <a href="limit-aritmetigi.html">limit aritmetiğindeki</a> çarpım kuralını
+uygulamak yeterli.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik"><span class="mat">\(L = 0\)</span> olursa</span></p><p>Önermedeki <span class="mat">\(L \ne 0\)</span> koşulu vazgeçilmezdir. <span class="mat">\(D = \mathbb{R}\setminus\{0\}\)</span>,
+<span class="mat">\(c = 0\)</span> ve <span class="mat">\(f(x) = x\)</span> alalım: her <span class="mat">\(x \in D\)</span> için <span class="mat">\(f(x) \ne 0\)</span> ve
+<span class="mat">\(\lim_{x\to 0} f(x) = 0\)</span>. Ama <span class="mat">\(1/f(x) = 1/x\)</span> ifadesinin <span class="mat">\(0\)</span>'da limiti yoktur;
+sağdan <span class="mat">\(+\infty\)</span>'a, soldan <span class="mat">\(-\infty\)</span>'a gider.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="limit-aritmetigi.html"><span>← Önceki</span>Limit Aritmetiği — Toplam ve Çarpım</a><a class="gez sonraki" href="epsilon-kisitlama.html"><span>Sonraki →</span>Küçük ε&#x27;lara Bakmak Yeterlidir</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

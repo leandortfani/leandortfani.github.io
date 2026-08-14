@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bileşkenin ve Kısıtlamanın Sürekliliği — Ahmet</title>
+<meta name="description" content="g circ f süreklidir — &quot;delta&#x27;yı varepsilon gibi kullan&quot; hilesi; ayrıca kısıtlamanın sürekliliği neden bedava geliyor.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#bileske">Bileşke</a></li><li class="toc-s2"><a href="#kisitlama">Kısıtlama</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Bileşkenin ve Kısıtlamanın Sürekliliği</h1>
+    <p class="ozet"><span class="mat">\(g \circ f\)</span> süreklidir — "<span class="mat">\(\delta\)</span>'yı <span class="mat">\(\varepsilon\)</span> gibi kullan" hilesi; ayrıca kısıtlamanın sürekliliği neden bedava geliyor.</p>
+  </header>
+  <h2 id="bileske">Bileşke<a class="capa" href="#bileske">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.7</span></p><p><span class="mat">\(f : D \to \mathbb{R}\)</span> bir <span class="mat">\(D\)</span> aralığında sürekli ve <span class="mat">\(g : \mathbb{R} \to T\)</span>
+sürekli olsun. O hâlde bileşke <span class="mat">\(g \circ f : D \to T\)</span> süreklidir.</p></section>
+<p>Bu kanıttaki tek fikir şu: <span class="mat">\(g\)</span>'nin sürekliliğinden gelen <span class="mat">\(\delta\)</span>'yı, <span class="mat">\(f\)</span>'nin
+sürekliliğine <strong>girdi <span class="mat">\(\varepsilon\)</span>'u</strong> olarak vermek. Sıralamayı doğru kurmak
+kanıtın tamamı.</p>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in D\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(b = f(a)\)</span> yazalım.</p>
+<p><strong>Adım 1.</strong> <span class="mat">\(g\)</span>, <span class="mat">\(b\)</span> noktasında sürekli olduğundan, verilen <span class="mat">\(\varepsilon\)</span>'a
+karşılık öyle bir <span class="mat">\(\eta &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[|u - b| &lt; \eta \;\Longrightarrow\; |g(u) - g(b)| &lt; \varepsilon . \tag{1}\]</div>
+<p><strong>Adım 2.</strong> <span class="mat">\(\eta\)</span> pozitif bir sayıdır; onu <span class="mat">\(f\)</span>'nin <span class="mat">\(a\)</span> noktasındaki süreklilik
+tanımına <span class="mat">\(\varepsilon\)</span> yerine koyabiliriz. Öyleyse bir <span class="mat">\(\delta &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[x \in D, \quad |x - a| &lt; \delta \;\Longrightarrow\; |f(x) - f(a)| &lt; \eta .
+\tag{2}\]</div>
+<p><strong>Adım 3.</strong> Şimdi <span class="mat">\(x \in D\)</span> ve <span class="mat">\(|x - a| &lt; \delta\)</span> olsun. <span class="mat">\((2)\)</span> gereği
+<span class="mat">\(u = f(x)\)</span> noktası <span class="mat">\(|u - b| &lt; \eta\)</span> koşulunu sağlar; <span class="mat">\((1)\)</span>'i bu <span class="mat">\(u\)</span>'ya
+uygulayınca</p>
+<div class="mat-blok">\[\bigl|(g\circ f)(x) - (g\circ f)(a)\bigr| = |g(f(x)) - g(f(a))| &lt; \varepsilon .\]</div>
+<p><span class="mat">\(\varepsilon\)</span> keyfî ve <span class="mat">\(a \in D\)</span> keyfî olduğundan <span class="mat">\(g \circ f\)</span> süreklidir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Sıra önemli</span></p><p>Kanıtı "önce <span class="mat">\(f\)</span> için <span class="mat">\(\delta\)</span> seçelim" diye kurmaya kalkarsak takılırız:
+<span class="mat">\(f\)</span>'nin ürettiği hata payının <span class="mat">\(g\)</span> için yeterince küçük olup olmadığını
+bilemeyiz. Zincirde <strong>dıştaki</strong> fonksiyondan başlayıp içeri doğru gitmek
+gerekiyor. Kabaca: <span class="mat">\(\varepsilon \to \eta \to \delta\)</span>.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Yerel yeterlilik</span></p><p>Kanıtta <span class="mat">\(g\)</span>'nin bütün <span class="mat">\(\mathbb{R}\)</span> üzerinde sürekli olması gerekmedi; yalnızca
+<span class="mat">\(b = f(a)\)</span> noktasındaki sürekliliği kullanıldı. Doğru ifade şudur: <span class="mat">\(f\)</span>, <span class="mat">\(a\)</span>'da
+sürekli ve <span class="mat">\(g\)</span>, <span class="mat">\(f(a)\)</span>'da sürekliyse <span class="mat">\(g\circ f\)</span> de <span class="mat">\(a\)</span>'da süreklidir.
+Süreklilik yerel bir özelliktir.</p></section>
+<h2 id="kisitlama">Kısıtlama<a class="capa" href="#kisitlama">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.8</span></p><p><span class="mat">\(f : D \to S\)</span> bir <span class="mat">\(D\)</span> aralığında tanımlı sürekli bir fonksiyon ve
+<span class="mat">\(E \subseteq D\)</span> ikinci bir aralık olsun. O hâlde <span class="mat">\(f\)</span>'nin <span class="mat">\(E\)</span>'ye kısıtlaması
+<span class="mat">\(f|_E\)</span> süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in E\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(E \subseteq D\)</span> olduğundan
+<span class="mat">\(a \in D\)</span>'dir ve <span class="mat">\(f\)</span>'nin <span class="mat">\(a\)</span>'daki sürekliliğinden bir <span class="mat">\(\delta &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[x \in D, \quad |x - a| &lt; \delta \;\Longrightarrow\; |f(x) - f(a)| &lt; \varepsilon .\]</div>
+<p>Aynı <span class="mat">\(\delta\)</span>'yı <span class="mat">\(f|_E\)</span> için kullanalım. <span class="mat">\(x \in E\)</span> ve <span class="mat">\(|x - a| &lt; \delta\)</span> olsun.
+<span class="mat">\(E \subseteq D\)</span> olduğundan <span class="mat">\(x \in D\)</span>'dir ve yukarıdaki çıkarım geçerlidir:</p>
+<div class="mat-blok">\[\bigl|f|_E(x) - f|_E(a)\bigr| = |f(x) - f(a)| &lt; \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden bu kadar kısa?</span></p><p>Çünkü kısıtlama, süreklilik koşulunun <strong>öncülünü</strong> daraltıyor: daha az <span class="mat">\(x\)</span>
+hakkında bir şey kanıtlamamız gerekiyor, ama elimizdeki bilgi aynı kalıyor.
+Böyle durumlarda kanıt her zaman "aynı <span class="mat">\(\delta\)</span> iş görür" biçiminde olur.</p>
+<p>Ters yön ise doğru <strong>değildir</strong>: <span class="mat">\(f|_E\)</span>'nin sürekliliği <span class="mat">\(f\)</span>'nin sürekliliğini
+gerektirmez. <span class="mat">\(f(x) = 0\)</span> (<span class="mat">\(x \le 0\)</span>), <span class="mat">\(f(x) = 1\)</span> (<span class="mat">\(x &gt; 0\)</span>) fonksiyonu
+<span class="mat">\(E = (0,\infty)\)</span> üzerinde süreklidir ama <span class="mat">\(\mathbb{R}\)</span> üzerinde <span class="mat">\(0\)</span>'da
+süreksizdir.</p></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Zincirleme uygulama</span></p><p>Bu iki önerme, süreklilik cebiriyle birleşince şunu verir:</p>
+<div class="mat-blok">\[h(x) = \frac{\sqrt{x^2+1}}{\,\cos(x^4 - 3x) + 2\,}\]</div>
+<p>gibi ifadeler, paydanın sıfırlanmadığı her aralıkta süreklidir — tek tek
+<span class="mat">\(\varepsilon\)</span>–<span class="mat">\(\delta\)</span> hesabı yapmadan, sadece yapı taşlarını sayarak.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="n-inci-kokun-surekliligi.html"><span>← Önceki</span>n. Kök Fonksiyonu Süreklidir</a><a class="gez sonraki" href="surekli-genisleme.html"><span>Sonraki →</span>Sürekli Genişleme</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

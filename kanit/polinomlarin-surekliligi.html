@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polinomlar Süreklidir — Ahmet</title>
+<meta name="description" content="Özdeşlik ve sabit fonksiyonlardan başlayıp süreklilik cebiriyle tümevarım; sonuç olarak her y için limxto y P(x) = P(y).">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#yapi-taslari">Yapı taşları</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#dogrudan-bir-kanit">Doğrudan bir kanıt</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Polinomlar Süreklidir</h1>
+    <p class="ozet">Özdeşlik ve sabit fonksiyonlardan başlayıp süreklilik cebiriyle tümevarım; sonuç olarak her <span class="mat">\(y\)</span> için <span class="mat">\(\lim_{x\to y} P(x) = P(y)\)</span>.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.4 ve Alıştırma 6</span></p><p>Her polinom <span class="mat">\(P : \mathbb{R} \to \mathbb{R}\)</span> süreklidir. Özel olarak her
+<span class="mat">\(y \in \mathbb{R}\)</span> için</p>
+<div class="mat-blok">\[\lim_{x \to y} P(x) = P(y).\]</div></section>
+<p>İki iddia aslında aynı iddiadır: <span class="mat">\(\mathbb{R}\)</span>'nin her noktası bir yığılma
+noktası olduğundan, süreklilik ile "limit değere eşittir" ifadesi burada
+birbirine denktir.</p>
+<h2 id="yapi-taslari">Yapı taşları<a class="capa" href="#yapi-taslari">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Lemma</span> <span class="ortam-baslik">Özdeşlik fonksiyonu süreklidir</span></p><p><span class="mat">\(\mathrm{id}(x) = x\)</span> ile tanımlı <span class="mat">\(\mathrm{id} : \mathbb{R}\to\mathbb{R}\)</span>
+süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in \mathbb{R}\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(\delta = \varepsilon\)</span> alalım.
+<span class="mat">\(|x - a| &lt; \delta\)</span> olduğunda</p>
+<div class="mat-blok">\[|\mathrm{id}(x) - \mathrm{id}(a)| = |x - a| &lt; \delta = \varepsilon .\]</div><span class="mezar">□</span></section>
+<p>Diğer yapı taşı, <a href="sureklilik-cebiri.html">sürekliliğin cebirinden</a> geliyor:
+sabit fonksiyonlar süreklidir, ve sürekli fonksiyonların toplamı ile çarpımı
+süreklidir.</p>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(P(x) = \sum_{k=0}^{n} a_k x^k\)</span> olsun. <span class="mat">\(n\)</span> üzerinden tümevarım yapıyoruz.</p>
+<p><strong>Temel durum <span class="mat">\(n = 0\)</span>.</strong> <span class="mat">\(P(x) = a_0\)</span> sabit fonksiyondur; Alıştırma 24.1
+gereği süreklidir.</p>
+<p><strong>Tümevarım adımı.</strong> Derecesi en çok <span class="mat">\(n-1\)</span> olan bütün polinomların sürekli
+olduğunu varsayalım ve <span class="mat">\(\deg P = n \ge 1\)</span> olsun. Yazalım:</p>
+<div class="mat-blok">\[P(x) = \underbrace{\Bigl(\sum_{k=0}^{n-1} a_k x^k\Bigr)}_{=:\,Q(x)}
+\;+\; a_n x^n .\]</div>
+<p>Tümevarım hipotezine göre <span class="mat">\(Q\)</span> süreklidir.</p>
+<p><span class="mat">\(x^n\)</span> teriminin sürekliliği için: <span class="mat">\(\mathrm{id}\)</span> süreklidir ve sürekli
+fonksiyonların çarpımı süreklidir; <span class="mat">\(n\)</span> tane <span class="mat">\(\mathrm{id}\)</span>'yi çarparak
+(bu da <span class="mat">\(n\)</span> üzerinden basit bir tümevarım) <span class="mat">\(x \mapsto x^n\)</span> fonksiyonunun
+sürekli olduğunu elde ederiz. Sabit fonksiyon <span class="mat">\(x \mapsto a_n\)</span> ile çarpınca
+<span class="mat">\(x \mapsto a_n x^n\)</span> süreklidir.</p>
+<p>Son olarak <span class="mat">\(P = Q + a_n x^n\)</span> iki sürekli fonksiyonun toplamı olduğundan
+süreklidir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span> <span class="ortam-baslik">Rasyonel fonksiyonlar</span></p><p><span class="mat">\(P\)</span> ve <span class="mat">\(Q\)</span> polinom olmak üzere <span class="mat">\(R = P/Q\)</span> rasyonel fonksiyonu, tanım kümesi</p>
+<div class="mat-blok">\[D = \{x \in \mathbb{R} : Q(x) \ne 0\}\]</div>
+<p>üzerinde süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(D\)</span> üzerinde <span class="mat">\(P\)</span> ve <span class="mat">\(Q\)</span> süreklidir (kısıtlama sürekliliği bozmaz) ve <span class="mat">\(Q\)</span> hiç
+sıfırlanmaz. Süreklilik cebirinin üçüncü maddesi <span class="mat">\(1/Q\)</span>'nun sürekliliğini,
+çarpım kuralı da <span class="mat">\(P \cdot (1/Q)\)</span>'nun sürekliliğini verir.</p><span class="mezar">□</span></section>
+<h2 id="dogrudan-bir-kanit">Doğrudan bir kanıt<a class="capa" href="#dogrudan-bir-kanit">#</a></h2>
+<p>Tümevarım kısa ama biraz soyut. Somut bir <span class="mat">\(\delta\)</span> görmek isteyenler için
+doğrudan tahmin de mümkün.</p>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in \mathbb{R}\)</span> sabit olsun ve <span class="mat">\(|x - a| \le 1\)</span> ile çalışalım; bu bölgede
+<span class="mat">\(|x| \le |a| + 1 =: M\)</span>.</p>
+<p><span class="mat">\(x^k - a^k = (x-a)\bigl(x^{k-1} + x^{k-2}a + \cdots + a^{k-1}\bigr)\)</span></p>
+<p>çarpanlamasında parantez içi <span class="mat">\(k\)</span> terimlidir ve her terimin mutlak değeri en çok
+<span class="mat">\(M^{k-1}\)</span>'dir. Öyleyse</p>
+<div class="mat-blok">\[|x^k - a^k| \le k\,M^{k-1}\,|x-a| .\]</div>
+<p>Bunları toplarsak</p>
+<div class="mat-blok">\[|P(x) - P(a)| \le \sum_{k=1}^{n} |a_k|\,|x^k - a^k|
+\;\le\; \underbrace{\Bigl(\sum_{k=1}^{n} k\,|a_k|\,M^{k-1}\Bigr)}_{=:\,C}
+\,|x - a| .\]</div>
+<p><span class="mat">\(C\)</span> yalnızca <span class="mat">\(P\)</span>'ye ve <span class="mat">\(a\)</span>'ya bağlı, <span class="mat">\(x\)</span>'ten bağımsız bir sabittir. Verilen
+<span class="mat">\(\varepsilon &gt; 0\)</span> için</p>
+<div class="mat-blok">\[\delta = \min\!\left(1,\ \frac{\varepsilon}{C+1}\right)\]</div>
+<p>seçmek yeterlidir: <span class="mat">\(|x-a| &lt; \delta\)</span> olduğunda
+<span class="mat">\(|P(x)-P(a)| \le C|x-a| &lt; \varepsilon\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>İkinci kanıt aslında daha fazlasını veriyor: <span class="mat">\(P\)</span>, her sınırlı aralıkta
+<strong>Lipschitz</strong> sürekli. Bu, düz sürekliliğin epeyce üstünde bir düzgünlük;
+ilk kanıtın yapısal zarafeti ile ikincisinin niceliksel gücü arasındaki fark
+tam olarak burada.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="sureklilik-cebiri.html"><span>← Önceki</span>Sürekliliğin Cebiri</a><a class="gez sonraki" href="n-inci-kokun-surekliligi.html"><span>Sonraki →</span>n. Kök Fonksiyonu Süreklidir</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

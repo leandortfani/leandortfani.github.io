@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sürekli Genişleme — Ahmet</title>
+<meta name="description" content="[a,b) üzerinde sürekli bir fonksiyon, b&#x27;deki limiti varsa [a,b] üzerine sürekli olarak genişletilir — ve bu genişleme tektir.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#kanit">Kanıt</a></li><li class="toc-s2"><a href="#teklik">Teklik</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Sürekli Genişleme</h1>
+    <p class="ozet"><span class="mat">\([a,b)\)</span> üzerinde sürekli bir fonksiyon, <span class="mat">\(b\)</span>'deki limiti varsa <span class="mat">\([a,b]\)</span> üzerine sürekli olarak genişletilir — ve bu genişleme tektir.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.9</span></p><p><span class="mat">\(f : D \to S\)</span>, <span class="mat">\(D = [a,b)\)</span> üzerinde tanımlı sürekli bir fonksiyon olsun ve</p>
+<div class="mat-blok">\[\lim_{x \to b} f(x) = u\]</div>
+<p>var olsun. O hâlde</p>
+<div class="mat-blok">\[g(x) = \begin{cases} f(x), &amp; x \in [a,b), \\[2pt] u, &amp; x = b \end{cases}\]</div>
+<p>ile tanımlı <span class="mat">\(g : [a,b] \to \mathbb{R}\)</span> fonksiyonu süreklidir.</p></section>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<p>Sürekliliği iki bölgede kontrol etmemiz gerekiyor: <span class="mat">\([a,b)\)</span>'nin iç noktalarında
+ve tek problemli nokta olan <span class="mat">\(b\)</span>'de.</p>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik"><span class="mat">\([a,b)\)</span> üzerindeki noktalar</span></p><p><span class="mat">\(c \in [a,b)\)</span> olsun. <span class="mat">\(b - c &gt; 0\)</span> olduğuna dikkat edelim.</p>
+<p><span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(f\)</span>, <span class="mat">\(c\)</span> noktasında sürekli olduğundan bir
+<span class="mat">\(\delta_1 &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[x \in [a,b), \quad |x - c| &lt; \delta_1 \;\Longrightarrow\;
+|f(x) - f(c)| &lt; \varepsilon .\]</div>
+<p><span class="mat">\(\delta = \min(\delta_1,\, b - c) &gt; 0\)</span> alalım. <span class="mat">\(x \in [a,b]\)</span> ve
+<span class="mat">\(|x - c| &lt; \delta\)</span> olsun. <span class="mat">\(\delta \le b - c\)</span> olduğundan <span class="mat">\(x &lt; c + (b-c) = b\)</span>,
+yani <span class="mat">\(x \in [a,b)\)</span> ve dolayısıyla <span class="mat">\(g(x) = f(x)\)</span>, <span class="mat">\(g(c) = f(c)\)</span>. O hâlde</p>
+<div class="mat-blok">\[|g(x) - g(c)| = |f(x) - f(c)| &lt; \varepsilon .\]</div>
+<p>Buradaki tek incelik <span class="mat">\(\delta \le b-c\)</span> kısıtı: bu sayede <span class="mat">\(x = b\)</span> hâli hiç
+karşımıza çıkmıyor ve <span class="mat">\(u\)</span>'nun ne olduğuyla ilgilenmemiz gerekmiyor.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik"><span class="mat">\(b\)</span> noktası</span></p><p><span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(\lim_{x\to b} f(x) = u\)</span> olduğundan bir
+<span class="mat">\(\delta &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[x \in [a,b), \quad 0 &lt; |x - b| &lt; \delta \;\Longrightarrow\;
+|f(x) - u| &lt; \varepsilon .\]</div>
+<p>Aynı <span class="mat">\(\delta\)</span>'yı <span class="mat">\(g\)</span> için kullanalım. <span class="mat">\(x \in [a,b]\)</span> ve <span class="mat">\(|x - b| &lt; \delta\)</span>
+olsun. İki hâl var:</p>
+<ul>
+<li><span class="mat">\(x = b\)</span> ise <span class="mat">\(|g(b) - g(b)| = 0 &lt; \varepsilon\)</span>; sağlanır.</li>
+<li><span class="mat">\(x \ne b\)</span> ise <span class="mat">\(x \in [a,b)\)</span> ve <span class="mat">\(0 &lt; |x-b| &lt; \delta\)</span> olduğundan <div class="mat-blok">\[|g(x) - g(b)| = |f(x) - u| &lt; \varepsilon .\]</div></li>
+</ul>
+<p>Her iki hâlde de koşul sağlandı, yani <span class="mat">\(g\)</span>, <span class="mat">\(b\)</span> noktasında süreklidir.</p><span class="mezar">□</span></section>
+<p>Bu iki adım <span class="mat">\([a,b]\)</span>'nin bütün noktalarını kapsar; <span class="mat">\(g\)</span> süreklidir.</p>
+<h2 id="teklik">Teklik<a class="capa" href="#teklik">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span></p><p>Yukarıdaki <span class="mat">\(g\)</span>, <span class="mat">\(f\)</span>'nin <span class="mat">\([a,b]\)</span> üzerine <strong>tek</strong> sürekli genişlemesidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(h : [a,b] \to \mathbb{R}\)</span> sürekli olsun ve <span class="mat">\([a,b)\)</span> üzerinde <span class="mat">\(f\)</span> ile
+çakışsın. <span class="mat">\(h\)</span>'nin <span class="mat">\(b\)</span>'deki sürekliliği</p>
+<div class="mat-blok">\[h(b) = \lim_{x \to b} h(x) = \lim_{x\to b} f(x) = u = g(b)\]</div>
+<p>verir (ortadaki eşitlikte <span class="mat">\(x \ne b\)</span> olan noktalarda <span class="mat">\(h = f\)</span> olduğunu
+kullandık). Diğer noktalarda <span class="mat">\(h = f = g\)</span> zaten. Öyleyse <span class="mat">\(h = g\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Limit yoksa</span></p><p>Limitin varlığı vazgeçilmezdir. <span class="mat">\(f(x) = \sin\!\bigl(1/(b-x)\bigr)\)</span>
+fonksiyonu <span class="mat">\([a,b)\)</span> üzerinde süreklidir ama <span class="mat">\(x \to b\)</span> iken limiti yoktur;
+<span class="mat">\(f(b)\)</span> olarak hangi değeri seçersek seçelim sürekli bir genişleme elde
+edemeyiz. Bunun bir örneği
+<a href="sin-bir-bolu-x.html"><span class="mat">\(\sin(1/x)\)</span> üzerine yazıda</a>.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Neden önemli</span></p><p>Bu önerme, "sürekli fonksiyon" kavramının tanım kümesinin sınırına doğru nasıl
+davrandığını söyler ve pratikte sürekli sık kullanılır: <span class="mat">\(\frac{\sin x}{x}\)</span>
+fonksiyonu <span class="mat">\(\mathbb{R}\setminus\{0\}\)</span> üzerinde tanımlıdır, ama <span class="mat">\(0\)</span>'daki limiti
+<span class="mat">\(1\)</span> olduğu için <span class="mat">\(0\)</span>'da <span class="mat">\(1\)</span> değerini vererek bütün <span class="mat">\(\mathbb{R}\)</span> üzerinde sürekli
+hâle getirilir. Bu tür genişlemeler "kaldırılabilir süreksizlik" adını taşır.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="bileske-ve-kisitlama.html"><span>← Önceki</span>Bileşkenin ve Kısıtlamanın Sürekliliği</a><a class="gez sonraki" href="mutlak-deger-ve-parcalar.html"><span>Sonraki →</span>Mutlak Değer, Pozitif ve Negatif Parçalar</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

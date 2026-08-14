@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Küçük ε'lara Bakmak Yeterlidir — Ahmet</title>
+<meta name="description" content="Limit tanımındaki koşul yalnızca 0 &lt; varepsilon &lt; 1 için doğrulanırsa limit yine vardır — küçük bir gözlem ama sayısız kanıtı kısaltır.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#neden-soylenecek-bir-sey-var">Neden söylenecek bir şey var?</a></li><li class="toc-s2"><a href="#kanit">Kanıt</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Küçük ε'lara Bakmak Yeterlidir</h1>
+    <p class="ozet">Limit tanımındaki koşul yalnızca <span class="mat">\(0 &lt; \varepsilon &lt; 1\)</span> için doğrulanırsa limit yine vardır — küçük bir gözlem ama sayısız kanıtı kısaltır.</p>
+  </header>
+  <section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 7</span></p><p><span class="mat">\(f : D \to \mathbb{R}\)</span> bir aralıkta tanımlı reel değerli bir fonksiyon,
+<span class="mat">\(c \in \overline{D}\)</span> ve <span class="mat">\(z \in \mathbb{R}\)</span> olsun. Her <span class="mat">\(0 &lt; \varepsilon &lt; 1\)</span>
+için öyle bir <span class="mat">\(\delta &gt; 0\)</span> bulunabildiğini varsayalım ki</p>
+<div class="mat-blok">\[0 &lt; |x - c| &lt; \delta \;\Longrightarrow\; |f(x) - z| &lt; \varepsilon .\]</div>
+<p>O hâlde <span class="mat">\(\lim_{x\to c} f(x) = z\)</span>'dir.</p></section>
+<h2 id="neden-soylenecek-bir-sey-var">Neden söylenecek bir şey var?<a class="capa" href="#neden-soylenecek-bir-sey-var">#</a></h2>
+<p>Limit tanımı "<strong>her</strong> <span class="mat">\(\varepsilon &gt; 0\)</span> için" der. Hipotezimiz ise sadece
+<span class="mat">\((0,1)\)</span> aralığındaki <span class="mat">\(\varepsilon\)</span>'lar hakkında bilgi veriyor. Eksik olan,
+<span class="mat">\(\varepsilon \ge 1\)</span> hâli. Bunun gerçek bir eksik olmadığını görmek zor değil:
+küçük bir <span class="mat">\(\varepsilon\)</span> için verilen <span class="mat">\(\delta\)</span>, büyük bir <span class="mat">\(\varepsilon\)</span> için
+zaten fazlasıyla iyidir.</p>
+<h2 id="kanit">Kanıt<a class="capa" href="#kanit">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(\varepsilon &gt; 0\)</span> keyfî verilsin. İki hâli ayıralım.</p>
+<p><strong>Hâl 1: <span class="mat">\(\varepsilon &lt; 1\)</span>.</strong> Hipotez doğrudan uygulanabilir; istenen <span class="mat">\(\delta\)</span>
+zaten mevcuttur.</p>
+<p><strong>Hâl 2: <span class="mat">\(\varepsilon \ge 1\)</span>.</strong> Bu kez <span class="mat">\(\varepsilon&#x27; = \tfrac{1}{2}\)</span> alalım.
+<span class="mat">\(0 &lt; \varepsilon&#x27; &lt; 1\)</span> olduğundan hipotez bir <span class="mat">\(\delta &gt; 0\)</span> verir ve
+<span class="mat">\(0 &lt; |x-c| &lt; \delta\)</span> olan her <span class="mat">\(x \in D\)</span> için</p>
+<div class="mat-blok">\[|f(x) - z| &lt; \frac{1}{2} &lt; 1 \le \varepsilon .\]</div>
+<p>Yani aynı <span class="mat">\(\delta\)</span>, <span class="mat">\(\varepsilon\)</span> için de iş görür.</p>
+<p>Her iki hâlde de <span class="mat">\(\varepsilon\)</span>'a karşılık bir <span class="mat">\(\delta\)</span> bulduk. Tanım gereği
+<span class="mat">\(\lim_{x\to c} f(x) = z\)</span>.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Genelleme</span></p><p>Kanıtta <span class="mat">\(1\)</span> sayısının özel bir yanı yok. Aynı akıl yürütmeyle şu daha genel
+ifade elde edilir: bir <span class="mat">\(\varepsilon_0 &gt; 0\)</span> sabiti için koşul yalnızca
+<span class="mat">\(0 &lt; \varepsilon &lt; \varepsilon_0\)</span> aralığında doğrulanmışsa limit yine vardır.
+Hatta <span class="mat">\(\varepsilon\)</span>'ı sürekli değil, <strong>sıfıra yakınsayan bir dizi</strong> üzerinden
+almak da yeter: <span class="mat">\(\varepsilon_n \to 0\)</span> olan bir dizi için koşul sağlanıyorsa
+limit vardır. Nedeni aynı: verilen <span class="mat">\(\varepsilon\)</span>'dan küçük bir <span class="mat">\(\varepsilon_n\)</span>
+seçip onun <span class="mat">\(\delta\)</span>'sını kullanmak.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Pratikte niye işe yarar</span></p><p>Kanıtlarda sık sık <span class="mat">\(\varepsilon\)</span>'ın küçük olduğunu varsaymak isteriz — mesela
+"<span class="mat">\(\sqrt{1-\varepsilon}\)</span> tanımlı olsun" ya da "<span class="mat">\(1 - \varepsilon &gt; 0\)</span> olsun"
+demek için. Bu önerme, bu tür varsayımların hiçbir genellik kaybına yol
+açmadığını bir kez ve toptan garantiler. Ders kitaplarındaki
+"genelliği bozmadan <span class="mat">\(\varepsilon &lt; 1\)</span> alabiliriz" cümlesinin arkasında yatan
+şey budur.</p></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Ters yönde çalışmaz</span></p><p>Koşulun yalnızca <strong>büyük</strong> <span class="mat">\(\varepsilon\)</span>'lar için sağlanması hiçbir şey
+söylemez. <span class="mat">\(f \equiv 0\)</span> ve <span class="mat">\(z = 5\)</span> alalım: her <span class="mat">\(\varepsilon &gt; 5\)</span> için koşul
+sağlanır, ama <span class="mat">\(\lim f = 0 \ne 5\)</span>. Limit tanımının bütün gücü küçük
+<span class="mat">\(\varepsilon\)</span>'lardadır.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="tersin-limiti.html"><span>← Önceki</span>Sıfırdan Farklı Limitin Tersi</a><a class="gez sonraki" href="sikistirma-teoremi.html"><span>Sonraki →</span>Sıkıştırma Teoremi</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

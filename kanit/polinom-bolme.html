@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polinomlar için Bölme Önermesi — Ahmet</title>
+<meta name="description" content="Derecesi n olan P ile derecesi m le n olan D için P = DQ + R ayrışımının varlığı ve tekliği.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Cebir Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#varlik">Varlık</a></li><li class="toc-s2"><a href="#teklik">Teklik</a></li><li class="toc-s2"><a href="#lean-4-formalizasyonu">Lean 4 formalizasyonu</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Cebir Kanıtları · 2026-08-14</p>
+    <h1>Polinomlar için Bölme Önermesi</h1>
+    <p class="ozet">Derecesi <span class="mat">\(n\)</span> olan <span class="mat">\(P\)</span> ile derecesi <span class="mat">\(m \le n\)</span> olan <span class="mat">\(D\)</span> için <span class="mat">\(P = DQ + R\)</span> ayrışımının varlığı ve tekliği.</p>
+  </header>
+  <p>Bu, polinom cebirinin bel kemiğidir: tam sayılardaki kalanlı bölmenin polinom
+karşılığı. Aşağıdaki her şey — kök–çarpan teoremi, en büyük ortak bölen
+algoritması, kısmî kesirlere ayırma — bu tek önermeden çıkar.</p>
+<p>Katsayıları bir <span class="mat">\(\mathbb{K}\)</span> cismi (mesela <span class="mat">\(\mathbb{R}\)</span> ya da <span class="mat">\(\mathbb{C}\)</span>)
+üzerinden alıyoruz. Sıfır polinomunun derecesini <span class="mat">\(\deg 0 = -\infty\)</span> kabul
+ediyoruz; böylece <span class="mat">\(\deg(A+B) \le \max(\deg A, \deg B)\)</span> gibi ifadeler istisnasız
+doğru olur.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Bölme Önermesi</span></p><p><span class="mat">\(P(x)\)</span> derecesi <span class="mat">\(n\)</span> olan, <span class="mat">\(D(x)\)</span> derecesi <span class="mat">\(m\)</span> olan birer polinom olsun. Eğer
+<span class="mat">\(n \ge m\)</span> ise</p>
+<div class="mat-blok">\[P(x) = D(x)\,Q(x) + R(x)\]</div>
+<p>olacak biçimde, <span class="mat">\(\deg Q = n-m\)</span> ve <span class="mat">\(\deg R = r &lt; m\)</span> koşullarını sağlayan
+<span class="mat">\(Q(x)\)</span> ve <span class="mat">\(R(x)\)</span> polinomları vardır.</p></section>
+<h2 id="varlik">Varlık<a class="capa" href="#varlik">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(d = n - m \ge 0\)</span> üzerinden tümevarım yapıyoruz.</p>
+<p><span class="mat">\(P\)</span> ile <span class="mat">\(D\)</span>'nin baş katsayıları sırasıyla <span class="mat">\(a_n\)</span> ve <span class="mat">\(b_m\)</span> olsun. <span class="mat">\(D\)</span> derecesi
+<span class="mat">\(m\)</span> olan bir polinom olduğundan <span class="mat">\(b_m \ne 0\)</span>'dır, dolayısıyla <span class="mat">\(a_n/b_m\)</span> bölmesi
+<span class="mat">\(\mathbb{K}\)</span> içinde anlamlıdır. Şu polinomu tanımlayalım:</p>
+<div class="mat-blok">\[S(x) \;=\; P(x) - \frac{a_n}{b_m}\,x^{\,n-m} D(x).\]</div>
+<p>Sağdaki iki terimin de derecesi <span class="mat">\(n\)</span>'dir ve <span class="mat">\(x^n\)</span>'in katsayıları her ikisinde de
+<span class="mat">\(a_n\)</span>'e eşittir; bu terimler birbirini götürür. Demek ki</p>
+<div class="mat-blok">\[S(x) = P(x) - Q_1(x)D(x), \qquad Q_1(x) = \frac{a_n}{b_m}x^{\,n-m},
+\qquad \deg S = \ell &lt; n .\]</div>
+<p><strong>Temel durum (<span class="mat">\(d = 0\)</span>).</strong> Bu durumda <span class="mat">\(n = m\)</span> ve <span class="mat">\(\ell &lt; n = m\)</span> olur. O halde
+<span class="mat">\(Q = Q_1 = a_n/b_m\)</span> ve <span class="mat">\(R = S\)</span> seçmek yeterlidir: <span class="mat">\(\deg Q = 0 = n-m\)</span> ve
+<span class="mat">\(\deg R &lt; m\)</span>.</p>
+<p><strong>Tümevarım adımı (<span class="mat">\(d &gt; 0\)</span>).</strong> İddianın, derece farkı <span class="mat">\(d\)</span>'den küçük olan bütün
+çiftler için doğru olduğunu varsayalım. İki hâl var:</p>
+<ul>
+<li><span class="mat">\(\ell &lt; m\)</span> ise iş bitmiştir: <span class="mat">\(Q = Q_1\)</span> ve <span class="mat">\(R = S\)</span> alalım. Gerçekten <span class="mat">\(P = Q_1 D + S\)</span> ve <span class="mat">\(\deg R = \ell &lt; m\)</span>.</li>
+<li><span class="mat">\(\ell \ge m\)</span> ise <span class="mat">\(\ell - m &lt; n - m = d\)</span> olduğundan tümevarım hipotezi <span class="mat">\(S\)</span> ile <span class="mat">\(D\)</span> çiftine uygulanabilir: <div class="mat-blok">\[S(x) = Q_2(x)D(x) + R(x), \qquad \deg Q_2 = \ell - m, \quad \deg R &lt; m .\]</div> Buradan <div class="mat-blok">\[P(x) = S(x) + Q_1(x)D(x) = \bigl(Q_1(x) + Q_2(x)\bigr)D(x) + R(x).\]</div> Son olarak derece hesabı: <span class="mat">\(\deg Q_2 = \ell - m &lt; d = \deg Q_1\)</span> olduğundan toplamda <span class="mat">\(Q_1\)</span>'in baş terimi sağ kalır, yani <span class="mat">\(\deg(Q_1 + Q_2) = d = n - m\)</span>.</li>
+</ul>
+<p>Her iki hâlde de istenen ayrışım elde edildi.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-uyari"><p class="ortam-bas"><span class="ortam-etiket">Uyarı</span> <span class="ortam-baslik">Sık yapılan hata</span></p><p>Tümevarımı <span class="mat">\(n\)</span> üzerinden değil, <span class="mat">\(d = n-m\)</span> <strong>farkı</strong> üzerinden kurmak gerekiyor.
+Yukarıdaki adımda <span class="mat">\(S\)</span>'nin derecesi <span class="mat">\(\ell\)</span>, <span class="mat">\(P\)</span>'ninkinden küçük ama <span class="mat">\(D\)</span>
+değişmediği için asıl azalan büyüklük derece farkıdır. <span class="mat">\(n\)</span> üzerinden kuvvetli
+tümevarım da çalışır; ama <span class="mat">\(D\)</span>'nin derecesi sabit kaldığından fark üzerinden
+gitmek daha doğrudan.</p></section>
+<h2 id="teklik">Teklik<a class="capa" href="#teklik">#</a></h2>
+<p>Kaynak metinde geçmiyor ama ayrışım aslında <strong>biriciktir</strong>; bu olmadan
+"<span class="mat">\(P \bmod D\)</span>" gibi bir yazım anlamsız olurdu.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Teklik</span></p><p><span class="mat">\(D \ne 0\)</span> olsun. <span class="mat">\(P = DQ_1 + R_1 = DQ_2 + R_2\)</span> ve <span class="mat">\(\deg R_1, \deg R_2 &lt; \deg D\)</span>
+ise <span class="mat">\(Q_1 = Q_2\)</span> ve <span class="mat">\(R_1 = R_2\)</span>'dir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>İki eşitliği çıkararak</p>
+<div class="mat-blok">\[D(x)\bigl(Q_1(x) - Q_2(x)\bigr) = R_2(x) - R_1(x)\]</div>
+<p>elde ederiz. <span class="mat">\(Q_1 \ne Q_2\)</span> olduğunu varsayalım. O zaman <span class="mat">\(Q_1 - Q_2 \ne 0\)</span> ve
+bir cisim üzerinde derecelerin toplamsallığı gereği</p>
+<div class="mat-blok">\[\deg\bigl(D(Q_1-Q_2)\bigr) = \deg D + \deg(Q_1-Q_2) \ \ge\ \deg D .\]</div>
+<p>Öte yandan sağ taraf için</p>
+<div class="mat-blok">\[\deg(R_2 - R_1) \le \max(\deg R_1, \deg R_2) &lt; \deg D .\]</div>
+<p>Aynı polinomun derecesi hem <span class="mat">\(\ge \deg D\)</span> hem <span class="mat">\(&lt; \deg D\)</span> olamaz. Çelişki.
+Demek ki <span class="mat">\(Q_1 = Q_2\)</span>, bu da doğrudan <span class="mat">\(R_1 = R_2\)</span> verir.</p><span class="mezar">□</span></section>
+<h2 id="lean-4-formalizasyonu">Lean 4 formalizasyonu<a class="capa" href="#lean-4-formalizasyonu">#</a></h2>
+<p>Mathlib'de bölme ve kalan, cisim üzerindeki polinomlar için <code>/</code> ve <code>%</code> ile
+zaten tanımlıdır; önerme bu iki işlemin karakteristik özelliği hâline gelir.</p>
+<pre class="kod" data-dil="lean"><code>import Mathlib
+
+open Polynomial
+
+variable {K : Type*} [Field K]
+
+/-- Bölme önermesi: `D ≠ 0` iken her `P` için `P = D * Q + R` ve
+    `deg R &lt; deg D` olacak şekilde `Q` ve `R` vardır. -/
+theorem bolme_varlik (P D : K[X]) (hD : D ≠ 0) :
+    ∃ Q R : K[X], P = D * Q + R ∧ R.degree &lt; D.degree :=
+  ⟨P / D, P % D, (div_add_mod P D).symm, degree_mod_lt P hD⟩
+
+/-- Teklik: kalanın derecesi `deg D`&#x27;den küçük olacak biçimdeki ayrışım tektir. -/
+theorem bolme_teklik (P D Q₁ R₁ Q₂ R₂ : K[X]) (hD : D ≠ 0)
+    (h₁ : P = D * Q₁ + R₁) (h₂ : P = D * Q₂ + R₂)
+    (hR₁ : R₁.degree &lt; D.degree) (hR₂ : R₂.degree &lt; D.degree) :
+    Q₁ = Q₂ ∧ R₁ = R₂ := by
+  have hQ : Q₁ = Q₂ := by
+    by_contra hne
+    have hd : D * (Q₁ - Q₂) = R₂ - R₁ := by linear_combination h₁ - h₂
+    have hsub : Q₁ - Q₂ ≠ 0 := sub_ne_zero.mpr hne
+    have hbuyuk : D.degree ≤ (D * (Q₁ - Q₂)).degree := by
+      rw [degree_mul]
+      exact le_add_of_nonneg_right (zero_le_degree_iff.mpr hsub)
+    have hkucuk : (R₂ - R₁).degree &lt; D.degree :=
+      lt_of_le_of_lt (degree_sub_le _ _) (max_lt hR₂ hR₁)
+    rw [hd] at hbuyuk
+    exact absurd (lt_of_le_of_lt hbuyuk hkucuk) (lt_irrefl _)
+  refine ⟨hQ, ?_⟩
+  rw [hQ] at h₁
+  exact add_left_cancel (h₁.symm.trans h₂)</code></pre>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span></p><p>Lean parçaları Mathlib'e karşı yazılmıştır. Mathlib hızlı değiştiği için lemma
+adları sürümden sürüme kayabilir; <code>exact?</code> taktiği güncel adı bulmanın en hızlı
+yoludur.</p></section>
+  <nav class="alt-gezinme"><span></span><a class="gez sonraki" href="derecenin-toplamsalligi.html"><span>Sonraki →</span>Çarpımın Derecesi Derecelerin Toplamıdır</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

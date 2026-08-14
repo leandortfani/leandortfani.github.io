@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmet — Kanıt Defteri</title>
+<meta name="description" content="Analiz, cebir ve trigonometriden kanitlar. Bazilari Lean 4 ile formalize edilmistir.">
+<link rel="icon" href="varliklar/pfp.png">
+
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="varliklar/katex/katex.min.css">
+<script defer src="varliklar/katex/katex.min.js"></script>
+<script defer src="varliklar/katex/auto-render.min.js"></script>
+<script defer src="varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-ana">
+
+<header class="ust-serit">
+  <a class="marka" href="index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="index.html#analiz">Analiz</a>
+    <a href="index.html#cebir">Cebir</a>
+    <a href="index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+<div class="giris-kutu">
+  <aside class="profil">
+    <img class="pfp" src="varliklar/pfp.png" alt="Ahmet">
+    <p class="ad">Ahmet</p>
+    <p class="kulp"><a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  </aside>
+  <div class="giris-yazi">
+<h2 id="merhaba">Merhaba<a class="capa" href="#merhaba">#</a></h2>
+<p>Ben Ahmet, lisans ogrencisiyim. Bu sitede Analiz, Cebir vb konularda yazdigim kanitlari paylasacagim.
+</p>
+<p>Bu siteyi bi arkadasimla yaptigim konusma sonrasi acma karari verdim. Toplamda 400 adet kanit yazmak gibi bir amacim(iz) var. Site su an hala test asamasinda.</p>
+  </div>
+</div>
+
+<hr class="ayrac">
+
+<div class="base">
+  <h2 class="base-bas">Kanıtlar</h2>
+  <p class="base-alt">19 kanıt · 3 bölüm</p>
+
+  <section class="bolum" id="analiz">
+    <h2>Temel Analiz Kanıtları <span class="sayi">12</span></h2>
+    <p class="bolum-aciklama">Limit, süreklilik ve reel analizin temel önermeleri.</p>
+    <ol class="kanit-listesi">
+      <li>
+        <a class="baslik" href="kanit/limit-aritmetigi.html">Limit Aritmetiği — Toplam ve Çarpım</a>
+        <p class="ozet"><span class="mat">\(\lim (f+g) = \lim f + \lim g\)</span> ve <span class="mat">\(\lim (fg) = (\lim f)(\lim g)\)</span>; çarpımdaki püf nokta <span class="mat">\(g\)</span>'yi limitin yakınında sınırlamak.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">limit</span><span class="rozet">epsilon-delta</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/tersin-limiti.html">Sıfırdan Farklı Limitin Tersi</a>
+        <p class="ozet"><span class="mat">\(\lim f \ne 0\)</span> ise <span class="mat">\(\lim (1/f)\)</span> vardır ve <span class="mat">\(1/\lim f\)</span>'e eşittir; anahtar adım <span class="mat">\(|f|\)</span> için sıfırdan uzak bir alt sınır bulmak.</p>
+        <p class="meta"><span class="rozet">limit</span><span class="rozet">epsilon-delta</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/epsilon-kisitlama.html">Küçük ε'lara Bakmak Yeterlidir</a>
+        <p class="ozet">Limit tanımındaki koşul yalnızca <span class="mat">\(0 &lt; \varepsilon &lt; 1\)</span> için doğrulanırsa limit yine vardır — küçük bir gözlem ama sayısız kanıtı kısaltır.</p>
+        <p class="meta"><span class="rozet">limit</span><span class="rozet">epsilon-delta</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/sikistirma-teoremi.html">Sıkıştırma Teoremi</a>
+        <p class="ozet">İki fonksiyon arasına sıkışan bir fonksiyon onların ortak limitine mecburdur — analizin en çok kullanılan tek aracı.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">limit</span><span class="rozet">eşitsizlik</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/sureklilik-cebiri.html">Sürekliliğin Cebiri</a>
+        <p class="ozet">Sabit fonksiyonlar süreklidir; sürekli fonksiyonların toplamı, çarpımı ve (sıfırdan farklıysa) tersi de süreklidir.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">epsilon-delta</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/polinomlarin-surekliligi.html">Polinomlar Süreklidir</a>
+        <p class="ozet">Özdeşlik ve sabit fonksiyonlardan başlayıp süreklilik cebiriyle tümevarım; sonuç olarak her <span class="mat">\(y\)</span> için <span class="mat">\(\lim_{x\to y} P(x) = P(y)\)</span>.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">polinom</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/n-inci-kokun-surekliligi.html">n. Kök Fonksiyonu Süreklidir</a>
+        <p class="ozet"><span class="mat">\(u^n - v^n\)</span> çarpanlamasını tersten okuyarak <span class="mat">\((0,\infty)\)</span> üzerinde açık bir <span class="mat">\(\delta\)</span> elde ediyoruz.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">kök</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/bileske-ve-kisitlama.html">Bileşkenin ve Kısıtlamanın Sürekliliği</a>
+        <p class="ozet"><span class="mat">\(g \circ f\)</span> süreklidir — "<span class="mat">\(\delta\)</span>'yı <span class="mat">\(\varepsilon\)</span> gibi kullan" hilesi; ayrıca kısıtlamanın sürekliliği neden bedava geliyor.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">bileşke</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/surekli-genisleme.html">Sürekli Genişleme</a>
+        <p class="ozet"><span class="mat">\([a,b)\)</span> üzerinde sürekli bir fonksiyon, <span class="mat">\(b\)</span>'deki limiti varsa <span class="mat">\([a,b]\)</span> üzerine sürekli olarak genişletilir — ve bu genişleme tektir.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">limit</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/mutlak-deger-ve-parcalar.html">Mutlak Değer, Pozitif ve Negatif Parçalar</a>
+        <p class="ozet"><span class="mat">\(|f|\)</span> süreklidir; <span class="mat">\(f_+ = \tfrac12(f+|f|)\)</span> ve <span class="mat">\(f_- = \tfrac12(|f|-f)\)</span> de öyle; ve <span class="mat">\(f = f_+ - f_-\)</span>.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">süreklilik</span><span class="rozet">mutlak değer</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/sin-bir-bolu-x.html">sin(1/x) ve x·sin(1/x) Limitleri</a>
+        <p class="ozet">Birincisi yoktur, ikincisi <span class="mat">\(0\)</span>'dır. Aradaki tek fark, salınımı bastıran bir <span class="mat">\(x\)</span> çarpanı.</p>
+        <p class="meta"><span class="rozet">limit</span><span class="rozet">karşı örnek</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/ara-deger-teoremi.html">Ara Değer Teoremi</a>
+        <p class="ozet">Sürekli bir fonksiyon işaret değiştiriyorsa arada sıfırlanır. Kanıtın bütün ağırlığı reel sayıların tamlığında.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">supremum</span></p>
+      </li>
+    </ol>
+  </section>
+  <section class="bolum" id="cebir">
+    <h2>Cebir Kanıtları <span class="sayi">4</span></h2>
+    <p class="bolum-aciklama">Polinomlar, kökler, dereceler ve lineer cebirden eşitsizlikler.</p>
+    <ol class="kanit-listesi">
+      <li>
+        <a class="baslik" href="kanit/polinom-bolme.html">Polinomlar için Bölme Önermesi</a>
+        <p class="ozet">Derecesi <span class="mat">\(n\)</span> olan <span class="mat">\(P\)</span> ile derecesi <span class="mat">\(m \le n\)</span> olan <span class="mat">\(D\)</span> için <span class="mat">\(P = DQ + R\)</span> ayrışımının varlığı ve tekliği.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">polinom</span><span class="rozet">tümevarım</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/derecenin-toplamsalligi.html">Çarpımın Derecesi Derecelerin Toplamıdır</a>
+        <p class="ozet"><span class="mat">\(\deg(P_1P_2) = \deg P_1 + \deg P_2\)</span> — ve bunun neden tamlık bölgesi olmayan halkalarda bozulduğu.</p>
+        <p class="meta"><span class="rozet">polinom</span><span class="rozet">derece</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/kok-carpan-teoremi.html">Kök–Çarpan Teoremi ve Köklerin Sayısı</a>
+        <p class="ozet"><span class="mat">\(c\)</span> bir köktür <span class="mat">\(\iff\)</span> <span class="mat">\((x-c) \mid P\)</span>; buradan <span class="mat">\(n\)</span>. dereceden bir polinomun en çok <span class="mat">\(n\)</span> kökü olduğu ve tam <span class="mat">\(n\)</span> kökü varsa çarpanlara ayrılışı.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">polinom</span><span class="rozet">kök</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/cauchy-schwarz.html">Cauchy–Schwarz Eşitsizliği</a>
+        <p class="ozet"><span class="mat">\(|\langle u,v\rangle| \le \|u\|\,\|v\|\)</span> — diskriminant kanıtı, eşitlik hâli ve Lagrange özdeşliği ile ikinci bir kanıt.</p>
+        <p class="meta"><span class="rozet">lineer cebir</span><span class="rozet">iç çarpım</span><span class="rozet">eşitsizlik</span></p>
+      </li>
+    </ol>
+  </section>
+  <section class="bolum" id="trigonometri">
+    <h2>Trigonometrik Kanıtlar <span class="sayi">3</span></h2>
+    <p class="bolum-aciklama">Trigonometrik fonksiyonların analitik özellikleri.</p>
+    <ol class="kanit-listesi">
+      <li>
+        <a class="baslik" href="kanit/sin-cos-surekliligi.html">sin ve cos Süreklidir</a>
+        <p class="ozet">Toplam formüllerini farka çevirip <span class="mat">\(|\sin t| \le |t|\)</span> eşitsizliğiyle birleştirince <span class="mat">\(\delta = \varepsilon\)</span> çıkıyor.</p>
+        <p class="meta"><span class="rozet">süreklilik</span><span class="rozet">trigonometri</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/sinx-bolu-x.html">sin(x)/x Limitinin 1 Olduğu</a>
+        <p class="ozet"><span class="mat">\(\sin x &lt; x &lt; \tan x\)</span> geometrik eşitsizliğini ters çevirip sıkıştırma teoremine vermek; sonuç <span class="mat">\(0/0\)</span> belirsizliğinin en meşhur çözümü.</p>
+        <p class="meta"><span class="rozet">limit</span><span class="rozet">trigonometri</span><span class="rozet">sıkıştırma</span></p>
+      </li>
+      <li>
+        <a class="baslik" href="kanit/chebyshev.html">cos(nθ) Bir Polinomdur — Chebyshev</a>
+        <p class="ozet">Her <span class="mat">\(n\)</span> için <span class="mat">\(\cos n\theta = T_n(\cos\theta)\)</span> olacak biçimde tam sayı katsayılı bir <span class="mat">\(T_n\)</span> polinomu vardır; iki adımlı tümevarımla.</p>
+        <p class="meta"><span class="rozet rozet-lean">Lean&nbsp;4</span><span class="rozet">trigonometri</span><span class="rozet">polinom</span><span class="rozet">tümevarım</span></p>
+      </li>
+    </ol>
+  </section>
+</div>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

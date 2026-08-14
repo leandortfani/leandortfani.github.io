@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sürekliliğin Cebiri — Ahmet</title>
+<meta name="description" content="Sabit fonksiyonlar süreklidir; sürekli fonksiyonların toplamı, çarpımı ve (sıfırdan farklıysa) tersi de süreklidir.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Temel Analiz Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#1-sabit-fonksiyon">1. Sabit fonksiyon</a></li><li class="toc-s2"><a href="#2-toplam-ve-carpim">2. Toplam ve çarpım</a></li><li class="toc-s2"><a href="#3-carpmaya-gore-ters">3. Çarpmaya göre ters</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Temel Analiz Kanıtları · 2026-08-14</p>
+    <h1>Sürekliliğin Cebiri</h1>
+    <p class="ozet">Sabit fonksiyonlar süreklidir; sürekli fonksiyonların toplamı, çarpımı ve (sıfırdan farklıysa) tersi de süreklidir.</p>
+  </header>
+  <section class="ortam ortam-tanim"><p class="ortam-bas"><span class="ortam-etiket">Tanım</span> <span class="ortam-baslik">Süreklilik</span></p><p><span class="mat">\(f : D \to S\)</span> ve <span class="mat">\(a \in D\)</span> olsun. Her <span class="mat">\(\varepsilon &gt; 0\)</span> için öyle bir
+<span class="mat">\(\delta &gt; 0\)</span> varsa ki</p>
+<div class="mat-blok">\[x \in D, \quad |x - a| &lt; \delta \;\Longrightarrow\; |f(x) - f(a)| &lt; \varepsilon,\]</div>
+<p><span class="mat">\(f\)</span>'ye <span class="mat">\(a\)</span> noktasında <strong>sürekli</strong> denir. <span class="mat">\(D\)</span>'nin her noktasında sürekliyse
+<span class="mat">\(f\)</span> süreklidir denir.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Limitle ilişkisi</span></p><p><span class="mat">\(a\)</span>, <span class="mat">\(D\)</span>'nin bir yığılma noktasıysa süreklilik tam olarak
+<span class="mat">\(\lim_{x\to a} f(x) = f(a)\)</span> demektir. <span class="mat">\(a\)</span> yalıtılmış bir noktaysa (yeterince
+küçük bir <span class="mat">\(\delta\)</span> için <span class="mat">\(D\)</span> içinde <span class="mat">\(a\)</span>'dan başka nokta yoksa) koşul kendiliğinden
+sağlanır; <strong>her</strong> fonksiyon yalıtılmış noktalarda süreklidir. Bu yüzden
+aşağıdaki kanıtlarda limit teoremlerine başvurmak yerine doğrudan
+<span class="mat">\(\varepsilon\)</span>–<span class="mat">\(\delta\)</span> ile çalışıyoruz: yalıtılmış nokta hâli de bedava
+gelsin.</p></section>
+<h2 id="1-sabit-fonksiyon">1. Sabit fonksiyon<a class="capa" href="#1-sabit-fonksiyon">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.1</span></p><p><span class="mat">\(\lambda \in \mathbb{R}\)</span> olsun. Sabit fonksiyon
+<span class="mat">\(f : \mathbb{R} \to \mathbb{R}\)</span>, <span class="mat">\(f(x) = \lambda\)</span> süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in \mathbb{R}\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(\delta = 1\)</span> (ya da herhangi
+bir pozitif sayı) alalım. <span class="mat">\(|x - a| &lt; 1\)</span> olan her <span class="mat">\(x\)</span> için</p>
+<div class="mat-blok">\[|f(x) - f(a)| = |\lambda - \lambda| = 0 &lt; \varepsilon .\]</div>
+<p>Koşul <span class="mat">\(x\)</span>'ten bağımsız olarak sağlandığı için <span class="mat">\(f\)</span> her noktada süreklidir.</p><span class="mezar">□</span></section>
+<h2 id="2-toplam-ve-carpim">2. Toplam ve çarpım<a class="capa" href="#2-toplam-ve-carpim">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.2</span></p><p><span class="mat">\(f : D \to S\)</span> ve <span class="mat">\(g : D \to S\)</span> bir <span class="mat">\(D\)</span> aralığında sürekli olsun. O hâlde
+<span class="mat">\(f + g\)</span> ve <span class="mat">\(fg\)</span> fonksiyonları da süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik">Toplam</span></p><p><span class="mat">\(a \in D\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. Sürekliliklerden:</p>
+<ul>
+<li>bir <span class="mat">\(\delta_1 &gt; 0\)</span> için <span class="mat">\(|x - a| &lt; \delta_1 \Rightarrow
+  |f(x) - f(a)| &lt; \varepsilon/2\)</span>;</li>
+<li>bir <span class="mat">\(\delta_2 &gt; 0\)</span> için <span class="mat">\(|x - a| &lt; \delta_2 \Rightarrow
+  |g(x) - g(a)| &lt; \varepsilon/2\)</span>.</li>
+</ul>
+<p><span class="mat">\(\delta = \min(\delta_1,\delta_2)\)</span> alalım. <span class="mat">\(|x-a| &lt; \delta\)</span> olan <span class="mat">\(x \in D\)</span> için</p>
+<div class="mat-blok">\[\bigl|(f+g)(x) - (f+g)(a)\bigr| \le |f(x)-f(a)| + |g(x)-g(a)| &lt; \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span> <span class="ortam-baslik">Çarpım</span></p><p>Yine <span class="mat">\(a \in D\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. Alışılmış "sıfır ekle" ayrıştırması:</p>
+<div class="mat-blok">\[f(x)g(x) - f(a)g(a) = g(x)\bigl(f(x)-f(a)\bigr) + f(a)\bigl(g(x)-g(a)\bigr).\]</div>
+<p><span class="mat">\(g\)</span>'yi <span class="mat">\(a\)</span> civarında sınırlamamız gerekiyor. <span class="mat">\(g\)</span>'nin <span class="mat">\(a\)</span>'daki sürekliliğinde
+<span class="mat">\(\varepsilon = 1\)</span> alırsak bir <span class="mat">\(\delta_0 &gt; 0\)</span> için
+<span class="mat">\(|x-a| &lt; \delta_0 \Rightarrow |g(x) - g(a)| &lt; 1\)</span>, dolayısıyla</p>
+<div class="mat-blok">\[|g(x)| &lt; |g(a)| + 1 =: K .\]</div>
+<p>Ayrıca <span class="mat">\(K&#x27; = |f(a)| + 1 &gt; 0\)</span> yazalım. Şimdi:</p>
+<ul>
+<li>bir <span class="mat">\(\delta_1 &gt; 0\)</span> için <span class="mat">\(|x-a| &lt; \delta_1 \Rightarrow
+  |f(x)-f(a)| &lt; \dfrac{\varepsilon}{2K}\)</span>;</li>
+<li>bir <span class="mat">\(\delta_2 &gt; 0\)</span> için <span class="mat">\(|x-a| &lt; \delta_2 \Rightarrow
+  |g(x)-g(a)| &lt; \dfrac{\varepsilon}{2K&#x27;}\)</span>.</li>
+</ul>
+<p><span class="mat">\(\delta = \min(\delta_0,\delta_1,\delta_2)\)</span> ile, <span class="mat">\(|x-a| &lt; \delta\)</span> olan <span class="mat">\(x \in D\)</span> için</p>
+<div class="mat-blok">\[\begin{aligned}
+|f(x)g(x) - f(a)g(a)|
+&amp;\le |g(x)|\,|f(x)-f(a)| + |f(a)|\,|g(x)-g(a)| \\[4pt]
+&amp;&lt; K\cdot\frac{\varepsilon}{2K} + K&#x27;\cdot\frac{\varepsilon}{2K&#x27;}
+\;=\; \varepsilon .
+\end{aligned}\]</div><span class="mezar">□</span></section>
+<h2 id="3-carpmaya-gore-ters">3. Çarpmaya göre ters<a class="capa" href="#3-carpmaya-gore-ters">#</a></h2>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Alıştırma 24.3</span></p><p><span class="mat">\(f : D \to S\)</span> bir <span class="mat">\(D\)</span> aralığında sürekli ve her <span class="mat">\(x \in D\)</span> için <span class="mat">\(f(x) \ne 0\)</span>
+olsun. O hâlde <span class="mat">\(1/f\)</span> süreklidir.</p></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(a \in D\)</span> ve <span class="mat">\(\varepsilon &gt; 0\)</span> verilsin. <span class="mat">\(f(a) \ne 0\)</span> olduğundan
+<span class="mat">\(|f(a)|/2 &gt; 0\)</span>'dır ve süreklilikten bir <span class="mat">\(\delta_0 &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[|x-a| &lt; \delta_0 \;\Longrightarrow\; |f(x) - f(a)| &lt; \frac{|f(a)|}{2}
+\;\Longrightarrow\; |f(x)| &gt; \frac{|f(a)|}{2}\]</div>
+<p>(ikinci çıkarım ters üçgen eşitsizliğinden).</p>
+<p>Ayrıca süreklilikten bir <span class="mat">\(\delta_1 &gt; 0\)</span> vardır ki</p>
+<div class="mat-blok">\[|x-a| &lt; \delta_1 \;\Longrightarrow\;
+|f(x) - f(a)| &lt; \frac{\varepsilon\,|f(a)|^2}{2} .\]</div>
+<p><span class="mat">\(\delta = \min(\delta_0, \delta_1)\)</span> alalım. <span class="mat">\(|x - a| &lt; \delta\)</span> olan <span class="mat">\(x \in D\)</span> için</p>
+<div class="mat-blok">\[\left|\frac{1}{f(x)} - \frac{1}{f(a)}\right|
+= \frac{|f(a) - f(x)|}{|f(x)|\,|f(a)|}
+&lt; \frac{\varepsilon |f(a)|^2/2}{\bigl(|f(a)|/2\bigr)|f(a)|} = \varepsilon .\]</div><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p>Sürekli fonksiyonların farkı, ve paydası hiç sıfırlanmayan bölümü de
+süreklidir. Gerçekten <span class="mat">\(f - g = f + (-1)\cdot g\)</span> ve
+<span class="mat">\(f/g = f \cdot (1/g)\)</span> yazılabilir; sağ taraftaki bütün parçalar
+yukarıdaki üç önermeyle kapsanıyor.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Yapısal bakış</span></p><p>Bu üç önerme birlikte şunu söylüyor: <span class="mat">\(D\)</span> üzerindeki sürekli reel değerli
+fonksiyonlar kümesi <span class="mat">\(C(D)\)</span>, noktasal işlemlerle bir <strong>halka</strong> oluşturur (hatta
+<span class="mat">\(\mathbb{R}\)</span> üzerinde bir cebir). Bir sonraki adım —
+<a href="polinomlarin-surekliligi.html">polinomların sürekliliği</a> — bu halkanın en basit
+elemanlarını tanımaktan ibaret.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="sikistirma-teoremi.html"><span>← Önceki</span>Sıkıştırma Teoremi</a><a class="gez sonraki" href="polinomlarin-surekliligi.html"><span>Sonraki →</span>Polinomlar Süreklidir</a></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>

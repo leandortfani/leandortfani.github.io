@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cauchy–Schwarz Eşitsizliği — Ahmet</title>
+<meta name="description" content="|langle u,vrangle| le |u|,|v| — diskriminant kanıtı, eşitlik hâli ve Lagrange özdeşliği ile ikinci bir kanıt.">
+<link rel="icon" href="../varliklar/pfp.png">
+
+<script>
+  // Tema tercihini boya öncesi uygula (yanıp sönmeyi engeller)
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tema"); } catch (e) {}
+    if (!t) {
+      t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "koyu" : "acik";
+    }
+    document.documentElement.setAttribute("data-tema", t);
+  })();
+</script>
+
+<link rel="stylesheet" href="../varliklar/stil.css">
+
+<!-- KaTeX yerelde: CDN gerektirmez, çevrimdışı da çalışır. -->
+<link rel="stylesheet" href="../varliklar/katex/katex.min.css">
+<script defer src="../varliklar/katex/katex.min.js"></script>
+<script defer src="../varliklar/katex/auto-render.min.js"></script>
+<script defer src="../varliklar/site.js"></script>
+</head>
+
+<body class="sayfa-kanit">
+
+<header class="ust-serit">
+  <a class="marka" href="../index.html">Kanıt Defteri</a>
+  <nav class="ust-bag">
+    <a href="../index.html#analiz">Analiz</a>
+    <a href="../index.html#cebir">Cebir</a>
+    <a href="../index.html#trigonometri">Trigonometri</a>
+    <button id="tema-dugme" type="button" aria-label="Temayı değiştir" title="Temayı değiştir">
+      <span class="tema-ikon"></span>
+    </button>
+  </nav>
+</header>
+
+<main class="kabuk">
+
+
+<aside class="yan">
+  <a class="geri" href="../index.html">← Ana sayfa</a>
+  <p class="yan-bolum">Cebir Kanıtları</p>
+  <nav class="toc"><p class="toc-bas">İçindekiler</p><ul><li class="toc-s2"><a href="#kanit-diskriminant-yontemi">Kanıt (diskriminant yöntemi)</a></li><li class="toc-s3"><a href="#diskriminanta-basvurmadan">Diskriminanta başvurmadan</a></li><li class="toc-s2"><a href="#esitlik-hali">Eşitlik hâli</a></li><li class="toc-s2"><a href="#de-lagrange-ozdesligi"><span class="mat">\(\mathbb{R}^n\)</span>'de: Lagrange özdeşliği</a></li></ul></nav>
+</aside>
+<article class="yazi">
+  <header class="yazi-bas">
+    <p class="ust-bilgi">Cebir Kanıtları · 2026-08-14</p>
+    <h1>Cauchy–Schwarz Eşitsizliği</h1>
+    <p class="ozet"><span class="mat">\(|\langle u,v\rangle| \le \|u\|\,\|v\|\)</span> — diskriminant kanıtı, eşitlik hâli ve Lagrange özdeşliği ile ikinci bir kanıt.</p>
+  </header>
+  <p>Bu benim eklediğim bir kanıt; kaynak listede yok ama iç çarpım uzaylarında
+neredeyse her şeyin altından çıkan eşitsizlik bu. Üçgen eşitsizliği, açı
+tanımı, varyans–kovaryans eşitsizliği, hepsi buradan geliyor.</p>
+<section class="ortam ortam-tanim"><p class="ortam-bas"><span class="ortam-etiket">Tanım</span> <span class="ortam-baslik">İç çarpım uzayı</span></p><p><span class="mat">\(V\)</span>, <span class="mat">\(\mathbb{R}\)</span> üzerinde bir vektör uzayı olsun.
+<span class="mat">\(\langle \cdot,\cdot\rangle : V \times V \to \mathbb{R}\)</span> dönüşümü her
+değişkeninde doğrusal, simetrik ve <strong>pozitif tanımlı</strong> ise
+(<span class="mat">\(u \ne 0 \Rightarrow \langle u,u\rangle &gt; 0\)</span>) buna bir <strong>iç çarpım</strong> denir.
+<span class="mat">\(\|u\| = \sqrt{\langle u,u\rangle}\)</span> yazıyoruz.</p></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Teorem</span> <span class="ortam-baslik">Cauchy–Schwarz</span></p><p>Her <span class="mat">\(u, v \in V\)</span> için</p>
+<div class="mat-blok">\[\bigl|\langle u, v\rangle\bigr| \ \le\ \|u\|\,\|v\| .\]</div>
+<p>Eşitlik ancak ve ancak <span class="mat">\(u\)</span> ile <span class="mat">\(v\)</span> doğrusal bağımlı olduğunda sağlanır.</p></section>
+<h2 id="kanit-diskriminant-yontemi">Kanıt (diskriminant yöntemi)<a class="capa" href="#kanit-diskriminant-yontemi">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(v = 0\)</span> ise iki taraf da <span class="mat">\(0\)</span>'dır ve eşitlik sağlanır; ayrıca <span class="mat">\(u\)</span> ile <span class="mat">\(0\)</span> her
+zaman doğrusal bağımlıdır. Bundan sonra <span class="mat">\(v \ne 0\)</span>, yani <span class="mat">\(\|v\|^2 &gt; 0\)</span>
+varsayalım.</p>
+<p>Her <span class="mat">\(t \in \mathbb{R}\)</span> için <span class="mat">\(u + tv\)</span> vektörünün normunun karesine bakalım.
+Pozitif tanımlılık gereği bu sayı negatif olamaz:</p>
+<div class="mat-blok">\[0 \ \le\ \langle u + tv,\; u + tv\rangle .\]</div>
+<p>İç çarpımın iki değişkende de doğrusal ve simetrik olmasını kullanarak sağ
+tarafı açalım:</p>
+<div class="mat-blok">\[q(t) \;=\; \langle u,u\rangle + 2t\,\langle u,v\rangle + t^2\,\langle v,v\rangle
+\;=\; \|v\|^2\,t^2 + 2\langle u,v\rangle\,t + \|u\|^2 .\]</div>
+<p>Demek ki <span class="mat">\(q\)</span>, baş katsayısı <span class="mat">\(\|v\|^2 &gt; 0\)</span> olan ve <strong>hiçbir yerde negatif
+olmayan</strong> ikinci dereceden bir polinomdur. Böyle bir polinomun en çok bir
+(çift katlı) reel kökü olabilir; yani diskriminantı pozitif olamaz:</p>
+<div class="mat-blok">\[\Delta \;=\; \bigl(2\langle u,v\rangle\bigr)^2 - 4\,\|v\|^2\,\|u\|^2 \ \le\ 0 .\]</div>
+<p>Dörde bölüp düzenlersek</p>
+<div class="mat-blok">\[\langle u,v\rangle^2 \ \le\ \|u\|^2\,\|v\|^2\]</div>
+<p>ve her iki tarafın karekökünü alarak (karekök artan bir fonksiyon olduğundan)</p>
+<div class="mat-blok">\[\bigl|\langle u,v\rangle\bigr| \ \le\ \|u\|\,\|v\| .\]</div><span class="mezar">□</span></section>
+<h3 id="diskriminanta-basvurmadan">Diskriminanta başvurmadan<a class="capa" href="#diskriminanta-basvurmadan">#</a></h3>
+<p>Diskriminant argümanı hoş ama biraz "dışarıdan" geliyor. Aynı sonucu <span class="mat">\(q\)</span>'nun
+minimumunu bularak da alabiliriz — bu, geometrik anlamı da doğrudan gösterir.</p>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(q(t) = \|v\|^2 t^2 + 2\langle u,v\rangle t + \|u\|^2\)</span> ifadesini tam kareye
+tamamlayalım. <span class="mat">\(t_0 = -\langle u,v\rangle/\|v\|^2\)</span> seçimiyle</p>
+<div class="mat-blok">\[q(t_0) \;=\; \|u\|^2 - \frac{\langle u,v\rangle^2}{\|v\|^2}\ \ge\ 0 ,\]</div>
+<p>çünkü <span class="mat">\(q\)</span> her yerde negatif değildir. <span class="mat">\(\|v\|^2 &gt; 0\)</span> ile çarpınca doğrudan
+<span class="mat">\(\langle u,v\rangle^2 \le \|u\|^2\|v\|^2\)</span> çıkar.</p>
+<p><span class="mat">\(t_0\)</span>'ın anlamı şu: <span class="mat">\(u + t_0 v\)</span> vektörü tam olarak <span class="mat">\(u\)</span>'nun <span class="mat">\(v\)</span> yönündeki
+izdüşümünün çıkarılmış hâlidir ve <span class="mat">\(\langle u + t_0v,\ v\rangle = 0\)</span> olur.
+Eşitsizlik, "bir vektörün bir doğruya olan uzaklığının karesi negatif olamaz"
+demenin cebirsel kılığıdır.</p><span class="mezar">□</span></section>
+<h2 id="esitlik-hali">Eşitlik hâli<a class="capa" href="#esitlik-hali">#</a></h2>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p><span class="mat">\(v \ne 0\)</span> olsun.</p>
+<p>Eşitlik sağlanıyorsa <span class="mat">\(q(t_0) = 0\)</span> olur, yani <span class="mat">\(\|u + t_0 v\|^2 = 0\)</span>. Pozitif
+tanımlılık, normu sıfır olan tek vektörün <span class="mat">\(0\)</span> olduğunu söyler; dolayısıyla
+<span class="mat">\(u = -t_0 v\)</span>, yani <span class="mat">\(u\)</span> ile <span class="mat">\(v\)</span> doğrusal bağımlıdır.</p>
+<p>Tersine <span class="mat">\(u = \lambda v\)</span> ise doğrudan hesaplayalım:</p>
+<div class="mat-blok">\[\bigl|\langle \lambda v, v\rangle\bigr| = |\lambda|\,\|v\|^2
+= \bigl(|\lambda|\,\|v\|\bigr)\|v\| = \|\lambda v\|\,\|v\| ,\]</div>
+<p>yani eşitlik sağlanır.</p><span class="mezar">□</span></section>
+<h2 id="de-lagrange-ozdesligi"><span class="mat">\(\mathbb{R}^n\)</span>'de: Lagrange özdeşliği<a class="capa" href="#de-lagrange-ozdesligi">#</a></h2>
+<p>Standart iç çarpım için eşitsizliği tek satırlık bir özdeşlikten de okuyabiliriz.</p>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Önerme</span> <span class="ortam-baslik">Lagrange özdeşliği</span></p><p><span class="mat">\(a_1,\dots,a_n\)</span> ve <span class="mat">\(b_1,\dots,b_n\)</span> reel sayılar olmak üzere</p>
+<div class="mat-blok">\[\Bigl(\sum_{i=1}^n a_i^2\Bigr)\Bigl(\sum_{i=1}^n b_i^2\Bigr)
+- \Bigl(\sum_{i=1}^n a_i b_i\Bigr)^2
+\;=\; \sum_{1 \le i &lt; j \le n} (a_i b_j - a_j b_i)^2 .\]</div></section>
+<section class="ortam ortam-kanit"><p class="ortam-bas"><span class="ortam-etiket">Kanıt</span></p><p>Sol taraftaki ilk çarpımı açalım:</p>
+<div class="mat-blok">\[\Bigl(\sum_i a_i^2\Bigr)\Bigl(\sum_j b_j^2\Bigr) = \sum_{i,j} a_i^2 b_j^2 ,
+\qquad
+\Bigl(\sum_i a_i b_i\Bigr)^2 = \sum_{i,j} a_i b_i a_j b_j .\]</div>
+<p>Farkı alıp <span class="mat">\(i,j\)</span> ile <span class="mat">\(j,i\)</span> terimlerini eşleştirerek gruplayalım. <span class="mat">\(i = j\)</span> olan
+terimler <span class="mat">\(a_i^2b_i^2 - a_i^2b_i^2 = 0\)</span> verir. <span class="mat">\(i \ne j\)</span> olan her
+<span class="mat">\(\{i,j\}\)</span> çifti için iki terim birden gelir ve toplamları</p>
+<div class="mat-blok">\[a_i^2b_j^2 + a_j^2b_i^2 - 2a_ib_ia_jb_j = (a_ib_j - a_jb_i)^2 .\]</div>
+<p>Bütün çiftler üzerinden toplayınca istenen özdeşlik elde edilir.</p><span class="mezar">□</span></section>
+<section class="ortam ortam-teorem"><p class="ortam-bas"><span class="ortam-etiket">Sonuç</span></p><p>Sağ taraf karelerin toplamı olduğundan negatif olamaz. Öyleyse</p>
+<div class="mat-blok">\[\Bigl(\sum_{i=1}^n a_i b_i\Bigr)^2 \ \le\ \Bigl(\sum_{i=1}^n a_i^2\Bigr)
+\Bigl(\sum_{i=1}^n b_i^2\Bigr),\]</div>
+<p>ve eşitlik ancak bütün <span class="mat">\(a_ib_j - a_jb_i\)</span> ifadeleri sıfırken, yani
+<span class="mat">\((a_i)\)</span> ile <span class="mat">\((b_i)\)</span> orantılıyken sağlanır.</p></section>
+<section class="ortam ortam-not"><p class="ortam-bas"><span class="ortam-etiket">Not</span> <span class="ortam-baslik">Bir uygulama</span></p><p><span class="mat">\(b_i = 1\)</span> alırsak <span class="mat">\(\left(\sum a_i\right)^2 \le n\sum a_i^2\)</span> çıkar; bu da
+aritmetik ortalama ile karesel ortalama arasındaki eşitsizliktir. Olasılıkta
+aynı eşitsizlik <span class="mat">\(\operatorname{Cov}(X,Y)^2 \le \operatorname{Var}(X)
+\operatorname{Var}(Y)\)</span> olarak görünür — iç çarpım
+<span class="mat">\(\langle X,Y\rangle = \mathbb{E}[XY]\)</span> alındığında bu tam olarak
+Cauchy–Schwarz'tır.</p></section>
+  <nav class="alt-gezinme"><a class="gez onceki" href="kok-carpan-teoremi.html"><span>← Önceki</span>Kök–Çarpan Teoremi ve Köklerin Sayısı</a><span></span></nav>
+</article>
+</main>
+
+<footer class="alt-serit">
+  <p>Ahmet · <a href="https://twitter.com/stokastikgrad" rel="me">@stokastikgrad</a></p>
+  <p class="kucuk">Bu sayfalardaki kanıtlar el ile yazılmıştır; hata bulursanız yazın.</p>
+</footer>
+
+</body>
+</html>
