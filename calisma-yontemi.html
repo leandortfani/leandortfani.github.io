@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Bilimsel bulgularla desteklenen sürdürülebilir çalışma yöntemi.">
+  <title>Çalışma Yöntemi — Odak Sistemi</title>
+  <style>
+    :root{--bg:#061017;--panel:#0b1821;--panel2:#10232e;--text:#ecf8f8;--muted:#91aab2;--line:#203944;--cyan:#58d7e8;--cyan2:#b8f5f5;--ink:#031116;--amber:#ffca72;--max:1180px;--reading:720px}
+    [data-theme="light"]{--bg:#edf6f6;--panel:#fff;--panel2:#e4f2f3;--text:#11282f;--muted:#587078;--line:#c6dcdf;--cyan:#087f91;--cyan2:#075a69;--ink:#fff;--amber:#9b5c00}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.72 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;transition:.2s background,.2s color}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(88,215,232,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(88,215,232,.11) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,#000,transparent 55%)}
+    .progress{position:fixed;z-index:20;top:0;left:0;height:3px;width:0;background:var(--cyan)}
+    .topbar{position:sticky;z-index:10;top:0;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px)}
+    .topbar-inner{max-width:var(--max);height:66px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.01em}.brand-mark{width:29px;height:29px;display:grid;place-items:center;border:1px solid var(--cyan);color:var(--cyan);font:700 13px ui-monospace,monospace;transform:rotate(-4deg)}
+    .actions{display:flex;gap:8px}.icon-btn{height:38px;padding:0 13px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);font:inherit;font-size:14px;cursor:pointer}.icon-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+    .hero{max-width:var(--max);margin:0 auto;padding:64px 24px 56px;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}.eyebrow{margin:0 0 16px;color:var(--cyan);font:700 13px/1.3 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}.hero h1{font:800 clamp(3.7rem,8vw,7.1rem)/.88 Georgia,serif;letter-spacing:-.065em;margin:0;max-width:760px}.hero h1 span{display:block;color:var(--cyan)}.lead{max-width:650px;margin:28px 0;color:var(--muted);font-size:1.16rem}.hero-stats{display:flex;flex-wrap:wrap;gap:10px}.stat{border-left:2px solid var(--cyan);padding:4px 17px}.stat b{display:block;font-size:1.1rem}.stat span{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+    .portrait{position:relative;max-width:400px;justify-self:end}.portrait img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:contrast(1.03);border:1px solid var(--line)}.portrait:after{content:"SİSTEM > İRADE";position:absolute;right:-18px;bottom:22px;background:var(--cyan);color:#062027;padding:9px 13px;font:800 12px ui-monospace,monospace;letter-spacing:.1em}.portrait-note{position:absolute;top:-20px;left:-22px;width:74px;height:74px;border:1px solid var(--cyan);display:grid;place-items:center;color:var(--cyan);font:700 21px Georgia,serif;background:var(--bg)}
+    .layout{max-width:var(--max);margin:auto;padding:0 24px 100px;display:grid;grid-template-columns:230px minmax(0,var(--reading));gap:76px;align-items:start}.toc{position:sticky;top:92px}.toc small{display:block;color:var(--muted);font:700 11px ui-monospace,monospace;letter-spacing:.15em;margin-bottom:14px}.toc a{display:block;color:var(--muted);text-decoration:none;padding:8px 0 8px 14px;border-left:1px solid var(--line);font-size:14px;line-height:1.3}.toc a:hover,.toc a.active{color:var(--cyan);border-color:var(--cyan)}
+    main{min-width:0}.chapter{padding:20px 0 72px;border-top:1px solid var(--line)}.chapter-number{font:700 12px ui-monospace,monospace;color:var(--cyan);letter-spacing:.15em}.chapter h2{font:750 clamp(2rem,5vw,3.2rem)/1.04 Georgia,serif;letter-spacing:-.035em;margin:12px 0 30px}.chapter h3{font-size:1.35rem;line-height:1.3;margin:42px 0 13px}.chapter h4{font-size:1rem;margin:28px 0 6px;color:var(--cyan)}p{margin:0 0 18px}strong{color:var(--cyan2)}
+    .system{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0}.system div{display:grid;grid-template-columns:42px 1fr;gap:8px;align-items:center;background:var(--panel);padding:13px 18px}.system b{color:var(--cyan);font:700 13px ui-monospace,monospace}.system span{font-weight:650}.system div:not(:last-child) span:after{content:" ↓";float:right;color:var(--muted)}
+    .formula{margin:25px 0;padding:24px;border:1px solid var(--cyan);background:var(--panel);text-align:center;font:600 clamp(1rem,3vw,1.25rem) Georgia,serif;color:var(--cyan2)}
+    .note,.warning{margin:25px 0;padding:20px 22px;background:var(--panel2);border-left:3px solid var(--cyan)}.warning{border-color:var(--amber)}.note p:last-child,.warning p:last-child{margin-bottom:0}.kicker{font:800 11px ui-monospace,monospace;letter-spacing:.13em;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:8px}.warning .kicker{color:var(--amber)}
+    blockquote{margin:22px 0;padding:2px 0 2px 20px;border-left:2px solid var(--cyan);font:600 1.08rem/1.6 Georgia,serif;color:var(--cyan2)}
+    ul,ol{padding-left:22px;margin:12px 0 24px}li{margin:8px 0}li::marker{color:var(--cyan)}
+    table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.94rem}th,td{padding:13px 14px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--panel2);color:var(--cyan)}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0}.metric{background:var(--panel);border:1px solid var(--line);padding:18px}.metric b{display:block;font:750 1.5rem Georgia,serif}.metric span{color:var(--muted);font-size:.82rem}
+    .sequence{display:flex;align-items:stretch;gap:8px;margin:22px 0}.sequence span{flex:1;display:grid;place-items:center;min-height:76px;padding:12px;text-align:center;border:1px solid var(--line);background:var(--panel);font-weight:700}.sequence i{align-self:center;color:var(--cyan);font-style:normal}
+    .evidence{border:1px solid var(--line);margin:24px 0}.evidence summary{cursor:pointer;padding:15px 18px;background:var(--panel);font-weight:700;list-style:none}.evidence summary:after{content:"+";float:right;color:var(--cyan)}.evidence[open] summary:after{content:"−"}.evidence>div{padding:18px;color:var(--muted)}
+    .checklist{display:grid;gap:10px;margin-top:25px}.check{display:flex;gap:13px;align-items:flex-start;padding:16px;background:var(--panel);border:1px solid var(--line);cursor:pointer}.check input{appearance:none;width:20px;height:20px;flex:0 0 auto;margin-top:3px;border:1px solid var(--cyan);border-radius:4px}.check input:checked{background:var(--cyan);box-shadow:inset 0 0 0 4px var(--panel)}.check:has(input:checked){opacity:.58}.check:has(input:checked) span{text-decoration:line-through}
+    .footer{max-width:var(--reading);margin:auto;padding:0 24px 54px;color:var(--muted);font-size:.85rem}.focus main{max-width:var(--reading)}.focus .toc,.focus .portrait,.focus .hero-stats{display:none}.focus .layout{display:block;max-width:var(--reading)}.focus .hero{display:block;max-width:var(--reading);padding-top:48px}.focus .hero h1{font-size:clamp(3.3rem,9vw,5.5rem)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.portrait{justify-self:start;width:min(72vw,360px)}.layout{grid-template-columns:1fr;gap:0}.toc{display:none}.hero h1{font-size:clamp(3.7rem,16vw,6rem)}}
+    @media(max-width:560px){.topbar-inner,.hero,.layout{padding-left:17px;padding-right:17px}.brand span:last-child{display:none}.hero{padding-top:44px;gap:42px}.portrait-note{left:-7px}.metric-grid{grid-template-columns:1fr}.sequence{display:grid}.sequence i{justify-self:center;transform:rotate(90deg)}table{display:block;overflow:auto}.chapter{padding-bottom:54px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar"><div class="topbar-inner">
+    <div class="brand"><span class="brand-mark">ÇY</span><span>Çalışma Yöntemi</span></div>
+    <div class="actions"><button class="icon-btn" id="focusBtn" aria-pressed="false">Odak modu</button><button class="icon-btn" id="themeBtn" aria-label="Temayı değiştir">☀</button></div>
+  </div></header>
+
+  <section class="hero">
+    <div><p class="eyebrow">Sürdürülebilir odak protokolü / 01</p><h1>Daha çok değil,<span>daha sistemli.</span></h1><p class="lead">Başlaması kolay, ertelemesi maliyetli; ilerlemesi görünür ve yoğun bilişsel emeği gerçek toparlanmayla destekleyen bir çalışma düzeni.</p>
+      <div class="hero-stats"><div class="stat"><b>60–80 dk</b><span>odak bloğu</span></div><div class="stat"><b>10–15 dk</b><span>gerçek mola</span></div><div class="stat"><b>1 bağlam</b><span>her blokta</span></div></div>
+    </div>
+    <figure class="portrait"><span class="portrait-note">01</span><img src="Pasted image 20260904155906.png" alt="Mavi tonlarda manga karakteri çizimi"><figcaption class="portrait-note" style="display:none">Çalışma sistemi</figcaption></figure>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="İçindekiler"><small>İÇİNDEKİLER</small><a href="#sistem">Hedeflediğimiz sistem</a><a href="#aciliyet">Aciliyet & hedefler</a><a href="#dayaniklilik">Bilişsel dayanıklılık</a><a href="#ogrenme">Öğrenme modları</a><a href="#uyku">Uyku</a><a href="#cue">Başlatma cue’su</a><a href="#ozet">Uygulama özeti</a></nav>
+    <main>
+      <section class="chapter" id="sistem"><span class="chapter-number">01 — TEMEL MİMARİ</span><h2>Hedeflediğimiz sistem</h2><p>Ders çalışmak için iradeye bağımlı olmayan bir düzen kuruyoruz:</p>
+        <div class="system"><div><b>01</b><span>Başlamak kolay</span></div><div><b>02</b><span>Ertelemek maliyetli</span></div><div><b>03</b><span>Anlık dikkat dağıtıcıların etkisi minimum</span></div><div><b>04</b><span>İlerleme görünür</span></div><div><b>05</b><span>Yoğun çalışma, düzenli toparlanmayla destekli</span></div></div>
+        <p>Temporal Motivation Theory; beklenti, değer, gecikme ve dürtüselliğin motivasyonu birlikte şekillendirdiğini söyler.</p>
+        <div class="formula">Motivasyonel fayda ∝ (Beklenti × Değer) / (1 + Gecikme × Dürtüsellik)</div>
+        <table><thead><tr><th>Kaldıraç</th><th>Müdahale</th></tr></thead><tbody><tr><td><strong>Gecikmeyi azalt</strong></td><td>Uzak deadline’ı 60–90 dakikalık mikro-deadline’lara böl.</td></tr><tr><td><strong>Beklentiyi artır</strong></td><td>Her checkpoint’i nesnel olarak ulaşılabilir yap.</td></tr><tr><td><strong>Değeri artır</strong></td><td>İlerlemeyi anında görülen bir sonuç veya ödülle ilişkilendir.</td></tr><tr><td><strong>Rakip faydayı azalt</strong></td><td>Anlık haz veren alternatifleri direnmek yerine engelle.</td></tr></tbody></table>
+        <div class="note"><span class="kicker">Kilit nokta</span><p>Mikro-deadline yalnızca süre değil, <strong>gözlemlenebilir bir çıktı</strong> içermeli.</p></div>
+        <blockquote>“10:30’a kadar calculus çalış” yerine: “10:30’a kadar 1–8. soruların çözümlerini tamamla.”</blockquote>
+      </section>
+
+      <section class="chapter" id="aciliyet"><span class="chapter-number">02 — ACİLİYET</span><h2>Sınırlandırılmış sonuç, korku değil</h2>
+        <h3>Deadline’lar neden çalışır?</h3><p>Ariely ve Wertenbroch’un deneyleri, insanların ertelemeyle mücadele etmek için kendi üzerlerine maliyetli deadline’lar koyduğunu; bunların performansı artırdığını fakat çoğu zaman optimum ayarlanmadığını gösterir. Dışarıdan dayatılan deadline’lar daha etkili olabilir.</p>
+        <blockquote>09:15 — 1–8. problemler çözülmüş<br>10:40 — Bölüm 4 teoremi kapalı notlarla türetilmiş<br>12:10 — 25 soruluk retrieval testi tamamlanmış</blockquote>
+        <p>Gelecekteki sonucu, motivasyonel olarak tekrar tekrar şimdiki zamana çekersin.</p>
+        <div class="warning"><span class="kicker">Üst sınır</span><p>Akut ve kontrol edilemeyen stres çalışma belleğini bozabilir. Formül: <strong>kısa deadline + net çıktı + inandırıcı sonuç + yüksek algılanan kontrol.</strong></p></div>
+        <details class="evidence"><summary>Stres bulgusu</summary><div>Shields, Sazma ve Yonelinas’ın 51 çalışma, 2.486 katılımcı ve 223 etki büyüklüğünü kapsayan incelemesi akut stresin çalışma belleğini anlamlı biçimde bozduğunu bulmuştur. Bu bulgu, prefrontal ağların çok düşük veya çok yüksek katekolamin düzeylerinde kötüleşebildiğini gösteren çalışmalarla uyumludur.</div></details>
+        <h3>Spesifik hedefler</h3><p>Locke ve Latham’ın goal-setting sentezlerinde, spesifik ve zor hedefler belirsiz “elinden gelenin en iyisini yap” talimatlarından daha iyi sonuç verir. Bildirilen etki büyüklükleri yaklaşık <strong>d = 0.42–0.80</strong> aralığındadır.</p>
+        <blockquote>“Real analysis’i anla” değil; “10:20’ye kadar notlara bakmadan iki örnek için epsilon–delta argümanını doğru türet.”</blockquote>
+        <h3>Görünür ilerleme</h3><div class="metric-grid"><div class="metric"><b>138</b><span>randomize çalışma</span></div><div class="metric"><b>19.951</b><span>katılımcı</span></div><div class="metric"><b>d = .40</b><span>hedef başarısı artışı</span></div></div>
+        <p>Harkin ve arkadaşlarının meta-analizinde etkiler, ilerleme fiziksel olarak kaydedildiğinde ve sonuçlar raporlandığında daha güçlüydü.</p>
+        <blockquote>“7 saat çalıştım” değil: “38/50 problem çözüldü · 4/6 ispat hatırlandı · doğruluk %61 → %82.”</blockquote>
+        <h3>Commitment device’lar</h3><ol><li><strong>Düşük maliyet:</strong> Birine saat 11:00’e kadar oluşacak çıktıyı söyle.</li><li><strong>Orta düzey:</strong> Saat 11:00’de kanıt gönder.</li><li><strong>Sert çevresel:</strong> 09:00–12:00 arasında dikkat dağıtıcı site ve uygulamaları otomatik engelle.</li></ol><p>Amaç kusurlu performansın duygusal maliyetini değil, <strong>dikkat dağılmasının maliyetini</strong> artırmaktır.</p>
+      </section>
+
+      <section class="chapter" id="dayaniklilik"><span class="chapter-number">03 — DAYANIKLILIK</span><h2>Odak, tükenen bir depo değildir</h2>
+        <p>Aston-Jones ve Cohen’in adaptive-gain yaklaşımı görev katılımı ile keşif davranışı arasında bir ayrım sunar. Kurzban ve arkadaşlarının opportunity-cost modeli ise zihinsel çabayı, sınırlı yürütücü kaynakları başka yere ayırmanın artan değeriyle açıklar.</p>
+        <div class="note"><span class="kicker">Üç mantıklı müdahale</span><ol><li>Anlık ödül ve ilerleme sinyalini görünür tut.</li><li>Çekici alternatif eylemleri ortadan kaldır.</li><li>Görevi sonsuza kadar zorlamak yerine bitir, toparlan ve hedefi yeniden başlat.</li></ol></div>
+        <h3>Rakip seçenekleri kaldır</h3><p>YouTube, mesajlar, telefon ve farklı ders sekmeleri aynı anda görünürse beyin “zor matematik” ile “kolay ödül” arasında sürekli kıyas yapar. Matematik daha yorucu hissetmeye başlar.</p><ul><li>Bildirimleri kapat.</li><li>Sosyal medya ve site erişimini blokla.</li><li>Yalnızca blokta gereken sekmeleri açık bırak.</li><li>Telefonu fiziksel olarak erişmesi zor bir yere koy.</li><li>Aklına gelen yan işi bir “parking sheet”e yazıp devam et.</li></ul>
+        <h3>Bitmeyen iş yerine kapalı blok</h3><blockquote>10:00–11:10 → yalnızca 8 soru<br>11:10 → blok bitti<br>15 dk mola<br>11:25 → yeni blok, yeni hedef</blockquote>
+        <h3>90 dakika sihirli bir sayı değil</h3><p>Evrensel olarak kanıtlanmış bir “90 dakikalık optimum” yoktur. Neubauer ve Freudenthaler’ın dokuz saatlik ölçümleri, popüler ultradian iddiaları kesin bir reçeteye dönüştürmek için yeterli değildir.</p>
+        <h3>Mola literatürü</h3><p>Albulescu ve arkadaşlarının 22 örneklem ve 2.335 katılımcıyı kapsayan meta-analizinde mikro molalar zindeliği artırdı (<strong>d=.36</strong>) ve yorgunluğu azalttı (<strong>d=.35</strong>); genel performans etkisi (<strong>d=.16</strong>) anlamlı değildi. Yüksek talep gerektiren işlerden toparlanma on dakikadan uzun sürebilir.</p>
+        <div class="sequence"><span>60–80 dk<br>zor çalışma</span><i>→</i><span>10–15 dk<br>gerçek mola</span><i>→</i><span>2 blok sonrası<br>20–40 dk mola</span></div>
+        <h3>Görev reseti ≠ eğlence patlaması</h3><p>Ariga ve Lleras, nadir ve kısa kesintilerin vigilance decrement’ini önleyebildiğini göstermiştir. Etkili reset önceki hedeften uzaklaştırır; yerine yüksek derecede çekici, yarım kalmış bir bilgi akışı koymaz.</p>
+        <h3>Bir blok = bir bilişsel bağlam</h3><p>Task switching güvenilir biçimde daha yavaş ve sıklıkla daha hatalı tepkilere yol açar. Tamamlanmamış görevden kalan <em>attention residue</em> da sonraki görevde performansı düşürebilir.</p>
+        <blockquote>Kötü: kitap → e-posta → teorem → WhatsApp → makale → teorem.<br><br>İyi: 70 dakika yalnızca Bölüm 6’daki problemleri türetmek ve çözmek.</blockquote>
+        <h3>Restart marker</h3><p>Blok biterken gelecekteki kendine 1–2 cümlelik devam talimatı bırak. Böylece bağlamı yeniden kurmak için 5–10 dakika harcamazsın.</p><div class="note"><span class="kicker">Örnek</span><p>“Sonraki adım: 3. adımı monotonluk argümanıyla kanıtla; denklem sayfa 42’de.”</p></div>
+      </section>
+
+      <section class="chapter" id="ogrenme"><span class="chapter-number">04 — ÖĞRENME TASARIMI</span><h2>Modu, uzmanlık düzeyine göre seç</h2>
+        <p>Cognitive Load Theory, yeni bilginin sınırlı çalışma belleği üzerinden işlendiğini vurgular. Gereksiz dikkat geçişleri kaynak tüketir; bütünleştirilmiş materyal split-attention etkisini azaltır.</p>
+        <h3>Yeni konu</h3><div class="sequence"><span>Tam çözülmüş<br>örneği gör</span><i>→</i><span>Yarı çözülmüş<br>örneği tamamla</span><i>→</i><span>Bağımsız<br>problem çöz</span></div>
+        <p>Yeni öğrendiğin bir konuda tanımı 30 saniye okuyup zor soruya saldırmak yerine, önce doğru çözüm şemasını gör; sonra yardımı kademeli azalt.</p>
+        <h3>Bilinen konu</h3><div class="sequence"><span>Notlara bakmadan<br>hatırla</span><i>→</i><span>Problemi<br>çöz</span><i>→</i><span>Yanlışa bak,<br>düzelt</span></div>
+        <p>Bildiğin konuda tekrar tam örnek okumak yerine önce retrieval yap. Sonra uygulayıp hatana göre geri bildirim döngüsünü kapat.</p>
+      </section>
+
+      <section class="chapter" id="uyku"><span class="chapter-number">05 — TOPARLANMA</span><h2>Uyku, protokolün parçasıdır</h2>
+        <p>Uyku, çalışmadan çalınan zaman değil; ertesi gün kullanılacak dikkat altyapısının bakımıdır. Lim ve Dinges’in meta-analizinde kısa süreli uyku yoksunluğunun en büyük kaybı basit ve vigilant dikkat üzerinde görülmüştür.</p>
+        <div class="metric-grid"><div class="metric"><b>g = −.776</b><span>dikkat lapses</span></div><div class="metric"><b>g = −.383</b><span>genel bilişsel bozulma</span></div><div class="metric"><b>g = −.409</b><span>sürdürülen dikkat</span></div></div>
+        <div class="warning"><span class="kicker">Sonuç</span><p>İki ekstra gece çalışma saati kazanmak için uykudan kısmak, ertesi günün tamamında kullanılacak dikkat altyapısını bozabilir.</p></div>
+      </section>
+
+      <section class="chapter" id="cue"><span class="chapter-number">06 — OTOMATİKLİK</span><h2>Başlatmayı cue ile otomatikleştir</h2>
+        <p>Gollwitzer ve Sheeran’ın 94 bağımsız testi kapsayan meta-analizinde açık <strong>if–then</strong> planları hedef başarısında orta-büyük bir iyileşme yaratmıştır (<strong>d=.65</strong>).</p>
+        <blockquote>Eğer kahvaltıdan sonra kahvemi masaya koyarsam, o zaman hemen Problem Set 6’yı açar, zamanlayıcıyı başlatır ve 1. soruya geçerim.</blockquote>
+        <blockquote>Eğer alakasız bir şeyi kontrol etme isteğim gelirse, onu parking sheet’e yazar ve bulunduğum satıra dönerim.</blockquote>
+        <h3>Tekrarlanan bağlam</h3><p>Lally ve arkadaşlarının çalışmasında automaticity asimptotik biçimde yükselmiş; tahmin edilen düzeye ulaşmak bireyler arasında <strong>18–254 gün</strong> sürmüştür. Tek bir gün kaçırmak süreci anlamlı biçimde bozmamıştır.</p>
+        <div class="formula">Aynı cue → aynı konum → aynı başlangıç dizisi → aynı davranış kategorisi</div>
+        <p>Örnek bağlam: 08:30, aynı kütüphane masası, kulaklık, telefon interneti engelli, su solda, görev kâğıdı açık ve timer çalışıyor. Çalışma alanında baskın davranış mümkünse yalnızca <strong>academic work</strong> olmalı.</p>
+      </section>
+
+      <section class="chapter" id="ozet"><span class="chapter-number">07 — TL;DR</span><h2>Bugün uygulayacağın 12 kural</h2><p>İşaretlediklerin bu cihazda hatırlanır.</p>
+        <div class="checklist" id="checklist">
+          <label class="check"><input type="checkbox"><span>Çalışmaya başlarken 60–80 dakikalık, çıktısı belli bir hedef koy.</span></label>
+          <label class="check"><input type="checkbox"><span>Hedefi sıkı ama nesnel olarak ulaşılabilir yap.</span></label>
+          <label class="check"><input type="checkbox"><span>İlerlemeyi her tamamlanan soruda görünür hale getir.</span></label>
+          <label class="check"><input type="checkbox"><span>Dikkat dağıtıcıları iradeyle yönetme; erişimi engelle.</span></label>
+          <label class="check"><input type="checkbox"><span>“Ders çalış” değil, saatli ve spesifik bir çıktı yaz.</span></label>
+          <label class="check"><input type="checkbox"><span>Hedefi ve sonucu kanıtıyla birlikte birine raporla.</span></label>
+          <label class="check"><input type="checkbox"><span>Bitmek bilmeyen yola değil, önündeki küçük kapalı bloğa bak.</span></label>
+          <label class="check"><input type="checkbox"><span>İki 60–80 dakikalık blok arasında 15 dakika; sonrasında 20–40 dakika toparlan.</span></label>
+          <label class="check"><input type="checkbox"><span>Kısa görev resetini sosyal medya akışına dönüştürme.</span></label>
+          <label class="check"><input type="checkbox"><span>Dersi bırakmadan önce 1–2 cümlelik restart marker yaz.</span></label>
+          <label class="check"><input type="checkbox"><span>Yeni konuda örnek → kısmi örnek → bağımsız çözüm; bilinen konuda retrieval → problem → feedback uygula.</span></label>
+          <label class="check"><input type="checkbox"><span>Çalışma ortamını düzenli ve tek bağlamlı tut.</span></label>
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer class="footer">Çalışma Yöntemi · Kaynak notun web sunumu</footer>
+  <script>
+    const root=document.documentElement, body=document.body, progress=document.querySelector('#progress');
+    const savedTheme=localStorage.getItem('cy-theme'); if(savedTheme) root.dataset.theme=savedTheme;
+    const themeBtn=document.querySelector('#themeBtn');
+    function syncTheme(){themeBtn.textContent=root.dataset.theme==='dark'?'☀':'☾'} syncTheme();
+    themeBtn.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';localStorage.setItem('cy-theme',root.dataset.theme);syncTheme()});
+    document.querySelector('#focusBtn').addEventListener('click',e=>{body.classList.toggle('focus');e.currentTarget.setAttribute('aria-pressed',body.classList.contains('focus'));e.currentTarget.textContent=body.classList.contains('focus')?'Odaktan çık':'Odak modu'});
+    function onScroll(){const h=document.documentElement, max=h.scrollHeight-h.clientHeight;progress.style.width=(max?100*h.scrollTop/max:0)+'%'} addEventListener('scroll',onScroll,{passive:true});onScroll();
+    const links=[...document.querySelectorAll('.toc a')], sections=[...document.querySelectorAll('.chapter')];
+    new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id))}}),{rootMargin:'-20% 0px -70%'}).observe(sections[0]);
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id))}}),{rootMargin:'-20% 0px -70%'});sections.forEach(s=>observer.observe(s));
+    document.querySelectorAll('#checklist input').forEach((box,i)=>{box.checked=localStorage.getItem('cy-check-'+i)==='1';box.addEventListener('change',()=>localStorage.setItem('cy-check-'+i,box.checked?'1':'0'))});
+  </script>
+</body>
+</html>
